@@ -18,6 +18,19 @@
     text-align: right;
 }
 
+.nav-item::after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: #127475;
+    transition: 0.4s
+}
+
+.nav-item:hover::after {
+    width: 100%
+}
+
 .btn-info {
     color: #F5DFBB;
     /* Light shade for text on info button */
@@ -56,7 +69,7 @@ body {
 
 .container button {
     background-color: #8Fd974;
-    border:none;
+    border: none;
     transition: transform 0.3s;
 }
 
