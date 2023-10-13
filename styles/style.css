@@ -16,6 +16,20 @@
     color: #394141;
     /* Light shade for brand name & nav links for contrast */
     text-align: right;
+    margin-right: 1%;
+}
+
+.nav-item::after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: #127475;
+    transition: 0.4s
+}
+
+.nav-item:hover::after {
+    width: 100%;
 }
 
 .btn-info {
@@ -49,7 +63,6 @@ body {
     font-size: 2.25rem;
 }
 
-
 .container {
     text-align: center;
     padding: 10px;
@@ -57,7 +70,7 @@ body {
 
 .container button {
     background-color: #8Fd974;
-    border:none;
+    border: none;
     transition: transform 0.3s;
 }
 
