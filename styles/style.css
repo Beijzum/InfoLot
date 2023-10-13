@@ -15,6 +15,7 @@
 .navbar-light .navbar-nav .nav-link {
     color: #394141;
     /* Light shade for brand name & nav links for contrast */
+    text-align: right;
 }
 
 .btn-info {
