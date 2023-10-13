@@ -16,6 +16,7 @@
     color: #394141;
     /* Light shade for brand name & nav links for contrast */
     text-align: right;
+    margin-right: 1%;
 }
 
 .nav-item::after {
@@ -28,7 +29,7 @@
 }
 
 .nav-item:hover::after {
-    width: 100%
+    width: 100%;
 }
 
 .btn-info {
