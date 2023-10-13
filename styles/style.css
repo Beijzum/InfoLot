@@ -5,83 +5,78 @@
 *---------------------------------------------
 */
 
-
 .bg-info {
-    background-color: #8Fd974 !important;
-    /* Medium shade for navbar */
+  background-color: #8fd974 !important;
+  /* Medium shade for navbar */
 }
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
-    color: #394141;
-    /* Light shade for brand name & nav links for contrast */
-    text-align: right;
-    margin-right: 1%;
+  color: #394141;
+  /* Light shade for brand name & nav links for contrast */
+  text-align: right;
+  margin-right: 1%;
 }
 
 .nav-item::after {
-    content: '';
-    display: block;
-    width: 0px;
-    height: 2px;
-    background: #127475;
-    transition: 0.4s
+  content: "";
+  display: block;
+  width: 0px;
+  height: 2px;
+  background: #127475;
+  transition: 0.4s;
 }
 
 .nav-item:hover::after {
-    width: 100%;
-}
-
-.btn-info {
-    color: #F5DFBB;
-    /* Light shade for text on info button */
-    background-color: #EDAFB8;
-    /* Accent color for button background */
-    border-color: #127475;
-    /* Dark shade for button border */
+  width: 100%;
 }
 
 .btn-primary {
-    color: #4A5759;
-    /* Light shade for text */
-    font-size: 150%;
-    background-color: #7ac968;
-    /* Dark shade for primary button background */
-    border-color: #4A5759;
-    /* Darkest shade for border */
-    border-width: thick;
+  color: #4a5759;
+  /* Light shade for text */
+  font-size: 150%;
+  background-color: #7ac968;
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: thick;
+}
+
+.btn-secondary {
+  color: white;
+  background-color: #7ac968;
 }
 
 body {
-    background-color: white;
-    /* Light shade for body background */
+  background-color: white;
+  /* Light shade for body background */
 }
 
 .navbar-brand {
-    font-family: 'Autour One', cursive;
-    /*change the font name for what you have*/
-    font-size: 2.25rem;
+  font-family: "Autour One", cursive;
+  /*change the font name for what you have*/
+  font-size: 2.25rem;
 }
 
 .container {
-    text-align: center;
-    padding: 10px;
+  text-align: center;
+  padding: 10px;
 }
 
 .container button {
-    background-color: #8Fd974;
-    border: none;
-    transition: transform 0.3s;
+  background-color: #8fd974;
+  border: none;
+  transition: transform 0.3s;
 }
 
 .container button:hover {
-    transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .container button:active {
-    transform: scale(0.95)
+  transform: scale(0.95);
 }
 
 h1 {
-    color: #4A5759;
+  color: #4a5759;
 }
