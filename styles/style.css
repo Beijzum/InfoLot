@@ -14,8 +14,12 @@
 .navbar-light .navbar-nav .nav-link {
   color: #394141;
   /* Light shade for brand name & nav links for contrast */
-  text-align: right;
   margin-right: 1%;
+  float: inline-end;
+}
+
+.navbar-nav {
+  margin-left: auto;
 }
 
 .nav-item::after {
