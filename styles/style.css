@@ -15,7 +15,7 @@
   color: #394141;
   /* Light shade for brand name & nav links for contrast */
   margin-right: 1%;
-  float: inline-end;
+  text-align: right;
 }
 
 .navbar-nav {
