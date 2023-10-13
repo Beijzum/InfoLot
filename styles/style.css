@@ -35,10 +35,11 @@
   height: 2px;
   background: #127475;
   transition: 0.4s;
+  margin-left: auto;
 }
 
 .nav-item:hover::after {
-  width: 100%;
+  width: 40%;
 }
 
 .btn-primary {
