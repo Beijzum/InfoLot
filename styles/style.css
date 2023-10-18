@@ -16,18 +16,20 @@
   /* Light shade for brand name & nav links for contrast */
   margin-right: 1%;
   text-align: right;
-  
+
 }
 
+/* Navbar spacing right aligned */
 .navbar-nav {
   margin-left: auto;
-  width: 400px;
+  width: 100%;
 }
 
 .nav-item {
   width: 100%;
 }
 
+/* Hover thingy */
 .nav-item::after {
   content: "";
   display: block;
@@ -38,8 +40,9 @@
   margin-left: auto;
 }
 
+/* Hover thingy */
 .nav-item:hover::after {
-  width: 40%;
+  width: 100%;
 }
 
 .btn-primary {
