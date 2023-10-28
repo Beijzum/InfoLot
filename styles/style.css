@@ -16,13 +16,12 @@
   /* Light shade for brand name & nav links for contrast */
   margin-right: 1%;
   text-align: right;
-
 }
 
 /* Navbar spacing right aligned */
 .navbar-nav {
   margin-left: auto;
-  width: 100%;
+  width: 30%;
 }
 
 .nav-item {
