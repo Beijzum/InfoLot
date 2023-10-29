@@ -13,6 +13,7 @@ function loadSkeleton() {
     } else {
       // No user is signed in.
       console.log($("#navbarPlaceholder").load("./text/nav_before_login.html"));
+      console.log($("#body_after_login").load("./text/body_after_login.html"));
       console.log(
         $("#footerPlaceholderBeforeLogin").load(
           "./text/footer_before_login.html"
