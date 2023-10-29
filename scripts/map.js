@@ -574,6 +574,21 @@ function NeighborhoodDiscovery(configuration) {
     }
 }
 
+const CONFIGURATION = {
+    "capabilities": { "search": true, "distances": true, "directions": true, "contacts": true, "atmospheres": true, "thumbnails": true },
+    "pois": [
+        { "placeId": "ChIJ18-j2oJxhlQRS9kP8X3z3DI" },
+        { "placeId": "ChIJD0lLvc9zhlQRGReL2uC3aT8" },
+        { "placeId": "ChIJs8t50nxxhlQRPyIh8c2Xwcs" },
+        { "placeId": "ChIJ9boNuNVzhlQRp7SOKJsd6FA" },
+        { "placeId": "ChIJv_HIO3ZxhlQRDh4CBCA1mnM" }
+    ],
+    "centerMarker": { "icon": "circle" },
+    "mapRadius": 2000,
+    "mapOptions": { "center": { "lat": 49.2834511, "lng": -123.1152548 }, "fullscreenControl": true, "mapTypeControl": true, "streetViewControl": false, "zoom": 16, "zoomControl": true, "maxZoom": 20, "mapId": "" },
+    "mapsApiKey": "AIzaSyD_HJrj3XVbKfYW_0aTWk_IEqaxWQMTYS8"
+};
+
 function initMap() {
     new NeighborhoodDiscovery(CONFIGURATION);
 }
