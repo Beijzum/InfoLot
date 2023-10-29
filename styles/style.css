@@ -100,3 +100,10 @@ body {
 h1 {
   color: #4a5759;
 }
+
+.map {
+  display: flex;
+  height: 66vh;
+  width: 100%;
+  justify-content: center;
+}
