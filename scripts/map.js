@@ -591,4 +591,31 @@ const CONFIGURATION = {
 
 function initMap() {
     new NeighborhoodDiscovery(CONFIGURATION);
+    const map = new google.maps.Map(document.getElementByClass("map"), {
+    });
+
+    var latitude = feature.getGeometry().get().lat()
+    var longitude = feature.getGeometry().get().lng()
+    var titleText = feature.getProperty('Location ID')
+    var infowincontent = document.createElement('div');
+    var strong = document.createElement('strong');
+    strong.textContent = titleText
+    infowincontent.appendChild(strong);
+    infowincontent.appendChild(document.createElement('br'));
+    console.log(infowincontent);
+
+    var marker = new google.maps.Marker({
+        position: { lat: latitude, lng: longitude },
+        map: map,
+        clickable: true
+    });
+
+    marker.addListener('click', function () {
+        infoWindow.close();
+        infoWindow.setContent(infowincontent);
+        infoWindow.open(map, marker);
+    });
+
 }
+
+window.initMap = initMap;
