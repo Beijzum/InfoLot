@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +24,8 @@
     <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
     <!-------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA541e5-tB4tTbAGg-gokU6fqfo5Tx6jIc&callback=initMap"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
@@ -34,8 +35,8 @@
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link rel="stylesheet" href="./styles/style.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/style.css" />
 </head>
 
 <body>
@@ -48,12 +49,33 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-<div class="map">
-<iframe
-    src="https://storage.googleapis.com/maps-solutions-orvxqgolue/neighborhood-discovery/ioqs/neighborhood-discovery.html"
-    width="100%" height="100%" style="border:0;" loading="lazy">
-</iframe>
-</div>
+    <div id="map">
+        <div class="map" style="height: 400px; width: 100%">
+            <script>
+                function initMap() {
+                    var map = new google.maps.Map(document.getElementById("map"), {
+                        center: { lat: 49.2827, lng: -123.1207 }, // Map center (Vancouver, BC)
+                        zoom: 12, // Zoom level
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: { lat: 49.2827, lng: -123.1207 }, // Marker position (Vancouver, BC)
+                        map: map,
+                        title: "Vancouver, BC", // Tooltip text
+                    });
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: "This is Vancouver, BC!", // Content inside the info window
+                    });
+
+                    marker.addListener("click", function () {
+                        infowindow.open(map, marker);
+                    });
+                }
+            </script>
+        </div>
+    </div>
+
     <!-- our own footer goes here-->
     <nav id="footerPlaceholder"></nav>
 
