@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Responsive Google Map with multiple markers | WebExplorar.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="map-wrapper" style="width: 100%; height: 100vh; margin:0 auto;"></div>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script>
+        var locations = [
+            ['Sri Lanka <br><a href="#">Click Here</a>', 6.7106408, 79.3470383, 1],
+            ['India', 13.0478221, 80.0685805, 5],
+            ['Brazil', -13.6546815, -69.7509821, 3],
+            ['Australia', -33.8473551, 150.6510978, 2],
+            ['United States', 36.2370315, -113.7824561, 4]
+        ];
+        var map = new google.maps.Map(document.getElementById('map-wrapper'), {
+            zoom: 2,
+            center: new google.maps.LatLng(6.7106408, 79.3470383), // Center location when load the map on first time
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+            });
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        };
+
+    </script>
+</body>
+
+</html>
