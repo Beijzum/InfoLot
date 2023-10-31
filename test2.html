@@ -1,105 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Demo: Add custom markers in Mapbox GL JS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
 
-        .marker {
-            background-image: url('./icons8-map-marker-48.png');
-            background-size: cover;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
+      .marker {
+        background-image: url("./icons8-map-marker-48.png");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
 
-        .mapboxgl-popup {
-            max-width: 200px;
-        }
+      .mapboxgl-popup {
+        max-width: 200px;
+      }
 
-        .mapboxgl-popup-content {
-            text-align: center;
-            font-family: 'Open Sans', sans-serif;
-        }
+      .mapboxgl-popup-content {
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="map"></div>
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoibXlzdGlrYSIsImEiOiJjbG9kZzc0MjMwNXl5MmlvM2c4amgzOXhuIn0.um_Gr5iYmYWagNb9efmoBQ';
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoibXlzdGlrYSIsImEiOiJjbG9kZzc0MjMwNXl5MmlvM2c4amgzOXhuIn0.um_Gr5iYmYWagNb9efmoBQ";
 
-        const geojson = {
-            'type': 'FeatureCollection',
-            'features': [
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Point',
-                        'coordinates': [-123.112214, 49.286992]
-                    },
-                    'properties': {
-                        'title': 'Mapbox',
-                        'description': '<b>Waterfront Road - Lot #1292</b><p><a href="#">More Info</a></p><p>This parking lot is conveniently located by Waterfront</p>'
-                    }
-                },
-                {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Point',
-                        'coordinates': [-122.414, 37.776]
-                    },
-                    'properties': {
-                        'title': 'Mapbox',
-                        'description': 'San Francisco, California'
-                    }
-                }
-            ]
-        };
+      const geojson = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [-123.112214, 49.286992],
+            },
+            properties: {
+              title: "Mapbox",
+              description:
+                '<b>Waterfront Road - Lot #1292</b><p><a href="#">More Info</a></p><p>This parking lot is conveniently located by Waterfront</p>',
+            },
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [-122.414, 37.776],
+            },
+            properties: {
+              title: "Mapbox",
+              description: "San Francisco, California",
+            },
+          },
+        ],
+      };
 
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [-123.1207, 49.2827],
-            zoom: 14
-        });
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v12",
+        center: [-123.1207, 49.2827],
+        zoom: 14,
+      });
 
-        // add markers to map
-        for (const feature of geojson.features) {
-            // create a HTML element for each feature
-            const el = document.createElement('div');
-            el.className = 'marker';
+      // add markers to map
+      for (const feature of geojson.features) {
+        // create a HTML element for each feature
+        const el = document.createElement("div");
+        el.className = "marker";
 
-            // make a marker for each feature and add it to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(feature.geometry.coordinates)
-                .setPopup(
-                    new mapboxgl.Popup({ offset: 25 }) // add popups
-                        .setHTML(
-                            `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-                        )
-                )
-                .addTo(map);
-        }
+        // make a marker for each feature and add it to the map
+        new mapboxgl.Marker(el)
+          .setLngLat(feature.geometry.coordinates)
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+              .setHTML(
+                `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+              )
+          )
+          .addTo(map);
+      }
     </script>
-</body>
-
+  </body>
 </html>
