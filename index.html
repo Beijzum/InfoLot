@@ -2,134 +2,138 @@
 <html lang="en">
 
 <head>
-  <title>Welcome to InfoLot!</title>
-  <meta name="comp1800 template" content="InfoLot App" />
+    <title>Welcome to InfoLot!</title>
+    <meta name="comp1800 template" content="InfoLot App" />
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap Library CSS CDN go here -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!-- Bootstrap Library CSS CDN go here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
-  <!-- Boostrap Library JS CDN  go here -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+    <!-- Boostrap Library JS CDN  go here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 
-  <!-- Other libraries go here -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap" rel="stylesheet" />
+    <!-- Other libraries go here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap" rel="stylesheet" />
 
-  <!-- Google Icons (Material Design)-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-------------------------------------------->
+    <!-- Other libraries and styles of your own -->
+    <!-------------------------------------------->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/style.css">
 
-  <!-- Link to styles of your own -->
-  <link rel="stylesheet" href="./styles/style.css" />
 </head>
 
 <body>
-  <!------------------------------>
-  <!-- Your HTML Layout go here -->
-  <!------------------------------>
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <!------------------------------>
 
-  <!-- Navbar -->
-  <nav id="navbarPlaceholder"></nav>
+    <!-- Navbar -->
+    <nav id="navbarPlaceholder"></nav>
 
-  <!--Welcome Header-->
-  <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="./images/Car1.jpg" alt="" width="70%" height="auto" />
-    <h1 class="display-5 fw-bold">Welcome to InfoLot!</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Making your parking experiences seamless.</p>
-      <br />
-      <div class="d-grid gap-2 col-7 mx-auto">
-        <!--Search now button-->
-        <a href="./map_nearby.html" class="search_button btn btn-primary" type="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" padding-left="0" fill="currentColor"
-            class="bi bi-compass" viewBox="0 0 16 16">
-            <path
-              d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-          </svg>
-          Search for Parking Near Me!</a>
-      </div>
+    <!--Welcome Header-->
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="./images/Car1.jpg" alt="" width="70%" height="auto" />
+        <h1 class="display-5 fw-bold">Welcome to InfoLot!</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Making your parking experiences seamless.</p>
+            <br />
+            <div class="d-grid gap-2 col-7 mx-auto">
+                <!--Search now button-->
+                <a href="./map_nearby.html" class="search_button btn btn-primary" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" padding-left="0" fill="currentColor"
+                        class="bi bi-compass" viewBox="0 0 16 16">
+                        <path
+                            d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                        <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                    </svg>
+                    Search for Parking Near Me!</a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!--Search Button-->
-  <div class="container">
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button href="#" button class="btn btn-outline-success" type="submit">
-        Search
-      </button>
-    </form>
-  </div>
-  <br />
-
-  <!-- Three columns of text below -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-          role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-          <title>Placeholder</title>
-          <image width="100%" height="100%" xlink:href="./images/CarIcon.png" />
-        </svg>
-
-        <h2>Discover</h2>
-        <p>lorem ipsum</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-          role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-          <title>Placeholder</title>
-          <image width="100%" height="100%" xlink:href="./images/CarIcon.png" />
-        </svg>
-
-        <h2>Reserve</h2>
-        <p>lorem ipsum</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
-          role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-          <title>Placeholder</title>
-          <image width="100%" height="100%" xlink:href="./images/CarIcon.png" />
-        </svg>
-
-        <h2>Park</h2>
-        <p>lorem ipsum</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <!-- /.col-lg-4 -->
+    <!--Search Button-->
+    <div class="container">
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button href="#" button class="btn btn-outline-success" type="submit">
+                Search
+            </button>
+        </form>
     </div>
-    <!-- /.row -->
-  </div>
+    <br />
 
-  <!-- Footer -->
-  <nav id="footerPlaceholder"></nav>
+    <!-- Three columns of text below -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <image width="100%" height="100%" xlink:href="./images/CarIcon.png" />
+                </svg>
 
-  <!---------------------------------------------->
-  <!-- Your own JavaScript functions go here    -->
-  <!---------------------------------------------->
+                <h2>Discover</h2>
+                <p>lorem ipsum</p>
+                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <image width="100%" height="100%" xlink:href="./images/CarIcon.png" />
+                </svg>
 
-  <!-- Link to scripts of your own -->
-  <script src="./scripts/firebaseAPI_DTC_09.js"></script>
-  <script src="./scripts/skeleton.js"></script>
-  <script src="./scripts/script.js"></script>
+                <h2>Reserve</h2>
+                <p>lorem ipsum</p>
+                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <image width="100%" height="100%" xlink:href="./images/CarIcon.png" />
+                </svg>
+
+                <h2>Park</h2>
+                <p>lorem ipsum</p>
+                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <!-- Footer -->
+    <nav id="footerPlaceholder"></nav>
+
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <script src="./scripts/firebaseAPI_DTC_09.js"></script>
+    <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 
 </html>
