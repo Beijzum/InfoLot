@@ -50,7 +50,29 @@
     <nav id="navbarPlaceholder"></nav>
 
     <!-- Main -->
+    <div class="container">
+        <h1>List View Parking Lots</h1>
+        <!-- Here is the container for cards  -->
+        <div class="container">
+            <div id="parkingLots-go-here" class="row row-cols-auto">
+            </div>
+        </div>
+    </div>
 
+    <template id="parkingLotsCardTemplate">
+        <div class="card py-2 mx-2" style="width: 18rem">
+            <img class="card-image card-img-top" src=" ..." alt="..." />
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <br />
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                </p>
+                <a class="btn btn-primary card-href">Read more ...</a>
+            </div>
+        </div>
+    </template>
 
     <!-- Footer -->
     <nav id="footerPlaceholder"></nav>
@@ -61,6 +83,8 @@
     <script src="./scripts/firebaseAPI_DTC_09.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/parking_info.js"></script>
+    <script src="./scripts/list_view.js"></script>
 </body>
 
 </html>
