@@ -41,8 +41,8 @@ function showMap() {
                         // Coordinates
                         event_name = doc.data().name; // Event Name
                         preview = doc.data().details; // Text Preview
-                        // img = doc.data().posterurl; // Image
-                        // url = doc.data().link; // URL
+                        img = doc.data().posterurl; // Image
+                        url = doc.data().link; // URL
 
                         // Pushes information into the features array
                         // in our application, we have a string description of the parking lot
@@ -50,7 +50,7 @@ function showMap() {
                             'type': 'Feature',
                             'properties': {                                                              // change link below to parking lot info pages
                                 'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
-                            },
+                            }, // edit popup box contents
                             'geometry': {
                                 'type': 'Point',
                                 'coordinates': coordinates

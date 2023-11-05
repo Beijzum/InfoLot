@@ -129,6 +129,7 @@ h1 {
   color: #4a5759;
 }
 
+/* Mapbox Popup Customization */
 .mapboxgl-popup {
   max-width: 400px;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
