@@ -48,30 +48,33 @@
   <!-- Navbar -->
   <nav id="navbarPlaceholder"></nav>
 
-  <!--Welcome Header-->
-  <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="./images/Car1.jpg" alt="" width="70%" height="auto" />
-    <h1 class="display-5 fw-bold">Welcome to InfoLot!</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Making your parking experiences seamless.</p>
-      <br />
-      <div class="d-grid gap-2 col-7 mx-auto">
-        <!--Find Parking Button-->
-        <a href="./map.html" type="button" class="style_button btn btn-success">Find Parking Near Me</a>
+  <!-- Hero -->
+  <div id="hero" class="text-center bg-image" style="background-image: url('images/Car1.jpg'); height: 100%;">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.7); height: 100%;">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="display-4 fw-bold mt-" style="color: #ffffff;">Welcome to InfoLot!</h1>
+          <h5 class="lead mb-4 mt-3">Making your parking experiences seamless.
+          </h5>
+          <br>
+          <div class="d-grid gap-2 col-9 mx-auto mt-5">
+            <!--Find Parking Button-->
+            <a href="./map.html" type="button" class="style_button btn btn-success">Find Parking Near Me</a>
+          </div>
+          <br>
+          <form class="d-flex mt-5">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button href="#" button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+          <br>
+        </div>
       </div>
     </div>
   </div>
+  <!-- Hero -->
 
-  <!--Search Button-->
-  <div class="container">
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button href="#" button class="btn btn-outline-success" type="submit">
-        Search
-      </button>
-    </form>
-  </div>
-  <br />
 
   <!-- Three columns of text below -->
   <div class="container py-5">
