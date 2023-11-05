@@ -16,6 +16,7 @@ function displayParkingInfo() {
             document.getElementById("parkingLotName").innerHTML = parkingLotName;
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
+            document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}`;
         });
 }
 displayParkingInfo();

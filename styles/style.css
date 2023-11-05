@@ -57,7 +57,8 @@ body {
   width: 100%;
 }
 
-.btn-primary {
+
+.style_button {
   color: #4a5759;
   /* Light shade for text */
   font-size: 150%;
@@ -65,12 +66,12 @@ body {
   /* Dark shade for primary button background */
   border-color: #4a5759;
   /* Darkest shade for border */
-  border-width: thick;
+  border-width: 2px;
 }
 
-.btn-secondary {
-  color: white;
-  background-color: #7ac968;
+.style_button:hover {
+  background-color: white;
+  color: #4a5759;
 }
 
 body {
