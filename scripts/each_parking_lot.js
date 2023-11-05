@@ -11,12 +11,13 @@ function displayParkingInfo() {
             thisLot = doc.data();
             parkingCode = thisLot.code;
             parkingLotName = doc.data().name;
+            parkingLotDetails = doc.data().details;
 
             // only populate title, and image
             document.getElementById("parkingLotName").innerHTML = parkingLotName;
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
-            document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}`;
+            document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
         });
 }
 displayParkingInfo();

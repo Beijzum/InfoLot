@@ -90,6 +90,11 @@ body {
   color: #4a5759;
 }
 
+/*Styles image in each parking lot page */
+.parking-img {
+  width: 70%;
+}
+
 body {
   background-color: white;
   /* Light shade for body background */
