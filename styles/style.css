@@ -27,14 +27,14 @@ body {
 .logout_item {
   color: #394141;
   /* Light shade for brand name & nav links for contrast */
-  margin-right: 1%;
   text-align: right;
+  margin-left: 5%;
 }
 
 /* Navbar spacing right aligned */
 .navbar-nav {
   margin-left: auto;
-  width: 40%;
+  margin-right: 5%;
 }
 
 .nav-item {
