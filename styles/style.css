@@ -129,11 +129,9 @@ h1 {
   color: #4a5759;
 }
 
-#map {
-  display: flex;
-  height: 66vh;
-  width: 100%;
-  justify-content: center;
+.mapboxgl-popup {
+  max-width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 /* Hero */
