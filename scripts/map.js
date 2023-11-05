@@ -40,7 +40,8 @@ function showMap() {
                         console.log(coordinates);
                         // Coordinates
                         event_name = doc.data().name; // Event Name
-                        preview = doc.data().details; // Text Preview
+                        price = doc.data().rate; // Price
+                        hours = doc.data().hours_of_operation; // Hours
                         img = doc.data().posterurl; // Image
                         url = doc.data().link; // URL
 
@@ -49,7 +50,15 @@ function showMap() {
                         features.push({
                             'type': 'Feature',
                             'properties': {                                                              // change link below to parking lot info pages
-                                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
+                                'description':
+                                    `<div class="mapboxgl-popup-content">
+                                <p style="font-weight: bold;">${event_name}</p>
+                                <p>${price}</p>
+                                <p>${hours}</p>
+                                <a href="./reserve.html" type="button" class="style_button btn btn-success">Reserve Now</a>
+                                <br> 
+                                <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>
+                                </div>`
                             }, // edit popup box contents
                             'geometry': {
                                 'type': 'Point',
