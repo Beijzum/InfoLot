@@ -1,13 +1,13 @@
 function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("parkingLotsCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+    let cardTemplate = document.getElementById("parkingLotsCardTemplate"); // Retrieve the HTML element with the ID "parkingLotCardTemplate" and store it in the cardTemplate variable. 
 
-    db.collection(collection).get()   //the collection called "hikes"
+    db.collection(collection).get()   //the collection called "parkingLots"
         .then(allLots => {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
+            //var i = 1;  //Optional: if you want to have a unique ID for each parking lot
             allLots.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var details = doc.data().details;  // get value of the "details" key
-                var parkingCode = doc.data().code;    //get unique ID to each hike to be used for fetching right image
+                var parkingCode = doc.data().code;    //get unique ID to each parking lot to be used for fetching right image
                 var parkingAddress = doc.data().address;
                 var parkingHours = doc.data().hours_of_operation;
                 var parkingRate = doc.data().rate;
@@ -25,7 +25,7 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
-                //attach to gallery, Example: "hikes-go-here"
+                //attach to gallery, Example: "parking-lot-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
                 //i++;   //Optional: iterate variable to serve as unique ID

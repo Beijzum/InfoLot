@@ -28,7 +28,7 @@ function showMap() {
                 // Add the image to the map style.
                 map.addImage('eventpin', image); // Pin Icon
 
-                // READING information from "hikes" collection in Firestore
+                // READING information from "parkingLots" collection in Firestore
                 db.collection('parkingLots').get().then(allParkingLots => {
                     const features = []; // Defines an empty array for information to be added to
 
@@ -45,11 +45,11 @@ function showMap() {
                         // url = doc.data().link; // URL
 
                         // Pushes information into the features array
-                        // in our application, we have a string description of the hike
+                        // in our application, we have a string description of the parking lot
                         features.push({
                             'type': 'Feature',
                             'properties': {                                                              // change link below to parking lot info pages
-                                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/hike.html?id=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
+                                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/each_parking_lot.html?id=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
                             },
                             'geometry': {
                                 'type': 'Point',
@@ -83,7 +83,7 @@ function showMap() {
 
                     //-----------------------------------------------------------------------
                     // Add Click event listener, and handler function that creates a popup
-                    // that displays info from "hikes" collection in Firestore
+                    // that displays info from "parkingLots" collection in Firestore
                     //-----------------------------------------------------------------------
                     map.on('click', 'places', (e) => {
                         // Extract coordinates array.
