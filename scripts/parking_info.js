@@ -4,7 +4,7 @@ function writeParkingLots() {
 
     parkingRef.add({
         code: "VCCLot",
-        name: "Vancouver Convention Centre Lot",
+        name: "Vancouver Convention Centre West Lot",
         city: "Vancouver",
         province: "BC",
         address: "1055 Canada Pl, Vancouver, BC V6C 3C1",

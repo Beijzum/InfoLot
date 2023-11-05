@@ -57,7 +57,7 @@ body {
   width: 100%;
 }
 
-
+/*The find parking, switch to list view, and switch to map view buttons */
 .style_button {
   color: #4a5759;
   /* Light shade for text */
@@ -70,6 +70,22 @@ body {
 }
 
 .style_button:hover {
+  background-color: white;
+  color: #4a5759;
+}
+
+/*The more info buttons on the list view page*/
+.style_button_moreinfo {
+  color: #4a5759;
+  /* Light shade for text */
+  background-color: #7ac968;
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: 2px;
+}
+
+.style_button_moreinfo:hover {
   background-color: white;
   color: #4a5759;
 }
