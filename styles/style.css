@@ -136,6 +136,19 @@ h1 {
   justify-content: center;
 }
 
+/* Hero */
+/* Default height for small devices */
+#hero {
+  height: 400px;
+}
+
+/* Height for devices larger than 992px */
+@media (min-width: 992px) {
+  #hero {
+    height: 600px;
+  }
+}
+
 /* 3 Circle images */
 .profile-circel-image-200 img {
   width: 200px;
