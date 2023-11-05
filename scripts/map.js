@@ -49,7 +49,7 @@ function showMap() {
                         features.push({
                             'type': 'Feature',
                             'properties': {                                                              // change link below to parking lot info pages
-                                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/each_parking_lot.html?id=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
+                                'description': `<strong>${event_name}</strong><p>${preview}</p> <br> <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>`
                             },
                             'geometry': {
                                 'type': 'Point',
