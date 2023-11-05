@@ -49,8 +49,9 @@ function showMap() {
                         // in our application, we have a string description of the parking lot
                         features.push({
                             'type': 'Feature',
-                            'properties': {                                                              // change link below to parking lot info pages
+                            'properties': {
                                 'description':
+                                    // Edit popup box contents
                                     `<div class="mapboxgl-popup-content">
                                 <p style="font-weight: bold;">${event_name}</p>
                                 <p>${price}</p>
@@ -59,7 +60,7 @@ function showMap() {
                                 <br> 
                                 <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>
                                 </div>`
-                            }, // edit popup box contents
+                            },
                             'geometry': {
                                 'type': 'Point',
                                 'coordinates': coordinates
