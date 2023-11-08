@@ -93,5 +93,101 @@ function writeParkingLots() {
         lng: -123.1103949280631,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
+    parkingRef.add({
+        code: "IndigoLot077",
+        name: "Parking Indigo Vancouver - Lot #077",
+        city: "Vancouver",
+        province: "BC",
+        address: "1130 W Pender St, Vancouver, BC V6E 4A4",
+        hours_of_operation: "Open Mon-Fri, 6am to 6pm",
+        rate: "$7.00 per hour",
+        details: "Conveniently nestled in the heart of downtown Vancouver, Lot 077 at 1130 West Pender Street offers a prime parking solution for both residents and visitors. This secure and well-maintained parking facility provides a hassle-free experience for all your parking needs.",
+        lat: 49.2875299281045, 
+        lng: -123.12163874381025,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
 
+    parkingRef.add({
+        code: "AdvancedParkingLot9023",
+        name: "Advanced Parking West Pender St - Lot #9023",
+        city: "Vancouver",
+        province: "BC",
+        address: "1095 W Pender St, Vancouver, BC V6E 2M6",
+        hours_of_operation: "Open Mon-Fri, 7am to 7pm",
+        rate: "$9.00 per hour",
+        details: "Experience unrivaled parking convenience at Advanced Parking Lot #9023, located on West Pender Street in the heart of Vancouver's dynamic downtown district. This modern parking facility is your secure, accessible, and stress-free solution for all your parking needs.",
+        lat: 49.287622463423915, 
+        lng: -123.11934154663095,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    parkingRef.add({
+        code: "ParkPlaceLot295",
+        name: "Park Place Parking - Lot #295",
+        city: "Vancouver",
+        province: "BC",
+        address: "666 Burrard St, Vancouver, BC V6C 2X8",
+        hours_of_operation: "Open 24 hours",
+        rate: "$7.00 per hour",
+        details: "Discover the perfect parking solution at Park Place Parking Lot #295, nestled in a prime location in the heart of the city. This well-maintained parking facility offers a secure and convenient experience for all your parking needs.",
+        lat: 49.28526403391055, 
+        lng: -123.11954315040722,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    parkingRef.add({
+        code: "DiamondParkingLot4116",
+        name: "Diamond Parking - Lot #4116",
+        city: "Vancouver",
+        province: "BC",
+        address: "550 Hornby St #2E7, Vancouver, BC V6C 2E7",
+        hours_of_operation: "Open 24 hours",
+        rate: "$9.00 per hour",
+        details: "Diamond Parking Lot #4116 presents an urban oasis for your parking needs. Tucked conveniently in the heart of downtown Vancouver, this parking lot offers a practical and accessible solution for your vehicle. It provides a safe, well-lit space where your car can find a temporary home, sheltered from the elements. Located within reach of various attractions and businesses, this parking lot ensures your convenience as you explore the bustling city. Say goodbye to parking hassles and embrace the ease and peace of mind that comes with its parking facilities.",
+        lat: 49.285532312243255, 
+        lng: -123.11745673693052,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    parkingRef.add({
+        code: "EasyParkLot32",
+        name: "Easy Park - Lot #32",
+        city: "Vancouver",
+        province: "BC",
+        address: "777 Dunsmuir St, Vancouver, BC V6C 1X6",
+        hours_of_operation: "Open 24 hours",
+        rate: "$8.30 per hour",
+        details: "Welcome to the Pacific Centre Mall's Underground Parking Lot, conveniently located under the bustling North end of the mall with an entrance on Southbound Howe Street between Pender and Dunsmuir. Our multi-level parkade offers 364 parking stalls and operates as an unattended facility, granting you the flexibility to come and go at your leisure. Please note the 6-foot 6-inch height restriction to ensure standard-sized vehicles can access the facility. We understand the need for convenience, which is why we offer 24/7 access, accommodating your schedule whenever you decide to visit. Whether you're shopping, dining, or enjoying the attractions in the area, our secure and accessible parking facility is ready to serve you.",
+        lat: 49.28512640856986, 
+        lng: -123.11619073430639,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    parkingRef.add({
+        code: "PenderPlaceLot1",
+        name: "Pender Place - Lot #1",
+        city: "Vancouver",
+        province: "BC",
+        address: "750 W Pender St, Vancouver, BC V6C 2T7",
+        hours_of_operation: "Open Mon-Fri, 6am to 7pm",
+        rate: "$9.50 per hour",
+        details: "This clean and brightly lit parking facility is located under Pender Place on the south side of West Pender Street between Howe Street and Granville Street; within easy walking distance of Pacific Centre, Canada Place, Vancouver Convention Centre and the Waterfront. There are a wide variety of restaurants, hospitality services, shopping destinations and convenient access to transit available nearby.",
+        lat: 49.285171606751106, 
+        lng: -123.11586978528332,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    parkingRef.add({
+        code: "BCITLot1631",
+        name: "BCIT - Downtown Campus - Lot #1631",
+        city: "Vancouver",
+        province: "BC",
+        address: "555 Seymour St, Vancouver, BC V6B 3H6",
+        hours_of_operation: "Open Mon-Fri, 5am to 10pm",
+        rate: "$8.50 per hour",
+        details: "This well-maintained and brightly lit parking facility is located on the northwest side of Seymour Street between Dunsmuir Street and West Pender Street; just under the BCIT Campus in the heart of Downtown Vancouver. Many transit options, shopping destinations and restaurants are within easy walking distance and there are superior safety features including security patrols and 'panic' response stations.",
+        lat: 49.283526964350884,
+        lng: -123.11514022444909,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
 }
