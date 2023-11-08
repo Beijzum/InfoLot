@@ -102,7 +102,7 @@ function writeParkingLots() {
         hours_of_operation: "Open Mon-Fri, 6am to 6pm",
         rate: "$7.00 per hour",
         details: "Conveniently nestled in the heart of downtown Vancouver, Lot 077 at 1130 West Pender Street offers a prime parking solution for both residents and visitors. This secure and well-maintained parking facility provides a hassle-free experience for all your parking needs.",
-        lat: 49.2875299281045, 
+        lat: 49.2875299281045,
         lng: -123.12163874381025,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -116,7 +116,7 @@ function writeParkingLots() {
         hours_of_operation: "Open Mon-Fri, 7am to 7pm",
         rate: "$9.00 per hour",
         details: "Experience unrivaled parking convenience at Advanced Parking Lot #9023, located on West Pender Street in the heart of Vancouver's dynamic downtown district. This modern parking facility is your secure, accessible, and stress-free solution for all your parking needs.",
-        lat: 49.287622463423915, 
+        lat: 49.287622463423915,
         lng: -123.11934154663095,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -130,7 +130,7 @@ function writeParkingLots() {
         hours_of_operation: "Open 24 hours",
         rate: "$7.00 per hour",
         details: "Discover the perfect parking solution at Park Place Parking Lot #295, nestled in a prime location in the heart of the city. This well-maintained parking facility offers a secure and convenient experience for all your parking needs.",
-        lat: 49.28526403391055, 
+        lat: 49.28526403391055,
         lng: -123.11954315040722,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -144,7 +144,7 @@ function writeParkingLots() {
         hours_of_operation: "Open 24 hours",
         rate: "$9.00 per hour",
         details: "Diamond Parking Lot #4116 presents an urban oasis for your parking needs. Tucked conveniently in the heart of downtown Vancouver, this parking lot offers a practical and accessible solution for your vehicle. It provides a safe, well-lit space where your car can find a temporary home, sheltered from the elements. Located within reach of various attractions and businesses, this parking lot ensures your convenience as you explore the bustling city. Say goodbye to parking hassles and embrace the ease and peace of mind that comes with its parking facilities.",
-        lat: 49.285532312243255, 
+        lat: 49.285532312243255,
         lng: -123.11745673693052,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -158,7 +158,7 @@ function writeParkingLots() {
         hours_of_operation: "Open 24 hours",
         rate: "$8.30 per hour",
         details: "Welcome to the Pacific Centre Mall's Underground Parking Lot, conveniently located under the bustling North end of the mall with an entrance on Southbound Howe Street between Pender and Dunsmuir. Our multi-level parkade offers 364 parking stalls and operates as an unattended facility, granting you the flexibility to come and go at your leisure. Please note the 6-foot 6-inch height restriction to ensure standard-sized vehicles can access the facility. We understand the need for convenience, which is why we offer 24/7 access, accommodating your schedule whenever you decide to visit. Whether you're shopping, dining, or enjoying the attractions in the area, our secure and accessible parking facility is ready to serve you.",
-        lat: 49.28512640856986, 
+        lat: 49.28512640856986,
         lng: -123.11619073430639,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -172,7 +172,7 @@ function writeParkingLots() {
         hours_of_operation: "Open Mon-Fri, 6am to 7pm",
         rate: "$9.50 per hour",
         details: "This clean and brightly lit parking facility is located under Pender Place on the south side of West Pender Street between Howe Street and Granville Street; within easy walking distance of Pacific Centre, Canada Place, Vancouver Convention Centre and the Waterfront. There are a wide variety of restaurants, hospitality services, shopping destinations and convenient access to transit available nearby.",
-        lat: 49.285171606751106, 
+        lat: 49.285171606751106,
         lng: -123.11586978528332,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -190,4 +190,103 @@ function writeParkingLots() {
         lng: -123.11514022444909,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
+
+    parkingRef.add({
+        code: "TELUSGardens9174",
+        name: "TELUS Gardens Residences - Parking Lot #9174",
+        city: "Vancouver",
+        province: "BC",
+        address: "783 Richards St, Vancouver, BC V6B 0M6",
+        hours_of_operation: "6am-11pm",
+        rate: "$9.00 per hour",
+        details: "Vancouver's newest parkade! A beautiful 50 stall underground parkade at the corner of Robson and Richards Street. The parkade is a pay by license plate operation that has paystations at each elevator lobby for immediate convenience. All you need to do is park, pay at the paystation with your license plate and be on your way to your destination. Electric vehicles parked in the stalls with chargers must pay Chargepoint for the power usage and at the meter for the parking.",
+        lat: 49.28089214915153,
+        lng: -123.11743098574253,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
+    parkingRef.add({
+        code: "AdvancedParkingHowe9167",
+        name: "Advanced Parking Howe St - Lot #9167",
+        city: "Vancouver",
+        province: "BC",
+        address: "980 Howe Street, Vancouver BC V6Z 1N9",
+        hours_of_operation: "7am-7pm",
+        rate: "$5.50 per hour",
+        details: "This new underground parkade featuring 217 stalls under brand new office tower at 980 Howe Street is clean, bright, security patrolled, with large - regular and small car stalls - motorbike parking - EV stations plus handicap parking. This parkade is located near hotels and retail shopping centers",
+        lat: 49.28013108501068,
+        lng: -123.12324671093894,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
+    parkingRef.add({
+        code: "PivotalBuilding1610",
+        name: "858 Beatty - Pivotal Building - Lot #1610",
+        city: "Vancouver",
+        province: "BC",
+        address: "858 Beatty St, Vancouver, BC V6B 1C1",
+        hours_of_operation: "7am-1am",
+        rate: "$5.00 per hour",
+        details: "This clean and brightly lit underground parking facility is located at the Pivotal Building on the east corner of Beatty Street and Smithe Street; close to BC Place Stadium and Yaletown. There are a wide variety of restaurants, hospitality services, shopping destinations and convenient access to transit available nearby.",
+        lat: 49.27740089865711,
+        lng: -123.11465106955497,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
+    parkingRef.add({
+        code: "Diamond4264",
+        name: "Diamond Parking Lot 4264",
+        city: "Vancouver",
+        province: "BC",
+        address: "1022 Nelson St #506, Vancouver, BC V6E 4S7",
+        hours_of_operation: "24/7",
+        rate: "$9.00 per hour",
+        details: "Lot info: The parking lot is gated with access between 6AM - 11:30PM only. Clearance is 7 ft. This is a virtual permit; no physical permit is sent out.Once purchased please ensure your license plate of the vehicles parking are correctly inputted and registered to your account/ permit to avoid any parking notices.",
+        lat: 49.281869952658006,
+        lng: -123.1271649874657,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
+    parkingRef.add({
+        code: "ParamountPlace9166",
+        name: "Paramount Place Parking Lot #9166",
+        city: "Vancouver",
+        province: "BC",
+        address: "900 Burrard St, Vancouver, BC V6Z 3G5",
+        hours_of_operation: "24/7",
+        rate: "$5.00 per hour +tax",
+        details: "This underground lot is located at Paramount Place, underneath the Scotiabank Theatre, on Burrard Street, between Barclay and Smithe Street.  Aside from serving as the primary parking location for visitors to the ScotiaBank Theatre, it is in close proximity to a variety of other destinations, including the Robson Street Shopping District, the Provincial Law Courts, Earls Restaurant, IGA Marketplace and the Sutton Place Hotel.",
+        lat: 49.282150151047,
+        lng: -123.12452188256384,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
+    parkingRef.add({
+        code: "DavieStreet9027",
+        name: "1237 Davie Street - Lot #9027",
+        city: "Vancouver",
+        province: "BC",
+        address: "1237 Davie St, Vancouver, BC V6E 1N4",
+        hours_of_operation: "24/7",
+        rate: "$5.00 per hour",
+        details: "This underground parkade is located on Davie Street, between Bute and Jervis. There are a wide variety of restaurants, hotels, professional services, shopping destinations and convenient access to transit available nearby",
+        lat: 49.282479471471575,
+        lng: -123.13370656576048,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
+    parkingRef.add({
+        code: "DenmanPendrell9175",
+        name: "Denman & Pendrell - Lot #9175",
+        city: "Vancouver",
+        province: "BC",
+        address: "1125 Denman Street, Vancouver BC V6G 2M7",
+        hours_of_operation: "24/7",
+        rate: "$5.50 per hour +tax",
+        details: "This surface parking lot is located at the heart of English Bay one block up from Davie Street. With easy access off Pendrell Street we are open 24/7 and within walking distance to unlimited entertainment and dining options. Residents and tourists alike are invited to park and enjoy this prominent location so close to the beach! Rental and filming requests are also welcome.",
+        lat: 49.288159118110286,
+        lng: -123.14075283215536,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+
 }
