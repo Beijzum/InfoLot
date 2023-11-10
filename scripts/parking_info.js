@@ -93,5 +93,6 @@ function writeParkingLots() {
         lng: -123.1103949280631,
         last_updated: firebase.firestore.FieldValue.serverTimestamp()
     });
+    
 
 }
