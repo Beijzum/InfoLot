@@ -22,7 +22,7 @@ function displayParkingInfo() {
 }
 displayParkingInfo();
 
-
+/* Saves the reviews onto local storage */
 function saveParkingLotDocumentIDAndRedirect() {
     let params = new URL(window.location.href) //get the url from the search bar
     let ID = params.searchParams.get("docID");
