@@ -21,3 +21,11 @@ function displayParkingInfo() {
         });
 }
 displayParkingInfo();
+
+
+function saveParkingLotDocumentIDAndRedirect() {
+    let params = new URL(window.location.href) //get the url from the search bar
+    let ID = params.searchParams.get("docID");
+    localStorage.setItem('parkingLotDocID', ID);
+    window.location.href = 'review.html';
+}

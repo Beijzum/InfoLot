@@ -50,21 +50,16 @@
     <nav id="navbarPlaceholder"></nav>
 
     <!-- Main -->
-    <div class="container">
-        <h1><span id="parkingLotName">this Lot </span></h1>
-        <br>
-
-        <div class="position-relative">
-
-            <img class="parking-img img-fluid" src="" />
-            <div id="details-go-here"></div>
-
-            <button class="btn btn-primary position-absolute bottom-0 end-0 m-3"
-                onclick="saveParkingLotDocumentIDAndRedirect()">Write
-                Review</button>
-
+    <div class="card text-center">
+        <div class="card-header">
+            Review received successfully!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Thanks for submitting your review!</h5>
+            <a href="map.html" class="btn btn-primary">Go back to the map</a>
         </div>
     </div>
+
 
     <!-- Footer -->
     <nav id="footerPlaceholder"></nav>
@@ -75,7 +70,6 @@
     <script src="./scripts/firebaseAPI_DTC_09.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/each_parking_lot.js"></script>
 </body>
 
 </html>
