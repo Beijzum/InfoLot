@@ -1,0 +1,412 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+.car-park {
+  margin: 20px auto;
+  max-width: 300px;
+  text-align: center;
+}
+
+/* ENTRANCE */
+.entrance {
+  position: relative;
+  height: 50px;
+}
+
+.entrance:before,
+.entrance:after {
+  content: "ENTRANCE";
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0px 2px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  display: block;
+  position: absolute;
+  background: #8fd974;
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.entrance:before {
+  left: 0;
+}
+
+.entrance:after {
+  right: 0;
+}
+
+/* EXIT */
+.exit {
+  position: relative;
+  height: 50px;
+}
+
+.exit:before,
+.exit:after {
+  content: "EXIT";
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0px 2px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  display: block;
+  position: absolute;
+  background: #8fd974;
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.exit:before {
+  left: 0;
+}
+
+.exit:after {
+  right: 0;
+}
+
+.fuselage {
+  border-right: 5px solid #d8d8d8;
+  border-left: 5px solid #d8d8d8;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.parks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+.park {
+  display: flex;
+  flex: 0 0 21.3%;
+  padding: 5px;
+  position: relative;
+}
+
+.park:nth-child(2) {
+  margin-right: 14.28571428571429%;
+}
+
+.park input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.park input[type="checkbox"]:checked + label {
+  background: #8fd974;
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.park input[type="checkbox"]:disabled + label {
+  background: #dddddd;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.park input[type="checkbox"]:disabled + label:after {
+  content: "X";
+  text-indent: 0;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.park input[type="checkbox"]:disabled + label:hover {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.park label {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5rem;
+  padding: 4px 0;
+  background: wheat;
+  border-radius: 5px;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.park label:before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  top: 1px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+}
+
+.park label:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0px 2px #5c6aff;
+}
+
+@-webkit-keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+
+/*
+* --------------------------------------------
+* These are some styles of customizing 
+* to over-ride the default bootstrap ones
+*---------------------------------------------
+*/
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-info {
+  background-color: #8fd974 !important;
+  /* Medium shade for navbar */
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+  color: #394141;
+  /* Light shade for brand name & nav links for contrast */
+  margin-right: 1%;
+  text-align: right;
+}
+
+.logout_item {
+  color: #394141;
+  /* Light shade for brand name & nav links for contrast */
+  text-align: right;
+  margin-left: 5%;
+}
+
+/* Navbar spacing right aligned */
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 5%;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+/* Hover thingy */
+.nav-item::after {
+  content: "";
+  display: block;
+  width: 0px;
+  height: 2px;
+  background: #127475;
+  transition: 0.4s;
+  margin-left: auto;
+}
+
+/* Hover thingy */
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/*The find parking, switch to list view, and switch to map view buttons */
+.style_button {
+  color: #4a5759;
+  /* Light shade for text */
+  font-size: 150%;
+  background-color: #7ac968;
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: 2px;
+}
+
+.style_button:hover {
+  background-color: white;
+  color: #4a5759;
+}
+
+/*The more info buttons on the list view page*/
+.style_button_moreinfo {
+  color: #4a5759;
+  /* Light shade for text */
+  background-color: #7ac968;
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: 2px;
+}
+
+.style_button_moreinfo:hover {
+  background-color: white;
+  color: #4a5759;
+}
+
+/*Styles image in each parking lot page */
+.parking-img {
+  width: 70%;
+}
+
+body {
+  background-color: white;
+  /* Light shade for body background */
+}
+
+.navbar-brand {
+  font-family: "Autour One", cursive;
+  /*change the font name for what you have*/
+  font-size: 2.25rem;
+}
+
+.container {
+  text-align: center;
+  padding: 10px;
+}
+
+.container button {
+  background-color: #8fd974;
+  border: none;
+  transition: transform 0.3s;
+}
+
+.container button:hover {
+  transform: scale(1.5);
+}
+
+.container button:active {
+  transform: scale(0.95);
+}
+
+h1 {
+  color: #4a5759;
+}
+
+/* Mapbox Popup Customization */
+.mapboxgl-popup-content {
+  text-align: center;
+}
+
+/* Hero */
+/* Default height for small devices */
+#hero {
+  height: 400px;
+}
+
+/* Height for devices larger than 992px */
+@media (min-width: 992px) {
+  #hero {
+    height: 600px;
+  }
+}
+
+/* 3 Circle images */
+.profile-circle-image-200 img {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+}
+
+.vv img {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.vv img:hover {
+  opacity: 0.8;
+  box-shadow: 0px 0px 5px 8px rgba(0, 0, 0, 0.08);
+}
