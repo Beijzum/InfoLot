@@ -3,6 +3,14 @@ function selectedSpotsKey(spotClass) {
   return `selected${spotClass === "spotsA" ? "A" : "B"}Spots`;
 }
 
+// Function to set selected spots in localStorage
+function setSelectedSpotsLocalStorage(spotClass, selectedSpots) {
+  localStorage.setItem(
+    selectedSpotsKey(spotClass),
+    JSON.stringify(selectedSpots)
+  );
+}
+
 // Function to remove event listeners from all spot elements
 function removeEventListeners() {
   const allSpotElements = document.querySelectorAll(".spotsA, .spotsB");
@@ -63,6 +71,7 @@ function renderSpot(container, spotClass, spotKey, spotAvailability, data) {
         iconElement.classList.remove("availableSpot");
         iconElement.classList.add("selectedSpot");
       }
+      setSelectedSpotsLocalStorage(spotClass, selectedSpots); // Set selected spots in localStorage
     }
   });
 
@@ -74,8 +83,13 @@ function renderSpot(container, spotClass, spotKey, spotAvailability, data) {
   container.appendChild(spotElement);
 }
 
-// Create a function to render the parking spots and handle save button click
-function renderParkingSpotsAndSave() {
+// Function to create a delay
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Function to render the parking spots and handle save button click
+async function renderParkingSpotsAndSave() {
   const spotsAContainer = document.getElementById("spotsA-container");
   const spotsBContainer = document.getElementById("spotsB-container");
 
@@ -104,7 +118,7 @@ function renderParkingSpotsAndSave() {
       });
 
       const saveButton = document.getElementById("save-button");
-      saveButton.addEventListener("click", () => {
+      saveButton.addEventListener("click", async () => {
         const selectedSpotsA = data[selectedSpotsKey("spotsA")] || [];
         const selectedSpotsB = data[selectedSpotsKey("spotsB")] || [];
 
@@ -121,13 +135,15 @@ function renderParkingSpotsAndSave() {
         db.collection("parkings")
           .doc("irTl1dU7fok3OYsKSYcF")
           .update(updateObject)
-          .then(() => {
+          .then(async () => {
             data[selectedSpotsKey("spotsA")] = [];
             data[selectedSpotsKey("spotsB")] = [];
 
-            setTimeout(() => {
-              location.reload();
-            }, 500);
+            // Add a delay before reloading the page
+            await delay(500);
+
+            // Reload the page to reflect the latest updates from the database
+            location.reload();
           })
           .catch((error) => {
             console.error("Error updating database:", error);
@@ -137,5 +153,33 @@ function renderParkingSpotsAndSave() {
   });
 }
 
+// Function to show or hide the next button based on spot selection
+function toggleNextButtonVisibility() {
+  const nextButton = document.getElementById("next-button");
+  const selectedSpotsA =
+    JSON.parse(localStorage.getItem(selectedSpotsKey("spotsA"))) || [];
+  const selectedSpotsB =
+    JSON.parse(localStorage.getItem(selectedSpotsKey("spotsB"))) || [];
+
+  if (selectedSpotsA.length > 0 || selectedSpotsB.length > 0) {
+    nextButton.style.display = "inline";
+  } else {
+    nextButton.style.display = "none";
+  }
+}
+
+// Event listener for the next button click
+document.getElementById("next-button").addEventListener("click", () => {
+  window.location.href = "reserve_details.html"; // Redirect to reserve_details.html
+});
+
 // Initial rendering and save button click handling
 renderParkingSpotsAndSave();
+
+// Check spot selection on page load
+toggleNextButtonVisibility();
+
+// Check spot selection whenever the page gains focus
+window.addEventListener("focus", () => {
+  toggleNextButtonVisibility();
+});
