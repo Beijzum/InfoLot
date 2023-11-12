@@ -1,3 +1,120 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+.car-park {
+  margin: 20px auto;
+  max-width: 35%;
+  text-align: center;
+}
+
+/* ENTRANCE */
+.entrance {
+  position: relative;
+  height: 50px;
+}
+
+.entrance:before,
+.entrance:after {
+  content: "ENTRANCE";
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0px 2px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  display: block;
+  position: absolute;
+  background: #8fd974;
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.entrance:before {
+  left: 0;
+}
+
+.entrance:after {
+  right: 0;
+}
+
+/* EXIT */
+.exit {
+  position: relative;
+  height: 50px;
+}
+
+.exit:before,
+.exit:after {
+  content: "EXIT";
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0px 2px;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  display: block;
+  position: absolute;
+  background: #8fd974;
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.exit:before {
+  left: 0;
+}
+
+.exit:after {
+  right: 0;
+}
+
+/* Parking lots */
+.fuselage {
+  border-right: 5px solid #d8d8d8;
+  border-left: 5px solid #d8d8d8;
+}
+
+.cabin {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#parking-spots {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#spotsA-container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#spotsB-container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.spotsA,
+.spotsB {
+  width: 50%;
+  height: 50px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
 /*
 * --------------------------------------------
 * These are some styles of customizing 
