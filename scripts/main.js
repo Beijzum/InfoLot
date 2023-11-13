@@ -35,14 +35,14 @@ function readQuote() {
           myposts.forEach(item => {
             db.collection("posts").doc(item).get()
               .then(postDoc => {
-                if (postDoc.exists) {
-                  // Access the description field from the post document
-                  var desc = postDoc.data().description;
-                  console.log('Description:', desc);
 
-                  // Display the description wherever you want
-                  document.getElementById("quote-goes-here").innerHTML = desc;
-                }
+                // Access the description field from the post document
+                var desc = postDoc.data().description;
+                console.log('Description:', desc);
+
+                // Display the description wherever you want
+                document.getElementById("quote-goes-here").innerHTML = desc;
+
               });
           });
         });
@@ -50,4 +50,25 @@ function readQuote() {
   });
 }
 
-readQuote(); 
+readQuote();
+
+function displayUserProfileImage() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // Get the Firestore document of the user
+      currentUser = db.collection("users").doc(user.uid);
+      currentUser.get()
+        .then(userDoc => {
+          // Get the user's image URL
+          var userImage = userDoc.data().profilePic;
+
+          // Display the image wherever you want
+          if (userImage != null) {
+            document.getElementById("mypic-goes-here").src = userImage;
+          };
+        });
+    };
+  });
+};
+
+displayUserProfileImage()
