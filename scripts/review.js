@@ -36,24 +36,24 @@ function writeReview() {
     console.log("inside write review");
     let parkingLotTitle = document.getElementById("title").value;
     let parkingLotDescription = document.getElementById("description").value;
-    let hikeFlooded = document.querySelector('input[name="flooded"]:checked').value;
-    let hikeScrambled = document.querySelector('input[name="scrambled"]:checked').value;
+    let parkingGated = document.querySelector('input[name="gated"]:checked').value;
+    let parkingUnderground = document.querySelector('input[name="underground"]:checked').value;
 
     // Get the star rating
     // Get all the elements with the class "star" and store them in the 'stars' variable
     const stars = document.querySelectorAll('.star');
-    // Initialize a variable 'hikeRating' to keep track of the rating count
+    // Initialize a variable 'parkingLotRating' to keep track of the rating count
     let parkingLotRating = 0;
     // Iterate through each element in the 'stars' NodeList using the forEach method
     stars.forEach((star) => {
         // Check if the text content of the current 'star' element is equal to the string 'star'
         if (star.textContent === 'star') {
-            // If the condition is met, increment the 'hikeRating' by 1
+            // If the condition is met, increment the 'parkinglotRating' by 1
             parkingLotRating++;
         }
     });
 
-    console.log(parkingLotTitle, parkingLotDescription, parkingLotRating, hikeFlooded, hikeScrambled);
+    console.log(parkingLotTitle, parkingLotDescription, parkingLotRating, parkingGated, parkingUnderground);
 
     var user = firebase.auth().currentUser;
     if (user) {
@@ -66,8 +66,8 @@ function writeReview() {
             userID: userID,
             title: parkingLotTitle,
             description: parkingLotDescription,
-            flooded: hikeFlooded,
-            scrambled: hikeScrambled,
+            gated: parkingGated,
+            underground: parkingUnderground,
             rating: parkingLotRating, // Include the rating in the review
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).then((docRef) => {
