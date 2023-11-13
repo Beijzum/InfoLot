@@ -29,3 +29,29 @@ function saveParkingLotDocumentIDAndRedirect() {
     localStorage.setItem('parkingLotDocID', ID);
     window.location.href = 'review.html';
 }
+
+
+// Add parking lot ID as favourites
+function saveFavoriteParkingLot(userID, parkingLotId) {
+    // Get a reference to the user document in Firestore
+    var userDocRef = db.collection("users").doc(userID);
+
+    // Update the user document with the parking lot ID with favourites as a variable
+    userDocRef.update({
+        favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
+    })
+        .then(function () {
+            console.log('Added Parking Lot ID to user favorites.');
+        })
+        .catch(function (error) {
+            console.error('Error updating user favorites:', error);
+        });
+}
+
+
+function onAddToFavoritesButtonClick() {
+    var userId = firebase.auth().currentUser.uid;
+    var parkingLotId = "your_parking_lot_id"; 
+
+    saveFavoriteParkingLot(userId, parkingLotId);
+}
