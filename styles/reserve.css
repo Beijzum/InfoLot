@@ -105,12 +105,13 @@ html {
 
 .spotsA,
 .spotsB {
-  width: 50%;
+  width: 80%;
   height: 50px;
   margin: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #d8d8d8;
   cursor: pointer;
 }
 
