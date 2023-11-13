@@ -111,7 +111,7 @@ function uploadPic(reviewDocID) {
         // AFTER .put() is done
         .then(function () {
             console.log('2. Uploaded to Cloud Storage.');
-            return storageRef.getDownloadURL()
+            storageRef.getDownloadURL()
 
                 // AFTER .getDownloadURL is done
                 .then(function (url) { // Get URL of the uploaded file
@@ -120,7 +120,7 @@ function uploadPic(reviewDocID) {
                     // Now that the image is on Storage, we can go back to the
                     // review document, and update it with an "image" field
                     // that contains the url of where the picture is stored.
-                    return db.collection("reviews").doc(reviewDocID).update({
+                    db.collection("reviews").doc(reviewDocID).update({
                         "image": url, // Save the URL into users collection
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     })
