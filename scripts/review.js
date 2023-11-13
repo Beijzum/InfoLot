@@ -61,7 +61,7 @@ function writeReview() {
         var userID = user.uid;
 
         // Get the document for the current user.
-        db.collection("reviews").add({
+        db.collection("reviews").add({ // Add to 'reviews' database
             parkingLotDocID: parkingLotDocID,
             userID: userID,
             title: parkingLotTitle,
@@ -70,8 +70,8 @@ function writeReview() {
             underground: parkingUnderground,
             rating: parkingLotRating, // Include the rating in the review
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then((docRef) => {
-            uploadPic(docRef.id)
+        }).then((docRef) => { // Promise callback after document is added. docRef is a variable that holds a reference to the newly added document
+            uploadPic(docRef.id) // Calls the newly added document and adds ID property to it. Calls uploadPic function using the review ID as argument.
         });
     }
 };
@@ -102,9 +102,9 @@ listenFileSelect();
 // This function is called AFTER the review has been created, 
 // and we know the review's document id.
 //------------------------------------------------
-function uploadPic(reviewDocID) {
+function uploadPic(reviewDocID) { // Uploading a pic to reviews collection using review ID as argument from writeReview()
     console.log("inside uploadPic " + reviewDocID);
-    var storageRef = storage.ref("images/" + reviewDocID);
+    var storageRef = storage.ref("images/" + reviewDocID); //stores img in 'Storage' in database as the review ID name
 
     storageRef.put(ImageFile)   //global variable ImageFile
 
@@ -130,7 +130,7 @@ function uploadPic(reviewDocID) {
                             // One last thing to do:
                             // save this reviewDocID into an array for the OWNER
                             // so we can show "my reviews" in the future
-                            saveReviewIDforUser(reviewDocID);
+                            saveReviewIDforUser(reviewDocID); // Calls the saveReviewIDforUser function and passes reviewDocID (from writeReview) as an argument
                         })
                 })
         })
@@ -142,12 +142,12 @@ function uploadPic(reviewDocID) {
 //--------------------------------------------
 //saves the review ID for the user, in an array
 //--------------------------------------------
-function saveReviewIDforUser(reviewDocID) {
+function saveReviewIDforUser(reviewDocID) { // uses reviewDocID (from writeReview) as an argument. Saves reviewID into user collection.
     firebase.auth().onAuthStateChanged(user => {
         console.log("user id is: " + user.uid);
         console.log("reviewdoc id is: " + reviewDocID);
-        db.collection("users").doc(user.uid).update({
-            reviewID: firebase.firestore.FieldValue.arrayUnion(reviewDocID)
+        db.collection("users").doc(user.uid).update({ // Saves in users collection
+            reviewID: firebase.firestore.FieldValue.arrayUnion(reviewDocID) // saves 'reviewID' variable with 'reviewDocID' as a value
         })
             .then(() => {
                 console.log("5. Saved to user's document!");
