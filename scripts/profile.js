@@ -77,7 +77,8 @@ function editUserInfo() {
 
 function saveUserInfo() {
     firebase.auth().onAuthStateChanged(function (user) {
-        var storageRef = storage.ref("images/" + user.uid + ".jpg");
+        // Stores images in Storage using userID
+        var storageRef = storage.ref("images/" + user.uid);
 
         //Asynch call to put File Object (global variable ImageFile) onto Cloud
         storageRef.put(ImageFile)
