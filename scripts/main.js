@@ -19,7 +19,8 @@ function insertNameFromFirestore() {
 
 insertNameFromFirestore();
 
-function displayUserProfileData() {
+
+function displayUserProfileImage() {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // Get the Firestore document of the user
@@ -28,12 +29,30 @@ function displayUserProfileData() {
         .then(userDoc => {
           // Get the user's image URL and quote
           var userImage = userDoc.data().profilePic;
-          var userQuote = userDoc.data().quote;
 
           // Display the image wherever you want
           if (userImage != null) {
             document.getElementById("mypic-goes-here").src = userImage;
           };
+
+        });
+    };
+  });
+};
+
+displayUserProfileImage()
+
+
+function readQuote() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // Get the Firestore document of the user
+      currentUser = db.collection("users").doc(user.uid);
+      currentUser.get()
+        .then(userDoc => {
+          // Get the user's image URL and quote
+          var userQuote = userDoc.data().quote;
+
           //Display the quote of the day
           if (userQuote != null) {
             document.getElementById("quote-goes-here").innerHTML = userDoc.data().quote
@@ -43,4 +62,4 @@ function displayUserProfileData() {
   });
 };
 
-displayUserProfileData()
+readQuote()
