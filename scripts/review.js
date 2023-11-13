@@ -72,13 +72,12 @@ function writeReview() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).then((docRef) => {
             uploadPic(docRef.id)
-                .then(() => {
-                    window.location.href = "thanks.html"; // Redirect to the thanks page
-                });
-        })
-    };
-}
+        });
+    }
+};
 
+
+var ImageFile;
 function listenFileSelect() {
     // listen for file selection
     var fileInput = document.getElementById("mypic-input"); // pointer #1
@@ -91,14 +90,6 @@ function listenFileSelect() {
         image.src = blob; // Display this image
     })
 }
-
-// When a change happens to the File Chooser Input
-fileInput.addEventListener('change', function (e) {
-    ImageFile = e.target.files[0];   //Global variable
-    var blob = URL.createObjectURL(ImageFile);
-    image.src = blob; // Display this image
-})
-
 listenFileSelect();
 
 
@@ -160,8 +151,7 @@ function saveReviewIDforUser(reviewDocID) {
         })
             .then(() => {
                 console.log("5. Saved to user's document!");
-                alert("Post is complete!");
-                // window.location.href = "showposts.html";
+                window.location.href = "thanks.html"; // Redirect to the thanks page
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
