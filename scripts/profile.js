@@ -1,29 +1,26 @@
-function editUserInfo() {
-    //Enable the form fields
-    document.getElementById('personalInfoFields').disabled = false;
-}
-
 //global variable with default
 var ImageFile = "./images/phantom_thief.png"; // this is the default profile pic for user without profile picture
 
-function addFileChooserListener() {
+function addFileChooserListener() { // Waits for file selection. Assigns temporary img
     console.log("inside add File chooser listener");
-    const fileInput = document.getElementById("mypic-input"); // pointer #1
-    const image = document.getElementById("mypic-goes-here"); // pointer #2
-    image.src = ImageFile; //default initially
+    const fileInput = document.getElementById("mypic-input"); // pointer #1 which is inputting a file
+    const image = document.getElementById("mypic-goes-here"); // pointer #2 which is the image class mypic-goes-here
+    image.src = ImageFile; //default initially, which is currently phantom_thief.png
     //attach listener to input file
     //when this file changes, do something
-    fileInput.addEventListener('change', function (e) {
+    fileInput.addEventListener('change', function (e) { // listens for 'change' event; in this case, input file 
         console.log("inside file chooser event handler!")
         //the change event returns a file "e.target.files[0]"
-        ImageFile = e.target.files[0];
-        var blob = URL.createObjectURL(e.target.files[0]);
+        ImageFile = e.target.files[0]; // refers to the array of files selected through the file input
+        var blob = URL.createObjectURL(e.target.files[0]); // specifically gets the first file from the array (assuming a single file selection).
 
         //change the DOM img element source to point to this file
         image.src = blob; //assign the "src" property of the "img" tag
     })
 }
-addFileChooserListener();
+
+addFileChooserListener(); // Call the function
+
 
 var currentUser; //put this right after you start script tag before writing any functions.
 function populateUserInfo() {
@@ -37,6 +34,7 @@ function populateUserInfo() {
             currentUser.get()
                 .then(userDoc => {
                     //get the data fields of the user
+                    // don't forget to add these also in saveUserInfo()
                     var userName = userDoc.data().name;
                     var userSchool = userDoc.data().school;
                     var userCity = userDoc.data().city;
@@ -71,6 +69,12 @@ function populateUserInfo() {
 populateUserInfo();
 
 
+function editUserInfo() {
+    //Enable the form fields
+    document.getElementById('personalInfoFields').disabled = false;
+}
+
+
 function saveUserInfo() {
     firebase.auth().onAuthStateChanged(function (user) {
         // Stores images in Storage using userID
@@ -85,7 +89,8 @@ function saveUserInfo() {
                 storageRef.getDownloadURL()
                     .then(function (url) { // Get "url" of the uploaded file
                         console.log("Got the download URL.");
-                        //get values from the from
+                        //get values from the from the forms
+                        // don't forget to check with populateUserInfo()
                         userName = document.getElementById('nameInput').value;
                         userSchool = document.getElementById('schoolInput').value;
                         userCity = document.getElementById('cityInput').value;
@@ -102,7 +107,7 @@ function saveUserInfo() {
                             .then(function () {
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved use profile info');
-                                document.getElementById('personalInfoFields').disabled =
+                                document.getElementById('personalInfoFields').disabled = // Re-disables edit form after saving 
                                     true;
                             })
                     })
