@@ -147,6 +147,13 @@ h1 {
   }
 }
 
+/* User Profile Picture */
+.profile-picture img {
+  width: 300px;
+  height: 300px;
+  border-radius: 300px;
+}
+
 /* 3 Circle images */
 .profile-circle-image-200 img {
   width: 200px;

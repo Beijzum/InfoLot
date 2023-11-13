@@ -52,11 +52,16 @@
     <nav id="navbarPlaceholder"></nav>
 
     <!-- the body of your page goes here -->
-    <!-- stuff -->
     <div class="container">
         <h1>User Profile </h1>
         <form>
-            <fieldset class="mb-3" id="personalInfoFields" disabled>
+            <fieldset class="mb-3" id="personalInfoFields">
+                <div class="form-group py-5">
+                    <div id="profile-container" class="col-lg-12 col-md-6 profile-picture">
+                        <img id="mypic-goes-here" src="" />
+                    </div>
+                    <input id="mypic-input" type="file" accept="image/*">
+                </div>
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
@@ -78,18 +83,15 @@
         </form>
     </div>
 
+
     <div class="container">
-        <h1>Make a Post </h1>
+        <h1>Change your quote</h1>
         <form>
             <div class="form-group">
-                <label>Job Description</label>
+                <label>Quote: </label>
                 <textarea id="description" rows="4" cols="50"></textarea>
             </div>
-            <div class="container py-3">
-                <input type="file" id="mypic-input" accept="image/*" />
-                <img id="mypic-goes-here" width=100 height=100 />
-            </div>
-            <div class="d-flex mt-5">
+            <div class="d-flex justify-content-center mt-5">
                 <button type="button" class="btn btn-info" onclick="savePost()">Post Now</button>
             </div>
         </form>
