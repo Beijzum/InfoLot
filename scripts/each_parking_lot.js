@@ -51,7 +51,15 @@ function saveFavoriteParkingLot(userID, parkingLotId) {
 
 function onAddToFavoritesButtonClick() {
     var userId = firebase.auth().currentUser.uid;
-    var parkingLotId = "your_parking_lot_id"; 
 
-    saveFavoriteParkingLot(userId, parkingLotId);
+    // Retrieve parking lot ID from the URL
+    let params = new URL(window.location.href); // parse the parameters from the URL of current window
+    var parkingLotId = params.searchParams.get("docID"); // Grabs docID from URL 
+
+    if (parkingLotId) {
+        // Call the function to save the favorite
+        saveFavoriteParkingLot(userId, parkingLotId);
+    } else {
+        console.error("Parking lot ID not found in the URL.");
+    }
 }
