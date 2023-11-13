@@ -4,7 +4,7 @@ function editUserInfo() {
 }
 
 //global variable with default
-var ImageFile = "./images/phantom_thief.png";
+var ImageFile = "./images/phantom_thief.png"; // this is the default profile pic for user without profile picture
 
 function addFileChooserListener() {
     console.log("inside add File chooser listener");
@@ -70,10 +70,6 @@ function populateUserInfo() {
 //call the function to run it 
 populateUserInfo();
 
-function editUserInfo() {
-    //Enable the form fields
-    document.getElementById('personalInfoFields').disabled = false;
-}
 
 function saveUserInfo() {
     firebase.auth().onAuthStateChanged(function (user) {
