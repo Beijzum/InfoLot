@@ -70,11 +70,101 @@ function writeReview() {
             scrambled: hikeScrambled,
             rating: parkingLotRating, // Include the rating in the review
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => {
-            window.location.href = "thanks.html"; // Redirect to the thanks page
-        });
-    } else {
-        console.log("No user is signed in");
-        window.location.href = 'review.html';
-    }
+        }).then((docRef) => {
+            uploadPic(docRef.id)
+                .then(() => {
+                    window.location.href = "thanks.html"; // Redirect to the thanks page
+                });
+        })
+    };
+}
+
+function listenFileSelect() {
+    // listen for file selection
+    var fileInput = document.getElementById("mypic-input"); // pointer #1
+    const image = document.getElementById("mypic-goes-here"); // pointer #2
+
+    // When a change happens to the File Chooser Input
+    fileInput.addEventListener('change', function (e) {
+        ImageFile = e.target.files[0];   //Global variable
+        var blob = URL.createObjectURL(ImageFile);
+        image.src = blob; // Display this image
+    })
+}
+
+// When a change happens to the File Chooser Input
+fileInput.addEventListener('change', function (e) {
+    ImageFile = e.target.files[0];   //Global variable
+    var blob = URL.createObjectURL(ImageFile);
+    image.src = blob; // Display this image
+})
+
+listenFileSelect();
+
+
+//------------------------------------------------
+// So, a new review document has just been added
+// and it contains a bunch of fields.
+// We want to store the image associated with this review,
+// such that the image name is the reviewID (guaranteed unique).
+// 
+// This function is called AFTER the review has been created, 
+// and we know the review's document id.
+//------------------------------------------------
+function uploadPic(reviewDocID) {
+    console.log("inside uploadPic " + reviewDocID);
+    var storageRef = storage.ref("images/" + reviewDocID);
+
+    storageRef.put(ImageFile)   //global variable ImageFile
+
+        // AFTER .put() is done
+        .then(function () {
+            console.log('2. Uploaded to Cloud Storage.');
+            return storageRef.getDownloadURL()
+
+                // AFTER .getDownloadURL is done
+                .then(function (url) { // Get URL of the uploaded file
+                    console.log("3. Got the download URL.");
+
+                    // Now that the image is on Storage, we can go back to the
+                    // review document, and update it with an "image" field
+                    // that contains the url of where the picture is stored.
+                    return db.collection("reviews").doc(reviewDocID).update({
+                        "image": url, // Save the URL into users collection
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                        // AFTER .update is done
+                        .then(function () {
+                            console.log('4. Added pic URL to Firestore.');
+                            // One last thing to do:
+                            // save this reviewDocID into an array for the OWNER
+                            // so we can show "my reviews" in the future
+                            saveReviewIDforUser(reviewDocID);
+                        })
+                })
+        })
+        .catch((error) => {
+            console.log("error uploading to cloud storage");
+        })
+}
+
+//--------------------------------------------
+//saves the review ID for the user, in an array
+//--------------------------------------------
+function saveReviewIDforUser(reviewDocID) {
+    firebase.auth().onAuthStateChanged(user => {
+        console.log("user id is: " + user.uid);
+        console.log("reviewdoc id is: " + reviewDocID);
+        db.collection("users").doc(user.uid).update({
+            reviewID: firebase.firestore.FieldValue.arrayUnion(reviewDocID)
+        })
+            .then(() => {
+                console.log("5. Saved to user's document!");
+                alert("Post is complete!");
+                // window.location.href = "showposts.html";
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    })
 }
