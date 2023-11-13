@@ -74,6 +74,10 @@
                     <label>City</label>
                     <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
                 </div>
+                <div class="form-group">
+                    <label>Quote</label>
+                    <input type="text" id="quoteInput" class="form-control" placeholder="Enter your quote of the day">
+                </div>
             </fieldset>
             <div class="d-flex justify-content-end mt-5">
                 <button type="button" class="btn btn-info" onclick="editUserInfo()">Edit</button>
@@ -81,20 +85,6 @@
                 <button type="button" class="btn btn-warning" onclick="saveUserInfo()">Save</button>
                 <span style="width: 10px"></span>
                 <button type="button" class="btn btn-secondary" onclick="deleteUser()">Delete</button>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="container">
-        <h1>Change your quote</h1>
-        <form>
-            <div class="form-group">
-                <label>Quote: </label>
-                <textarea id="description" rows="4" cols="50"></textarea>
-            </div>
-            <div class="d-flex justify-content-center mt-5">
-                <button type="button" class="btn btn-info" onclick="savePost()">Post Now</button>
             </div>
         </form>
     </div>
@@ -109,7 +99,6 @@
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/profile.js"></script>
-    <script src="./scripts/makepost.js"></script>
 </body>
 
 </html>

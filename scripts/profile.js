@@ -41,6 +41,7 @@ function populateUserInfo() {
                     var userSchool = userDoc.data().school;
                     var userCity = userDoc.data().city;
                     var userImage = userDoc.data().profilePic;
+                    var userQuote = userDoc.data().quote;
 
                     //if the data fields are not empty, then write them in to the form.
                     if (userName != null) {
@@ -51,6 +52,9 @@ function populateUserInfo() {
                     }
                     if (userCity != null) {
                         document.getElementById("cityInput").value = userCity;
+                    }
+                    if (userQuote != null) {
+                        document.getElementById("quoteInput").value = userQuote;
                     }
                     if (userImage != null) {
                         document.getElementById("mypic-goes-here").src = userImage;
@@ -88,12 +92,14 @@ function saveUserInfo() {
                         userName = document.getElementById('nameInput').value;
                         userSchool = document.getElementById('schoolInput').value;
                         userCity = document.getElementById('cityInput').value;
+                        userQuote = document.getElementById('quoteInput').value;
 
                         //Asynch call to save the form fields into Firestore.
                         db.collection("users").doc(user.uid).update({
                             name: userName,
                             school: userSchool,
                             city: userCity,
+                            quote: userQuote,
                             profilePic: url // Save the URL into users collection
                         })
                             .then(function () {
