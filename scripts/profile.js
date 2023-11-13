@@ -1,18 +1,48 @@
-var currentUser;               //points to the document of the user who is logged in
+function editUserInfo() {
+    //Enable the form fields
+    document.getElementById('personalInfoFields').disabled = false;
+}
 
-function populateInfo() {
+//global variable with default
+var ImageFile = "./images/phantom_thief.png";
+
+function addFileChooserListener() {
+    console.log("inside add File chooser listener");
+    const fileInput = document.getElementById("mypic-input"); // pointer #1
+    const image = document.getElementById("mypic-goes-here"); // pointer #2
+    image.src = ImageFile; //default initially
+    //attach listener to input file
+    //when this file changes, do something
+    fileInput.addEventListener('change', function (e) {
+        console.log("inside file chooser event handler!")
+        //the change event returns a file "e.target.files[0]"
+        ImageFile = e.target.files[0];
+        var blob = URL.createObjectURL(e.target.files[0]);
+
+        //change the DOM img element source to point to this file
+        image.src = blob; //assign the "src" property of the "img" tag
+    })
+}
+addFileChooserListener();
+
+var currentUser; //put this right after you start script tag before writing any functions.
+function populateUserInfo() {
     firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
         if (user) {
-            // go and get the curret user info from firestore
-            currentUser = db.collection("users").doc(user.uid);
 
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid)
+            //get the document for current user.
             currentUser.get()
                 .then(userDoc => {
-                    let userName = userDoc.data().name;
-                    let userSchool = userDoc.data().school;
-                    let userCity = userDoc.data().city;
-                    let picUrl = userDoc.data().profilePic;
+                    //get the data fields of the user
+                    var userName = userDoc.data().name;
+                    var userSchool = userDoc.data().school;
+                    var userCity = userDoc.data().city;
+                    var userImage = userDoc.data().profilePic;
 
+                    //if the data fields are not empty, then write them in to the form.
                     if (userName != null) {
                         document.getElementById("nameInput").value = userName;
                     }
@@ -20,31 +50,26 @@ function populateInfo() {
                         document.getElementById("schoolInput").value = userSchool;
                     }
                     if (userCity != null) {
-                        console.log(userCity)
                         document.getElementById("cityInput").value = userCity;
                     }
-                    if (picUrl != null) {
-                        console.log(picUrl);
-                        // use this line if "mypicdiv" is a "div"
-                        $("#mypicdiv").append("<img src='" + picUrl + "'>")
-                        $("#mypic-goes-here").attr("src", picUrl);
+                    if (userImage != null) {
+                        document.getElementById("mypic-goes-here").src = userImage;
                     }
-                    else
-                        console.log("picURL is null");
                 })
-
         } else {
-            console.log("no user is logged in")
+            // No user is signed in.
+            console.log("No user is signed in");
         }
-    }
-
-    )
-
+    });
 }
-populateInfo();
 
 //call the function to run it 
 populateUserInfo();
+
+function editUserInfo() {
+    //Enable the form fields
+    document.getElementById('personalInfoFields').disabled = false;
+}
 
 function saveUserInfo() {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -74,30 +99,44 @@ function saveUserInfo() {
                             .then(function () {
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved use profile info');
-                                document.getElementById('personalInfoFields').disabled = true;
+                                document.getElementById('personalInfoFields').disabled =
+                                    true;
                             })
                     })
             })
     })
 }
 
-var ImageFile;      //global variable to store the File Object reference
+//-------------------------------------------------
+// This function asks user to confirm deletion:
+// 1. remove document from users collection in firestore
+// 2. THEN, remove auth() user from Firebase auth
+//-------------------------------------------------
+function deleteUser() {
+    firebase.auth().onAuthStateChanged(user => {
 
-function chooseFileListener() {
-    const fileInput = document.getElementById("mypic-input");   // pointer #1
-    const image = document.getElementById("mypic-goes-here");   // pointer #2
+        // Double check! Usability Heuristics #5
+        var result = confirm("WARNING " + user.displayName +
+            ": Deleting your User Account!!");
 
-    //attach listener to input file
-    //when this file changes, do something
-    fileInput.addEventListener('change', function (e) {
+        // If confirmed, then go ahead
+        if (result) {
+            // First, delete from Firestore users collection 
+            db.collection("users").doc(user.uid).delete()
+                .then(() => {
+                    console.log("Deleted from Firestore Collection");
 
-        //the change event returns a file "e.target.files[0]"
-        ImageFile = e.target.files[0];
-        var blob = URL.createObjectURL(ImageFile);
-
-        //change the DOM img element source to point to this file
-        image.src = blob;    //assign the "src" property of the "img" tag
+                    // Next, delete from Firebase Auth
+                    user.delete().then(() => {
+                        console.log("Deleted from Firebase Auth.");
+                        alert("user has been deleted");
+                        window.location.href = "index.html";
+                    }).catch((error) => {
+                        console.log("Error deleting from Firebase Auth " + error);
+                    });
+                }).catch((error) => {
+                    console.error("Error deleting user: ", error);
+                });
+        }
     })
 }
-
-chooseFileListener();

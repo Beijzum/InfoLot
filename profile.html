@@ -55,12 +55,12 @@
     <div class="container">
         <h1>User Profile </h1>
         <form>
-            <fieldset class="mb-3" id="personalInfoFields">
+            <fieldset class="mb-3" id="personalInfoFields" disabled>
                 <div class="form-group py-5">
-                    <div id="profile-container" class="col-lg-12 col-md-6 profile-picture">
-                        <img id="mypic-goes-here" src="" />
+                    <div class="profile-pic-container col-lg-12 col-md-6 profile-picture">
+                        <img id="mypic-goes-here" src="" height="100rem" width="100rem" />
                     </div>
-                    <input id="mypic-input" type="file" accept="image/*">
+                    <input id="mypic-input" type="file">
                 </div>
                 <div class="form-group">
                     <label>Name</label>
@@ -76,9 +76,11 @@
                 </div>
             </fieldset>
             <div class="d-flex justify-content-end mt-5">
-                <button type="button" class="btn btn-secondary" onclick="editUserInfo()">Edit</button>
+                <button type="button" class="btn btn-info" onclick="editUserInfo()">Edit</button>
                 <span style="width: 10px"></span>
-                <button type="button" class="btn btn-info" onclick="saveUserInfo()">Save</button>
+                <button type="button" class="btn btn-warning" onclick="saveUserInfo()">Save</button>
+                <span style="width: 10px"></span>
+                <button type="button" class="btn btn-secondary" onclick="deleteUser()">Delete</button>
             </div>
         </form>
     </div>

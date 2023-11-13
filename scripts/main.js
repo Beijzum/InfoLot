@@ -18,3 +18,36 @@ function insertNameFromFirestore() {
 }
 
 insertNameFromFirestore();
+
+function readQuote() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log(user.uid); // Log the UID of the logged-in user
+
+      // Get the Firestore document of the user
+      currentUser = db.collection("users").doc(user.uid);
+      currentUser.get()
+        .then(doc => {
+          myposts = doc.data().myposts; // Get array of my posts
+          console.log(myposts);
+
+          // Iterate through each post in myposts array
+          myposts.forEach(item => {
+            db.collection("posts").doc(item).get()
+              .then(postDoc => {
+                if (postDoc.exists) {
+                  // Access the description field from the post document
+                  var desc = postDoc.data().description;
+                  console.log('Description:', desc);
+
+                  // Display the description wherever you want
+                  document.getElementById("quote-goes-here").innerHTML = desc;
+                }
+              });
+          });
+        });
+    }
+  });
+}
+
+readQuote(); 
