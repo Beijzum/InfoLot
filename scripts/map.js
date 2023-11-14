@@ -56,7 +56,7 @@ function showMap() {
                                 <p style="font-weight: bold;">${event_name}</p>
                                 <p>${price}</p>
                                 <p>${hours}</p>
-                                <a href="./reserve.html" type="button" class="style_button btn btn-success">Reserve Now</a>
+                                <a href="./reserve.html?docID=${doc.id}" type="button" class="style_button btn btn-success">Reserve Now</a>
                                 <br> 
                                 <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>
                                 </div>`
