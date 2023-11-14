@@ -1,4 +1,4 @@
-//global variable with default
+// Global variable with default
 var ImageFile = "./images/phantom_thief.png"; // this is the default profile pic for user without profile picture
 
 function addFileChooserListener() { // Waits for file selection. Assigns temporary img
@@ -24,16 +24,13 @@ addFileChooserListener(); // Call the function
 
 var currentUser; //put this right after you start script tag before writing any functions.
 function populateUserInfo() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check if user is signed in:
-        if (user) {
+    firebase.auth().onAuthStateChanged(user => {        // Check if user is signed in:
 
-            //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid)
-            //get the document for current user.
-            currentUser.get()
-                .then(userDoc => {
-                    //get the data fields of the user
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid)      // go to the correct user document by referencing to the user uid
+            currentUser.get()       // get the document for current user.
+                .then(userDoc => {      //get the data fields of the user
+                    // Assign variables to data
                     // don't forget to add these also in saveUserInfo()
                     var userName = userDoc.data().name;
                     var userSchool = userDoc.data().school;
@@ -65,31 +62,28 @@ function populateUserInfo() {
     });
 }
 
-//call the function to run it 
-populateUserInfo();
+
+populateUserInfo();     //call the function to run it
 
 
+// Enable the form fields with this button
 function editUserInfo() {
-    //Enable the form fields
     document.getElementById('personalInfoFields').disabled = false;
 }
 
 
+// Save user info with this button
 function saveUserInfo() {
-    firebase.auth().onAuthStateChanged(function (user) {
-        // Stores images in Storage using userID
-        var storageRef = storage.ref("images/" + user.uid);
+    firebase.auth().onAuthStateChanged(function (user) {        // Checks if user signed in
+        var storageRef = storage.ref("images/" + user.uid);         // Stores images in Storage using userID
 
-        //Asynch call to put File Object (global variable ImageFile) onto Cloud
-        storageRef.put(ImageFile)
+        storageRef.put(ImageFile)       //  Async Call to put File Object (global variable ImageFile) onto Cloud
             .then(function () {
                 console.log('Uploaded to Cloud Storage.');
-
-                //Asynch call to get URL from Cloud
-                storageRef.getDownloadURL()
-                    .then(function (url) { // Get "url" of the uploaded file
-                        console.log("Got the download URL.");
-                        //get values from the from the forms
+                storageRef.getDownloadURL()         // Async call to get URL from Cloud
+                    .then(function (url) {          // Get "url" of the uploaded file
+                        console.log("Got the download URL.");       //get values from the from the forms
+                        // Assign variables to values
                         // don't forget to check with populateUserInfo()
                         userName = document.getElementById('nameInput').value;
                         userSchool = document.getElementById('schoolInput').value;
@@ -102,13 +96,12 @@ function saveUserInfo() {
                             school: userSchool,
                             city: userCity,
                             quote: userQuote,
-                            profilePic: url // Save the URL into users collection
+                            profilePic: url         // Save the URL into users collection
                         })
                             .then(function () {
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved use profile info');
-                                document.getElementById('personalInfoFields').disabled = // Re-disables edit form after saving 
-                                    true;
+                                document.getElementById('personalInfoFields').disabled = true;      // Re-disables edit form after saving 
                             })
                     })
             })
@@ -122,20 +115,14 @@ function saveUserInfo() {
 //-------------------------------------------------
 function deleteUser() {
     firebase.auth().onAuthStateChanged(user => {
+        var result = confirm("WARNING " + user.displayName + ": Deleting your User Account!!");     // Double check! Usability Heuristics #5
 
-        // Double check! Usability Heuristics #5
-        var result = confirm("WARNING " + user.displayName +
-            ": Deleting your User Account!!");
-
-        // If confirmed, then go ahead
-        if (result) {
-            // First, delete from Firestore users collection 
-            db.collection("users").doc(user.uid).delete()
+        if (result) {       // If confirmed, then go ahead
+            db.collection("users").doc(user.uid).delete()       // First, delete from Firestore users collection 
                 .then(() => {
                     console.log("Deleted from Firestore Collection");
 
-                    // Next, delete from Firebase Auth
-                    user.delete().then(() => {
+                    user.delete().then(() => {      // Next, delete from Firebase Auth
                         console.log("Deleted from Firebase Auth.");
                         alert("user has been deleted");
                         window.location.href = "index.html";
