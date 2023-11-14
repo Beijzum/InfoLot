@@ -1,4 +1,5 @@
-var parkingLotDocID = localStorage.getItem("parkingLotDocID");    //visible to all functions on this page
+// Parking lot ID visible to all functions on this page
+var parkingLotDocID = localStorage.getItem("parkingLotDocID");
 
 function getParkingLotName(id) {
     db.collection("parkingLots")
@@ -13,25 +14,20 @@ function getParkingLotName(id) {
 getParkingLotName(parkingLotDocID);
 
 
-
-// Add this JavaScript code to make stars clickable
-
-// Select all elements with the class name "star" and store them in the "stars" variable
-const stars = document.querySelectorAll('.star');
+// Make stars clickable
+const stars = document.querySelectorAll('.star');       // Select all elements with the class name "star" and store them in the "stars" variable
 
 // Iterate through each star element
 stars.forEach((star, index) => {
-    // Add a click event listener to the current star
-    star.addEventListener('click', () => {
-        // Fill in clicked star and stars before it
-        for (let i = 0; i <= index; i++) {
-            // Change the text content of stars to 'star' (filled)
-            document.getElementById(`star${i + 1}`).textContent = 'star';
+    star.addEventListener('click', () => {      // Add a click event listener to the current star
+        for (let i = 0; i <= index; i++) {      // Fill in clicked star and stars before it
+            document.getElementById(`star${i + 1}`).textContent = 'star';       // Change the text content of stars to 'star' (filled)
         }
     });
 });
 
 
+// Write review button
 function writeReview() {
     console.log("inside write review");
     let parkingLotTitle = document.getElementById("title").value;
@@ -40,16 +36,12 @@ function writeReview() {
     let parkingUnderground = document.querySelector('input[name="underground"]:checked').value;
 
     // Get the star rating
-    // Get all the elements with the class "star" and store them in the 'stars' variable
-    const stars = document.querySelectorAll('.star');
-    // Initialize a variable 'parkingLotRating' to keep track of the rating count
-    let parkingLotRating = 0;
-    // Iterate through each element in the 'stars' NodeList using the forEach method
-    stars.forEach((star) => {
-        // Check if the text content of the current 'star' element is equal to the string 'star'
-        if (star.textContent === 'star') {
-            // If the condition is met, increment the 'parkinglotRating' by 1
-            parkingLotRating++;
+    const stars = document.querySelectorAll('.star');       // Get all the elements with the class "star" and store them in the 'stars' variable
+    let parkingLotRating = 0;           // Initialize a variable 'parkingLotRating' to keep track of the rating count
+
+    stars.forEach((star) => {               // Iterate through each element in the 'stars' NodeList using the forEach method
+        if (star.textContent === 'star') {      // Check if the text content of the current 'star' element is equal to the string 'star'
+            parkingLotRating++;             // If the condition is met, increment the 'parkinglotRating' by 1
         }
     });
 
@@ -78,8 +70,7 @@ function writeReview() {
 
 
 var ImageFile;
-function listenFileSelect() {
-    // listen for file selection
+function listenFileSelect() {       // listen for file selection
     var fileInput = document.getElementById("mypic-input"); // pointer #1
     const image = document.getElementById("mypic-goes-here"); // pointer #2
 
@@ -102,21 +93,17 @@ listenFileSelect();
 // This function is called AFTER the review has been created, 
 // and we know the review's document id.
 //------------------------------------------------
-function uploadPic(reviewDocID) { // Uploading a pic to reviews collection using review ID as argument from writeReview()
+function uploadPic(reviewDocID) {       // Uploading a pic to reviews collection using review ID as argument from writeReview()
     console.log("inside uploadPic " + reviewDocID);
-    var storageRef = storage.ref("images/" + reviewDocID); //stores img in 'Storage' in database as the review ID name
+    var storageRef = storage.ref("images/" + reviewDocID);          //stores img in 'Storage' in database as the review ID name
 
     storageRef.put(ImageFile)   //global variable ImageFile
-
-        // AFTER .put() is done
-        .then(function () {
+        .then(function () {         // AFTER .put() is done
             console.log('2. Uploaded to Cloud Storage.');
-            storageRef.getDownloadURL()
-
-                // AFTER .getDownloadURL is done
-                .then(function (url) { // Get URL of the uploaded file
+            storageRef.getDownloadURL()         // get URL of the uploaded file
+                .then(function (url) {          // AFTER .getDownloadURL is done, 
                     console.log("3. Got the download URL.");
-
+                    
                     // Now that the image is on Storage, we can go back to the
                     // review document, and update it with an "image" field
                     // that contains the url of where the picture is stored.
