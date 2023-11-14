@@ -30,8 +30,11 @@ stars.forEach((star, index) => {
 // Write review button
 function writeReview() {
     console.log("inside write review");
+    // Assign variables to HTML elements
     let parkingLotTitle = document.getElementById("title").value;
     let parkingLotDescription = document.getElementById("description").value;
+    let parkingExperience = document.getElementById("experience").value;
+    let parkingTraffic = document.getElementById("traffic").value;
     let parkingGated = document.querySelector('input[name="gated"]:checked').value;
     let parkingUnderground = document.querySelector('input[name="underground"]:checked').value;
 
@@ -58,6 +61,8 @@ function writeReview() {
             userID: userID,
             title: parkingLotTitle,
             description: parkingLotDescription,
+            experience: parkingExperience,
+            traffic: parkingTraffic,
             gated: parkingGated,
             underground: parkingUnderground,
             rating: parkingLotRating, // Include the rating in the review
