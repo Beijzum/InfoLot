@@ -23,16 +23,18 @@ function displayParkingInfo() {
 displayParkingInfo();
 
 /* Saves the reviews onto local storage */
-function saveParkingLotDocumentIDAndRedirect() {
-    let params = new URL(window.location.href) //get the url from the search bar
-    let ID = params.searchParams.get("docID");
-    localStorage.setItem('parkingLotDocID', ID);
-    window.location.href = 'review.html';
+function writeReviewBtn() {
+    let parkingLotID = (new URL(window.location.href)).searchParams.get("docID"); // Searches for the value of docID in the current windows URL
+
+    if (parkingLotID) {
+        localStorage.setItem('parkingLotDocID', parkingLotID);   // Save the parking lot ID to local storage
+        window.location.href = `/review.html?docID=${parkingLotID}`; // Redirects to review.html with the parking lot ID as its docID
+    }
 }
 
 
 // Add parking lot ID as favourites
-function saveFavoriteParkingLot(userID, parkingLotId) {
+function saveFavouriteParkingLot(userID, parkingLotId) {
     // Get a reference to the user document in Firestore
     var userDocRef = db.collection("users").doc(userID);
 
@@ -49,7 +51,7 @@ function saveFavoriteParkingLot(userID, parkingLotId) {
 }
 
 
-function onAddToFavoritesButtonClick() {
+function addFavouritesBtn() {
     var userId = firebase.auth().currentUser.uid;
 
     // Retrieve parking lot ID from the URL
@@ -58,7 +60,7 @@ function onAddToFavoritesButtonClick() {
 
     if (parkingLotId) {
         // Call the function to save the favorite
-        saveFavoriteParkingLot(userId, parkingLotId);
+        saveFavouriteParkingLot(userId, parkingLotId);
     } else {
         console.error("Parking lot ID not found in the URL.");
     }
