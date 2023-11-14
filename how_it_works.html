@@ -40,6 +40,70 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
 
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .masthead_how_it_works {
+            background-size: cover;
+            min-height: 40vh;
+            position: relative;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .color-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .header-how {
+            text-align: center;
+        }
+
+        .how_it_works_container {
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+
+        .how_it_works_icons1 {
+            background-color: rgba(201, 242, 155, 0.6);
+            padding: 50px;
+        }
+
+        .how_it_works_icons2 {
+            background-color: lightgreen;
+            padding: 50px;
+        }
+
+        .how_it_works_icons1>h2 {
+            margin-top: 20px;
+            color: white;
+        }
+
+        .how_it_works_icons2>h2 {
+            margin-top: 20px;
+            color: white;
+        }
+
+        .how_it_works_icons1>p {
+            font-size: 1em;
+            color: white;
+        }
+
+        .how_it_works_icons2>p {
+            font-size: 1em;
+            color: white;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -47,11 +111,52 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
 
+
     <!-- Navbar -->
     <nav id="navbarPlaceholder"></nav>
 
+
+    <!--Hero-->
+    <div class="masthead_how_it_works" style="background-image: url('./images/how_it_works2.jpg');">
+        <div class="color-overlay d-flex justify-content-center align-items-center">
+            <div class="header-how">
+                <h1>How It Works</h1>
+            </div>
+        </div>
+    </div>
     <!-- the body of your page goes here -->
     <!-- stuff -->
+    <div class="container how_it_works_container">
+        <div class="row row-cols-1 gy-5">
+
+            <div class="col cols-1 how_it_works_icons1">
+                <img src="./images/browse.png" class="img-fluid rounded-circle">
+                <h2>Step 1: Browse</h2>
+                <p>Search and compare parking spots in downtown, Vancouver.</p>
+            </div>
+
+            <div class="col cols-1 how_it_works_icons2">
+                <img src="./images/reserve.png" class="img-fluid rounded-circle">
+                <h2>Step 2: Reserve</h2>
+                <p>Book your spot and pay securely through the app.</p>
+            </div>
+
+            <div class="col cols-1 how_it_works_icons1">
+                <img src="./images/park.png" class="img-fluid rounded-circle">
+                <h2>Step 3: Park</h2>
+                <p>Arrive and park at your scheduled time.</p>
+            </div>
+
+            <div class="col cols-1 how_it_works_icons2">
+                <img src="./images/customize.png" class="img-fluid rounded-circle">
+                <h2>Step 4: Personalize</h2>
+                <p>Sign into your profile to save your favourite spots, track your history, and more!</p>
+            </div>
+
+
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <nav id="footerPlaceholder"></nav>
