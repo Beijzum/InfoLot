@@ -62,7 +62,6 @@ function populateUserInfo() {
     });
 }
 
-
 populateUserInfo();     //call the function to run it
 
 
@@ -90,8 +89,7 @@ function saveUserInfo() {
                         userCity = document.getElementById('cityInput').value;
                         userQuote = document.getElementById('quoteInput').value;
 
-                        //Asynch call to save the form fields into Firestore.
-                        db.collection("users").doc(user.uid).update({
+                        db.collection("users").doc(user.uid).update({       //Asynch call to save the form fields into Firestore.
                             name: userName,
                             school: userSchool,
                             city: userCity,
@@ -107,6 +105,7 @@ function saveUserInfo() {
             })
     })
 }
+
 
 //-------------------------------------------------
 // This function asks user to confirm deletion:

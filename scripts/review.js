@@ -81,6 +81,7 @@ function listenFileSelect() {       // listen for file selection
         image.src = blob; // Display this image
     })
 }
+
 listenFileSelect();
 
 
@@ -125,6 +126,7 @@ function uploadPic(reviewDocID) {       // Uploading a pic to reviews collection
             console.log("error uploading to cloud storage");
         })
 }
+
 
 //--------------------------------------------
 //saves the review ID for the user, in an array

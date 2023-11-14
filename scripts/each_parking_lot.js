@@ -3,24 +3,25 @@ function displayParkingInfo() {
     let ID = params.searchParams.get("docID"); //get value for key "id"
     console.log(ID);
 
-    // doublecheck: is your collection called "Reviews" or "reviews"?
-    db.collection("parkingLots")
+    db.collection("parkingLots")        // doublecheck: is your collection called "Reviews" or "reviews"?
         .doc(ID)
         .get()
-        .then(doc => {
+        .then(doc => {      // Assign variables to collection data
             thisLot = doc.data();
             parkingCode = thisLot.code;
             parkingLotName = doc.data().name;
             parkingLotDetails = doc.data().details;
 
-            // only populate title, and image
+            // Populate Title, image, and other details
             document.getElementById("parkingLotName").innerHTML = parkingLotName;
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
             document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
         });
 }
+
 displayParkingInfo();
+
 
 /* Saves the reviews onto local storage */
 function writeReviewBtn() {
@@ -35,11 +36,9 @@ function writeReviewBtn() {
 
 // Add parking lot ID as favourites
 function saveFavouriteParkingLot(userID, parkingLotId) {
-    // Get a reference to the user document in Firestore
-    var userDocRef = db.collection("users").doc(userID);
+    var userDocRef = db.collection("users").doc(userID);        // Get a reference to the user document in Firestore
 
-    // Update the user document with the parking lot ID with favourites as a variable
-    userDocRef.update({
+    userDocRef.update({         // Update the user document with the parking lot ID with favourites as a variable
         favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
     })
         .then(function () {
@@ -53,14 +52,11 @@ function saveFavouriteParkingLot(userID, parkingLotId) {
 
 function addFavouritesBtn() {
     var userId = firebase.auth().currentUser.uid;
-
-    // Retrieve parking lot ID from the URL
-    let params = new URL(window.location.href); // parse the parameters from the URL of current window
-    var parkingLotId = params.searchParams.get("docID"); // Grabs docID from URL 
+    let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
+    var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
 
     if (parkingLotId) {
-        // Call the function to save the favorite
-        saveFavouriteParkingLot(userId, parkingLotId);
+        saveFavouriteParkingLot(userId, parkingLotId);      // Call the function to save the favorite
     } else {
         console.error("Parking lot ID not found in the URL.");
     }
