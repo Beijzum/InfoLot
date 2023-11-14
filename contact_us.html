@@ -40,6 +40,31 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
 
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .masthead_contact_us {
+            background-size: cover;
+            min-height: 40vh;
+            position: relative;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .color-overlay>h1 {
+            font-size: 3rem;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,8 +75,83 @@
     <!-- Navbar -->
     <nav id="navbarPlaceholder"></nav>
 
+    <!--Header-->
+    <div class="masthead_contact_us" style="background-image: url('./images/contact_us1.jpg');">
+        <div class="color-overlay d-flex justify-content-center align-items-center">
+            <h1>Contact Us</h1>
+        </div>
+    </div>
+
     <!-- the body of your page goes here -->
     <!-- stuff -->
+
+    <!-- Contact 4 - Bootstrap Brain Component -->
+    <section class="bg-light py-3 py-md-5">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                    <h3 class="fs-6 text-secondary mb-2 text-uppercase text-center">Get in Touch</h3>
+                    <h2 class="display-5 mb-4 mb-md-5 text-center">We're always on the lookout to work with new clients.
+                    </h2>
+                    <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row gy-3 gy-md-4 gy-lg-0 align-items-xl-center">
+                <div class="col-12">
+                    <div class="row justify-content-xl-center">
+                        <div class="col-12 col-xl-11">
+                            <div class="bg-white border rounded shadow-sm overflow-hidden">
+
+                                <form action="#!">
+                                    <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
+                                        <div class="col-12">
+                                            <label for="fullname" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="fullname" name="fullname"
+                                                value="">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="email" class="form-label">Email</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">
+
+                                                </span>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                    value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">
+                                                    
+                                                </span>
+                                                <input type="tel" class="form-control" id="phone" name="phone" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="message" class="form-label">Message </label>
+                                            <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button class="btn btn-primary btn-lg" type="submit">Send
+                                                    Message</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Footer -->
     <nav id="footerPlaceholder"></nav>

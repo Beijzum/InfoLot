@@ -55,6 +55,7 @@
         h1 {
             font-size: 3rem;
             color: white;
+            text-align: center;
         }
 
         .color-overlay {
@@ -64,34 +65,28 @@
             background-color: rgba(0, 0, 0, 0.6);
         }
 
-        .header-how {
-            text-align: center;
-        }
-
         .how_it_works_container {
             margin-top: 5%;
             margin-bottom: 5%;
+            display: flex;
         }
 
         .how_it_works_icons1 {
-            background-color: rgba(201, 242, 155, 0.6);
+            background-color: #333333;
             padding: 50px;
         }
 
         .how_it_works_icons2 {
-            background-color: lightgreen;
+            background-color: #7ac968;
             padding: 50px;
         }
 
-        .how_it_works_icons1>h2 {
-            margin-top: 20px;
-            color: white;
-        }
-
+        .how_it_works_icons1>h2,
         .how_it_works_icons2>h2 {
             margin-top: 20px;
             color: white;
         }
+
 
         .how_it_works_icons1>p {
             font-size: 1em;
@@ -101,6 +96,10 @@
         .how_it_works_icons2>p {
             font-size: 1em;
             color: white;
+        }
+
+        .how_it_works_icon_img {
+            border-radius: 100px;
         }
     </style>
 
@@ -116,39 +115,39 @@
     <nav id="navbarPlaceholder"></nav>
 
 
-    <!--Hero-->
-    <div class="masthead_how_it_works" style="background-image: url('./images/how_it_works2.jpg');">
+    <!--Header-->
+    <div class="masthead_how_it_works" style="background-image: url('./images/how_it_works/header_img.jpg');">
         <div class="color-overlay d-flex justify-content-center align-items-center">
-            <div class="header-how">
-                <h1>How It Works</h1>
-            </div>
+            <h1>How It Works</h1>
         </div>
     </div>
+
     <!-- the body of your page goes here -->
     <!-- stuff -->
     <div class="container how_it_works_container">
         <div class="row row-cols-1 gy-5">
 
             <div class="col cols-1 how_it_works_icons1">
-                <img src="./images/browse.png" class="img-fluid rounded-circle">
+                <img class="how_it_works_icon_img img-fluid" src="./images/how_it_works/browse.png" class="img-fluid">
                 <h2>Step 1: Browse</h2>
                 <p>Search and compare parking spots in downtown, Vancouver.</p>
             </div>
 
             <div class="col cols-1 how_it_works_icons2">
-                <img src="./images/reserve.png" class="img-fluid rounded-circle">
+                <img class="how_it_works_icon_img img-fluid" src="./images/how_it_works/reserve.png" class="img-fluid">
                 <h2>Step 2: Reserve</h2>
                 <p>Book your spot and pay securely through the app.</p>
             </div>
 
             <div class="col cols-1 how_it_works_icons1">
-                <img src="./images/park.png" class="img-fluid rounded-circle">
+                <img class="how_it_works_icon_img img-fluid" src="./images/how_it_works/park.png">
                 <h2>Step 3: Park</h2>
                 <p>Arrive and park at your scheduled time.</p>
             </div>
 
             <div class="col cols-1 how_it_works_icons2">
-                <img src="./images/customize.png" class="img-fluid rounded-circle">
+                <img class="how_it_works_icon_img img-fluid" src="./images/how_it_works/personalize.png"
+                    class="img-fluid">
                 <h2>Step 4: Personalize</h2>
                 <p>Sign into your profile to save your favourite spots, track your history, and more!</p>
             </div>
