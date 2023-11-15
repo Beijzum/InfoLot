@@ -26,17 +26,25 @@ function generateHoursOptions() {
 // Call the function to generate time options
 generateHoursOptions();
 
-function getParkingLotName(id) {
-  db.collection("parkingLots")
-    .doc(id)
-    .get()
-    .then((thisLot) => {
-      var parkingLotName = thisLot.data().name;
-      document.getElementById("parkingLotName").innerHTML = parkingLotName;
-    });
+function displayParkingName() {
+    let params = new URL(window.location.href); //get URL of search bar
+    let ID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(ID);
+
+    db.collection("parkingLots")        // This looks at parkingLots database to pull parking lot name
+        .doc(ID)
+        .get()
+        .then(doc => {      // Assign variables to collection data
+            thisLot = doc.data();
+            parkingCode = thisLot.code;
+            parkingLotName = doc.data().name;
+
+            // Populate Title, image, and other details
+            document.getElementById("parkingLotName").innerHTML = parkingLotName;
+        });
 }
 
-getParkingLotName(parkingLotDocID);
+displayParkingName();
 
 function provideReserveDetails() {
   console.log("inside fill out reserve details");
@@ -70,3 +78,5 @@ function provideReserveDetails() {
     window.location.href = "reserve.html";
   }
 }
+
+

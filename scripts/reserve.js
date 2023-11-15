@@ -169,9 +169,9 @@ function toggleNextButtonVisibility() {
 }
 
 // Event listener for the next button click
+let parkingLotID = (new URL(window.location.href)).searchParams.get("docID");
 document.getElementById("next-button").addEventListener("click", () => {
-  window.location.href = "reserve_details.html"; // Redirect to reserve_details.html
-});
+  window.location.href = `/reserve_details.html?docID=${parkingLotID}`});
 
 // Initial rendering and save button click handling
 renderParkingSpotsAndSave();
