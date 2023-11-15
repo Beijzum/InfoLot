@@ -147,6 +147,12 @@ h1 {
   }
 }
 
+.text-white {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* User Profile Picture */
 .profile-picture img {
   width: 300px;

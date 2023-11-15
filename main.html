@@ -1,123 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>InfoLot</title>
+    <meta name="comp1800 template" content="InfoLot App" />
 
-<head>
-  <title>InfoLot</title>
-  <meta name="comp1800 template" content="InfoLot App" />
+    <!------------------------>
+    <!-- Required meta tags -->
+    <!------------------------>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!------------------------>
-  <!-- Required meta tags -->
-  <!------------------------>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!------------------------------------------>
+    <!-- Bootstrap Library CSS JS CDN go here -->
+    <!------------------------------------------>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
 
-  <!------------------------------------------>
-  <!-- Bootstrap Library CSS JS CDN go here -->
-  <!------------------------------------------>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+    <!-------------------------------------------------------->
+    <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
+    <!-------------------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-------------------------------------------------------->
-  <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
-  <!-------------------------------------------------------->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap" rel="stylesheet" />
+    <!-------------------------------------------->
+    <!-- Other libraries and styles of your own -->
+    <!-------------------------------------------->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
 
-  <!-------------------------------------------->
-  <!-- Other libraries and styles of your own -->
-  <!-------------------------------------------->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles/style.css" />
+  <body>
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <!------------------------------>
 
-</head>
+    <!-- Navbar -->
+    <nav id="navbarPlaceholder"></nav>
 
-<body>
-  <!------------------------------>
-  <!-- Your HTML Layout go here -->
-  <!------------------------------>
-
-  <!-- Navbar -->
-  <nav id="navbarPlaceholder"></nav>
-
-  <!-- Hero -->
-  <div id="hero" class="text-center bg-image" style="background-image: url('images/Car1.jpg'); height: 100%;">
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6); height: 100%;">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white">
-          <div class="profile-pic-container col-lg-12 col-md-6 profile-picture">
-            <img id="mypic-goes-here" src="images/CarIcon2.png" height="100rem" width="100rem" />
+    <!-- Hero -->
+    <div
+      id="hero"
+      class="text-center bg-image"
+      style="background-image: url('images/Car1.jpg'); height: 100%"
+    >
+      <div
+        class="mask"
+        style="background-color: rgba(0, 0, 0, 0.6); height: 100%"
+      >
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            <div
+              class="profile-pic-container col-lg-12 col-md-6 profile-picture"
+            >
+              <img
+                id="mypic-goes-here"
+                src="images/CarIcon2.png"
+                height="100rem"
+                width="100rem"
+              />
+            </div>
+            <h1 class="display-4 fw-bold mt-" style="color: #ffffff">
+              Good morning, <span id="name-goes-here"></span>
+            </h1>
+            <h5 class="lead mb-4 mt-3">
+              Quote of the day:
+              <!-- Quote goes here -->
+              <span id="quote-goes-here"></span>
+            </h5>
+            <br />
+            <div class="d-grid gap-2 col-9 mx-auto mt-4">
+              <!--Find Parking Button-->
+              <a
+                href="./map.html"
+                type="button"
+                class="style_button btn btn-success"
+                >Find Parking Near Me</a
+              >
+            </div>
+            <br />
+            <form class="d-flex mt-5 w-100">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                href="#"
+                button
+                class="btn btn-outline-light"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
+            <br />
           </div>
-          <h1 class="display-4 fw-bold mt-" style="color: #ffffff;">Good morning, <span id="name-goes-here"></span></h1>
-          <h5 class="lead mb-4 mt-3"> Quote of the day:
-            <!-- Quote goes here -->
-            <span id="quote-goes-here"></span>
-          </h5>
-          <br>
-          <div class="d-grid gap-2 col-9 mx-auto mt-4">
-            <!--Find Parking Button-->
-            <a href="./map.html" type="button" class="style_button btn btn-success">Find Parking Near Me</a>
-          </div>
-          <br>
-          <form class="d-flex mt-5">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button href="#" button class="btn btn-outline-light" type="submit">
-              Search
-            </button>
-          </form>
-          <br>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Hero -->
+    <!-- Hero -->
 
-  <!-- Three columns of text below -->
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 vv profile-circle-image-200">
-        <img src="./images/reserve.jpg" class="img-fluid rounded-circle">
-        <h5 class="mb-3 mt-5">Reserve</h5>
-        <p class="mb-4 text-muted">Start planning your trip now and reserve your space
-          with a touch of a button.</p>
-        <br>
-      </div>
-      <div class="col-lg-4 col-md-6 vv profile-circle-image-200">
-        <img src="./images/explore.jpg" class="rounded img-fluid rounded-circle">
-        <h5 class="mb-3 mt-5">Explore</h5>
-        <p class="mb-4 text-muted">Embark on a journey of discovery. Travel to new destinations without worry.
-        </p>
-        <br>
-      </div>
-      <div class="col-lg-4 col-md-6 vv profile-circle-image-200">
-        <img src="./images/personalize.jpg" class="rounded img-fluid rounded-circle">
-        <h5 class="mb-3 mt-5">Personalize</h5>
-        <p class="mb-4 text-muted">Save your favourite spots and share your experiences with the community.
-        </p>
+    <!-- Three columns of text below -->
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 vv profile-circle-image-200">
+          <img src="./images/reserve.jpg" class="img-fluid rounded-circle" />
+          <h5 class="mb-3 mt-5">Reserve</h5>
+          <p class="mb-4 text-muted">
+            Start planning your trip now and reserve your space with a touch of
+            a button.
+          </p>
+          <br />
+        </div>
+        <div class="col-lg-4 col-md-6 vv profile-circle-image-200">
+          <img
+            src="./images/explore.jpg"
+            class="rounded img-fluid rounded-circle"
+          />
+          <h5 class="mb-3 mt-5">Explore</h5>
+          <p class="mb-4 text-muted">
+            Embark on a journey of discovery. Travel to new destinations without
+            worry.
+          </p>
+          <br />
+        </div>
+        <div class="col-lg-4 col-md-6 vv profile-circle-image-200">
+          <img
+            src="./images/personalize.jpg"
+            class="rounded img-fluid rounded-circle"
+          />
+          <h5 class="mb-3 mt-5">Personalize</h5>
+          <p class="mb-4 text-muted">
+            Save your favourite spots and share your experiences with the
+            community.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <nav id="footerPlaceholder"></nav>
+    <!-- Footer -->
+    <nav id="footerPlaceholder"></nav>
 
-  <!---------------------------------------------->
-  <!-- Your own JavaScript functions go here    -->
-  <!---------------------------------------------->
-  <script src="./scripts/firebaseAPI_DTC_09.js"></script>
-  <script src="./scripts/skeleton.js"></script>
-  <script src="./scripts/main.js"></script>
-  <script src="./scripts/script.js"></script>
-</body>
-
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+    <script src="./scripts/firebaseAPI_DTC_09.js"></script>
+    <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/script.js"></script>
+  </body>
 </html>
