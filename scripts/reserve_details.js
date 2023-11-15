@@ -46,7 +46,7 @@ function displayParkingName() {
 
 displayParkingName();
 
-function provideReserveDetails() {
+function provideReserveDetails(userID, parkingLotDocID) {
   console.log("inside fill out reserve details");
   let dateSelect = document.getElementById("dateInput").value;
   let reserveStartTime = document.getElementById("startTime").value;
@@ -77,6 +77,19 @@ function provideReserveDetails() {
     console.log("No user is signed in");
     window.location.href = "reserve.html";
   }
+
+  
 }
 
+function submitReserve() {
+    var userId = firebase.auth().currentUser.uid;
+    let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
+    var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
+
+    if (parkingLotId) {
+        provideReserveDetails(userId, parkingLotId);      // Call the function to reserve details
+    } else {
+        console.error("Parking lot ID not found in the URL.");
+    }
+  }
 
