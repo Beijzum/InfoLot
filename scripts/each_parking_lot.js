@@ -33,6 +33,13 @@ function writeReviewBtn() {
     }
 }
 
+// function writeReviewBtn() {
+//     let params = new URL(window.location.href) //get the url from the search bar
+//     let ID = params.searchParams.get("docID");
+//     localStorage.setItem('parkingLotDocID', ID);
+//     window.location.href = 'review.html';
+// }
+
 
 // Add parking lot ID as favourites
 function saveFavouriteParkingLot(userID, parkingLotId) {
@@ -61,3 +68,92 @@ function addFavouritesBtn() {
         console.error("Parking lot ID not found in the URL.");
     }
 }
+
+
+/* Populate the reviews */
+function populateReviews() {
+    console.log("test");
+    let parkingLotCardTemplate = document.getElementById("reviewCardTemplate");
+    let parkingLotCardGroup = document.getElementById("reviewCardGroup");
+
+    let params = new URL(window.location.href); // Get the URL from the search bar
+    let parkingLotID = params.searchParams.get("docID");
+
+
+    // Double-check: is your collection called "Reviews" or "reviews"?
+    db.collection("reviews")
+        .where("parkingLotDocID", "==", parkingLotID)
+        .get()
+        .then((allReviews) => {
+            reviews = allReviews.docs;
+            console.log(reviews);
+            reviews.forEach((doc) => {
+                var title = doc.data().title;
+                var description = doc.data().description;
+                var experience = doc.data().experience;
+                var traffic = doc.data().traffic;
+                var gated = doc.data().gated;
+                var underground = doc.data().underground;
+                var time = doc.data().timestamp.toDate();
+                var rating = doc.data().rating; // Get the rating value
+                console.log(rating)
+
+                console.log(time);
+
+                let reviewCard = parkingLotCardTemplate.content.cloneNode(true);
+                reviewCard.querySelector(".title").innerHTML = title;
+                reviewCard.querySelector(".time").innerHTML = new Date(
+                    time
+                ).toLocaleString();
+                reviewCard.querySelector(".description").innerHTML = `Description: ${description}`;
+                reviewCard.querySelector(".experience").innerHTML = `Experience: ${experience}`;
+                reviewCard.querySelector(".traffic").innerHTML = `Traffic: ${traffic}`;
+                reviewCard.querySelector(".gated").innerHTML = `Gated: ${gated}`;
+                reviewCard.querySelector(".underground").innerHTML = `Underground: ${underground}`;
+                reviewCard.querySelector(".rating").innerHTML = `Rating: ${rating}`;
+
+
+                // Populate the star rating based on the rating value
+
+                // Initialize an empty string to store the star rating HTML
+                let starRating = "";
+                // This loop runs from i=0 to i<rating, where 'rating' is a variable holding the rating value.
+                for (let i = 0; i < rating; i++) {
+                    starRating += '<span class="material-icons">star</span>';
+                }
+                // After the first loop, this second loop runs from i=rating to i<5.
+                for (let i = rating; i < 5; i++) {
+                    starRating += '<span class="material-icons">star_outline</span>';
+                }
+                reviewCard.querySelector(".star-rating").innerHTML = starRating;
+
+                parkingLotCardGroup.appendChild(reviewCard);
+            });
+        });
+}
+
+populateReviews();
+
+
+/* Display profile image in reviews */
+function displayUserProfileImage() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // Get the Firestore document of the user
+            currentUser = db.collection("users").doc(user.uid);
+            currentUser.get()
+                .then(userDoc => {
+                    // Get the user's image URL and quote
+                    var userImage = userDoc.data().profilePic;
+
+                    // Display the image wherever you want
+                    if (userImage != null) {
+                        document.getElementById("mypic-goes-here").src = userImage;
+                    };
+
+                });
+        };
+    });
+};
+
+displayUserProfileImage()

@@ -40,6 +40,34 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
 
+    <style>
+        .heart_icon {
+            font-size: 1em;
+            margin-right: -10px;
+            margin-top: 2px;
+        }
+
+        .review_button,
+        .favourites_button {
+            margin: 20px;
+        }
+
+        /* Add CSS styles for the card container with vertical scrolling */
+        .card-container {
+            max-height: 350px;
+            /* Adjust the maximum height as needed */
+            overflow-y: auto;
+        }
+
+        /* Style the individual cards as needed */
+        .card {
+            width: 45%;
+            /* Adjust the width as per your design, leaving a little space for margins */
+            margin: 2%;
+            /* Add margin between cards */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -55,17 +83,63 @@
         <h1><span id="parkingLotName">this Lot </span></h1>
         <br>
 
-        <div class="position-relative">
 
-            <img class="parking-img img-fluid" src="" />
-            <div id="details-go-here"></div>
+        <img class="parking-img img-fluid" src="" />
+        <div id="details-go-here"></div>
 
-            <button class="btn btn-primary mt-3" onclick="writeReviewBtn()">Write
+
+
+        <div class="button_container">
+
+            <button class="btn btn-primary mt-3 review_button" onclick="writeReviewBtn()">Write
                 Review</button>
-            <button class="btn btn-primary mt-3" onclick="addFavouritesBtn()">
-                <i class="material-icons">favorite</i>Add to Favourites</button>
+
+            <button class="btn btn-primary mt-3 favourites_button" onclick="addFavouritesBtn()">
+                <i class="material-icons heart_icon">favorite_outlined</i>
+                <span class="favourites">Add to Favourites</span>
+            </button>
+
         </div>
     </div>
+
+    <!--Populate Reviews Here-->
+
+    <div class="container">
+        <h2>Reviews:</h2>
+        <div id="details-go-here"></div>
+        <!-- Here is the container for cards with horizontal scrolling -->
+        <div class="card-container">
+            <div id="reviewCardGroup" class="row row-cols-auto">
+                <!-- Add your card templates here -->
+            </div>
+        </div>
+    </div>
+
+    <template id="reviewCardTemplate">
+        <div class="card bg-secondary">
+            <img class="card-img-top">
+            <div class="card-body bg-light">
+
+                <div class="profile-pic-container profile-circle-image-150">
+                    <img id="mypic-goes-here" src="images/CarIcon2.png" height="100rem" width="100rem" />
+                </div>
+
+
+                <h5 class="title">placeholder</h5>
+                <p class="star-rating"></p>
+                <p class="time">placeholder</p>
+                <p class="experience">placeholder</p>
+                <p class="traffic">placeholder</p>
+                <p class="gated">placeholder</p>
+                <p class="underground">placeholder</p>
+                <p class="rating">placeholder</p>
+                <br>
+                <p class="description">This card has supporting text below as a natural lead-in to additional content.
+                </p>
+            </div>
+        </div>
+    </template>
+
 
     <!-- Footer -->
     <nav id="footerPlaceholder"></nav>
