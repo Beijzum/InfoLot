@@ -46,6 +46,7 @@ function displayParkingName() {
 
 displayParkingName();
 
+
 function provideReserveDetails(userID, parkingLotDocID) {
   console.log("inside fill out reserve details");
   let dateSelect = document.getElementById("dateInput").value;
@@ -71,7 +72,7 @@ function provideReserveDetails(userID, parkingLotDocID) {
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
-        window.location.href = "thanks.html"; // Redirect to the thanks page
+        window.location.href = "thanks_reserve.html"; // Redirect to the thanks page
       });
   } else {
     console.log("No user is signed in");
