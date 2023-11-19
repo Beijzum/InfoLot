@@ -27,7 +27,7 @@ function displayParkingInfo() {
 displayParkingInfo();
 
 
-
+/*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
 
 /* --------Displays correct text inside favourites button ---------- */
 function checkAndUpdateFavouritesButton() {
@@ -66,8 +66,6 @@ function checkAndUpdateFavouritesButton() {
 }
 checkAndUpdateFavouritesButton();
 
-
-/*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
 
 /* What happens when the favourites button is clicked */
 function addFavouritesBtn() {
