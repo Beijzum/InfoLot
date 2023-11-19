@@ -1,6 +1,7 @@
 function displayParkingInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     let ID = params.searchParams.get("docID"); //get value for key "id"
+
     console.log(ID);
 
     db.collection("parkingLots")        // doublecheck: is your collection called "Reviews" or "reviews"?
@@ -42,32 +43,68 @@ function writeReviewBtn() {
 
 
 // Add parking lot ID as favourites
-function saveFavouriteParkingLot(userID, parkingLotId) {
-    var userDocRef = db.collection("users").doc(userID);        // Get a reference to the user document in Firestore
+// function saveFavouriteParkingLot(userID, parkingLotId) {
+//     var userDocRef = db.collection("users").doc(userID);        // Get a reference to the user document in Firestore
 
-    userDocRef.update({         // Update the user document with the parking lot ID with favourites as a variable
-        favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
-    })
-        .then(function () {
-            console.log('Added Parking Lot ID to user favorites.');
-        })
-        .catch(function (error) {
-            console.error('Error updating user favorites:', error);
-        });
-}
+//     userDocRef.update({         // Update the user document with the parking lot ID with favourites as a variable
+//         favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
+//     })
+//         .then(function () {
+//             console.log('Added Parking Lot ID to user favorites.');
+//         })
+//         .catch(function (error) {
+//             console.error('Error updating user favorites:', error);
+//         });
+// }
 
 
 function addFavouritesBtn() {
-    var userId = firebase.auth().currentUser.uid;
     let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
-    var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
+    var parkingLotID = params.searchParams.get("docID");    // Grabs docID from URL 
 
-    if (parkingLotId) {
-        saveFavouriteParkingLot(userId, parkingLotId);      // Call the function to save the favorite
+    if (parkingLotID) {
+        updateFavourites(parkingLotID);      // Call the function to save the favorite
     } else {
         console.error("Parking lot ID not found in the URL.");
     }
 }
+
+
+function updateFavourites(parkingLotID) {
+    currentUser.get().then(userDoc => {
+        let favourites = userDoc.data().favourites;
+        let iconID = "heart_icon"       // ID of icon in html
+        let isFavourited = (favourites.includes(parkingLotID)); // check if this parkingLotID exists in favourites array
+
+        if (isFavourited) {
+            currentUser.update({
+                favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotID)
+            })
+                .then(() => {
+                    console.log("item was removed " + parkingLotID)
+                    document.getElementById(iconID).innerText = 'favorite_border'
+                })
+        } else {
+            currentUser.update({
+                favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotID)
+            })
+                .then(() => {
+                    console.log("item was added " + parkingLotID)
+                    document.getElementById(iconID).innerText = 'favorite'
+                })
+        }
+    }
+    )
+}
+
+// let iconID = "heart_icon"
+// currentUser.get().then(userDoc => {     // Checks the database if user has favourited parking lot already
+//     //get the user name
+//     var favourites = userDoc.data().favourites;
+//     if (favourites.includes(parkingLotID)) {
+//         document.getElementById(iconID).innerText = 'favorite';
+//     }
+// })
 
 
 /* Populate the reviews */
