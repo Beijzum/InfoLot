@@ -1,3 +1,5 @@
+// https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
+
 // Parking lot ID visible to all functions on this page
 var parkingLotDocID = localStorage.getItem("parkingLotDocID");
 

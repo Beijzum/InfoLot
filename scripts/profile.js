@@ -1,3 +1,5 @@
+// https://github.com/orrbcit/techtips-202310/blob/main/profile.html
+
 // Global variable with default
 var ImageFile = "./images/phantom_thief.png"; // this is the default profile pic for user without profile picture
 

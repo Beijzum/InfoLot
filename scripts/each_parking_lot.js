@@ -4,6 +4,7 @@ var currentUser;
 function displayParkingInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     let ID = params.searchParams.get("docID"); //get value for key "id"
+
     console.log(ID);
 
     db.collection("parkingLots")        // doublecheck: is your collection called "Reviews" or "reviews"?
@@ -20,6 +21,8 @@ function displayParkingInfo() {
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
             document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
+
+            checkUserFavourites(ID);      // Check user favourites when loading page
 
         });
 
@@ -156,10 +159,8 @@ function populateReviews() {
     console.log("test populateReviews");
     let parkingLotCardTemplate = document.getElementById("reviewCardTemplate");
     let parkingLotCardGroup = document.getElementById("reviewCardGroup");
-
     let params = new URL(window.location.href); // Get the URL from the search bar
     let parkingLotID = params.searchParams.get("docID");
-
 
     // Double-check: is your collection called "Reviews" or "reviews"?
     db.collection("reviews")

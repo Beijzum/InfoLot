@@ -42,6 +42,7 @@ body {
 }
 
 /* Hover thingy */
+/* https: //bbbootstrap.com/snippets/simple-navbar-hover-17011029 */
 .nav-item::after {
   content: "";
   display: block;

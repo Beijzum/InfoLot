@@ -1,3 +1,5 @@
+// https://github.com/orrbcit/techtips-202310/blob/main/scripts/main.js
+
 function insertNameFromFirestore() {
   // Check if the user is logged in:
   firebase.auth().onAuthStateChanged((user) => {
