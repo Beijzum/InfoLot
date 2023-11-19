@@ -1,3 +1,6 @@
+var currentUser;
+
+/* --------Displays the parking lot info ---------- */
 function displayParkingInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     let ID = params.searchParams.get("docID"); //get value for key "id"
@@ -17,13 +20,125 @@ function displayParkingInfo() {
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
             document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
-        });
-}
 
+        });
+
+}
 displayParkingInfo();
 
 
-/* Saves the reviews onto local storage */
+
+
+/* --------Displays correct text inside favourites button ---------- */
+function checkAndUpdateFavouritesButton() {
+    let parkingLotDocId = (new URL(window.location.href)).searchParams.get("docID");
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            db.collection("users").doc(user.uid).get().then(userDoc => {
+                if (userDoc.exists) {
+                    let userData = userDoc.data();
+                    let favourites = userDoc.data().favourites;// Replace with your field name
+
+                    // Check if the field exists and contains the specific item
+                    if (favourites && favourites.includes(parkingLotDocId)) {
+                        console.log("The item is favourited");
+                        document.getElementById("favourites").innerText = "Remove from favourites";
+                        // Perform operations based on the presence of the item
+                    } else {
+                        console.log("The item is not favourited");
+                        document.getElementById("favourites").innerText = "Add to favourites";
+                        // Handle the absence of the item
+                    }
+                } else {
+                    document.getElementById("favourites").innerText = "Add to favourites";
+                }
+            })
+        } else {
+            // No user is signed in.
+            console.log("No user is logged in.");
+            document.getElementById("favourites").innerText = "Add to favourites";
+        }
+    });
+}
+checkAndUpdateFavouritesButton();
+
+
+/*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
+
+/* What happens when the favourites button is clicked */
+function addFavouritesBtn() {
+    let currentUser = firebase.auth().currentUser;
+    // Grabs doc id from the URL
+    let docID = (new URL(window.location.href)).searchParams.get("docID");
+
+    if (currentUser) {
+        // Updates user's favourites in firestore 
+        updateFavourites(docID);
+
+    } else {
+        // If no user is signed in, redirect to the login page
+        window.location.href = "/login.html";
+    }
+}
+
+
+/* Function to update firestore favourites in user collection and changes
+the favourites button */
+function updateFavourites(parkingLotDocID) {
+    currentUser.get().then(userDoc => {
+        let favourites = userDoc.data().favourites;
+        let isFavourited = favourites.includes(parkingLotDocID); // check if hikeID exists in the bookmarks array
+        console.log(isFavourited)
+
+        if (isFavourited) {
+            currentUser.update({
+                favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
+            }).then(function () {
+                document.getElementById("favourites").innerText = "Add to favourites";
+                console.log("Favourites has been removed for " + parkingLotDocID);
+            })
+
+        } else {
+            currentUser.update({
+                favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
+            }).then(function () {
+                document.getElementById("favourites").innerText = "Remove from favourites";
+                console.log("Favourites has been saved for " + parkingLotDocID);
+            })
+        }
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function addFavouritesBtn() {
+//     var userId = firebase.auth().currentUser.uid;
+//     let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
+//     var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
+
+//     if (parkingLotId) {
+//         saveFavouriteParkingLot(userId, parkingLotId);      // Call the function to save the favorite
+//     } else {
+//         console.error("Parking lot ID not found in the URL.");
+//     }
+// }
+
+/*---------------------------- REVIEWS FUNCTIONS --------------------------------------- */
+
+/* Upon clicking write review button, user is directed to review page to fill out review */
 function writeReviewBtn() {
     let parkingLotID = (new URL(window.location.href)).searchParams.get("docID"); // Searches for the value of docID in the current windows URL
 
@@ -33,46 +148,9 @@ function writeReviewBtn() {
     }
 }
 
-// function writeReviewBtn() {
-//     let params = new URL(window.location.href) //get the url from the search bar
-//     let ID = params.searchParams.get("docID");
-//     localStorage.setItem('parkingLotDocID', ID);
-//     window.location.href = 'review.html';
-// }
-
-
-// Add parking lot ID as favourites
-function saveFavouriteParkingLot(userID, parkingLotId) {
-    var userDocRef = db.collection("users").doc(userID);        // Get a reference to the user document in Firestore
-
-    userDocRef.update({         // Update the user document with the parking lot ID with favourites as a variable
-        favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
-    })
-        .then(function () {
-            console.log('Added Parking Lot ID to user favorites.');
-        })
-        .catch(function (error) {
-            console.error('Error updating user favorites:', error);
-        });
-}
-
-
-function addFavouritesBtn() {
-    var userId = firebase.auth().currentUser.uid;
-    let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
-    var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
-
-    if (parkingLotId) {
-        saveFavouriteParkingLot(userId, parkingLotId);      // Call the function to save the favorite
-    } else {
-        console.error("Parking lot ID not found in the URL.");
-    }
-}
-
-
 /* Populate the reviews */
 function populateReviews() {
-    console.log("test");
+    console.log("test populateReviews");
     let parkingLotCardTemplate = document.getElementById("reviewCardTemplate");
     let parkingLotCardGroup = document.getElementById("reviewCardGroup");
 
@@ -131,11 +209,10 @@ function populateReviews() {
             });
         });
 }
-
 populateReviews();
 
 
-/* Display profile image in reviews */
+/* Display profile image when leaving reviews */
 function displayUserProfileImage() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -155,5 +232,12 @@ function displayUserProfileImage() {
         };
     });
 };
-
 displayUserProfileImage()
+
+/* OLD CODE */
+// function writeReviewBtn() {
+//     let params = new URL(window.location.href) //get the url from the search bar
+//     let ID = params.searchParams.get("docID");
+//     localStorage.setItem('parkingLotDocID', ID);
+//     window.location.href = 'review.html';
+// }

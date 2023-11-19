@@ -27,7 +27,7 @@ stars.forEach((star, index) => {
 });
 
 
-// Write review button
+// When clicking the submit button after writing a review. 
 function writeReview() {
     console.log("inside write review");
     // Assign variables to HTML elements
@@ -109,7 +109,7 @@ function uploadPic(reviewDocID) {       // Uploading a pic to reviews collection
             storageRef.getDownloadURL()         // get URL of the uploaded file
                 .then(function (url) {          // AFTER .getDownloadURL is done, 
                     console.log("3. Got the download URL.");
-                    
+
                     // Now that the image is on Storage, we can go back to the
                     // review document, and update it with an "image" field
                     // that contains the url of where the picture is stored.
