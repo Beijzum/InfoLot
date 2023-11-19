@@ -143,7 +143,7 @@ function saveReviewIDforUser(reviewDocID) { // uses reviewDocID (from writeRevie
         console.log("user id is: " + user.uid);
         console.log("reviewdoc id is: " + reviewDocID);
         db.collection("users").doc(user.uid).update({ // Saves in users collection
-            reviewID: firebase.firestore.FieldValue.arrayUnion(reviewDocID) // saves 'reviewID' variable with 'reviewDocID' as a value
+            reviews: firebase.firestore.FieldValue.arrayUnion(reviewDocID) // saves 'reviews' variable with 'reviewDocID' as a value
         })
             .then(() => {
                 console.log("5. Saved to user's document!");
