@@ -90,12 +90,14 @@ function updateFavourites(parkingLotDocID) {
         let favourites = userDoc.data().favourites;
         let isFavourited = favourites.includes(parkingLotDocID); // check if hikeID exists in the bookmarks array
         console.log(isFavourited)
+        let iconID = "heart_icon"
 
         if (isFavourited) {
             currentUser.update({
                 favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
             }).then(function () {
                 document.getElementById("favourites").innerText = "Add to favourites";
+                document.getElementsByClassName(iconID).innerText = 'favorite_border';
                 console.log("Favourites has been removed for " + parkingLotDocID);
             })
 
@@ -104,6 +106,7 @@ function updateFavourites(parkingLotDocID) {
                 favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
             }).then(function () {
                 document.getElementById("favourites").innerText = "Remove from favourites";
+                document.getElementByClassName(iconID).innerText = 'border';
                 console.log("Favourites has been saved for " + parkingLotDocID);
             })
         }
