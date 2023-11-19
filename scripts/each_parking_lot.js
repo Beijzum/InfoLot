@@ -21,9 +21,6 @@ function displayParkingInfo() {
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
             document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
-
-            checkUserFavourites(ID);      // Check user favourites when loading page
-
         });
 
 }
@@ -42,15 +39,18 @@ function checkAndUpdateFavouritesButton() {
                 if (userDoc.exists) {
                     let userData = userDoc.data();
                     let favourites = userDoc.data().favourites;// Replace with your field name
+                    let iconID = "heart_icon"
 
                     // Check if the field exists and contains the specific item
                     if (favourites && favourites.includes(parkingLotDocId)) {
                         console.log("The item is favourited");
                         document.getElementById("favourites").innerText = "Remove from favourites";
+                        document.getElementById(iconID).innerText = 'favorite'; // Change the icon to filled heart
                         // Perform operations based on the presence of the item
                     } else {
                         console.log("The item is not favourited");
                         document.getElementById("favourites").innerText = "Add to favourites";
+                        document.getElementById(iconID).innerText = 'favorite_border'; // Change icon to empty heart
                         // Handle the absence of the item
                     }
                 } else {
@@ -100,7 +100,7 @@ function updateFavourites(parkingLotDocID) {
                 favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
             }).then(function () {
                 document.getElementById("favourites").innerText = "Add to favourites";
-                document.getElementsByClassName(iconID).innerText = 'favorite_border';
+                document.getElementById(iconID).innerText = 'favorite_border';
                 console.log("Favourites has been removed for " + parkingLotDocID);
             })
 
@@ -109,38 +109,13 @@ function updateFavourites(parkingLotDocID) {
                 favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
             }).then(function () {
                 document.getElementById("favourites").innerText = "Remove from favourites";
-                document.getElementByClassName(iconID).innerText = 'border';
+                document.getElementById(iconID).innerText = 'favorite';
                 console.log("Favourites has been saved for " + parkingLotDocID);
             })
         }
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function addFavouritesBtn() {
-//     var userId = firebase.auth().currentUser.uid;
-//     let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
-//     var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
-
-//     if (parkingLotId) {
-//         saveFavouriteParkingLot(userId, parkingLotId);      // Call the function to save the favorite
-//     } else {
-//         console.error("Parking lot ID not found in the URL.");
-//     }
-// }
 
 /*---------------------------- REVIEWS FUNCTIONS --------------------------------------- */
 
