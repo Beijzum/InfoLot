@@ -18,6 +18,8 @@ function displayParkingInfo() {
             let imgEvent = document.querySelector(".parking-img");
             imgEvent.src = "../lot_images/" + parkingCode + ".jpg";
             document.getElementById("details-go-here").innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
+
+            checkUserFavourites(ID);      // Check user favourites when loading page
         });
 }
 
@@ -34,29 +36,6 @@ function writeReviewBtn() {
     }
 }
 
-// function writeReviewBtn() {
-//     let params = new URL(window.location.href) //get the url from the search bar
-//     let ID = params.searchParams.get("docID");
-//     localStorage.setItem('parkingLotDocID', ID);
-//     window.location.href = 'review.html';
-// }
-
-
-// Add parking lot ID as favourites
-// function saveFavouriteParkingLot(userID, parkingLotId) {
-//     var userDocRef = db.collection("users").doc(userID);        // Get a reference to the user document in Firestore
-
-//     userDocRef.update({         // Update the user document with the parking lot ID with favourites as a variable
-//         favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
-//     })
-//         .then(function () {
-//             console.log('Added Parking Lot ID to user favorites.');
-//         })
-//         .catch(function (error) {
-//             console.error('Error updating user favorites:', error);
-//         });
-// }
-
 
 function addFavouritesBtn() {
     let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
@@ -71,40 +50,46 @@ function addFavouritesBtn() {
 
 
 function updateFavourites(parkingLotID) {
-    currentUser.get().then(userDoc => {
-        let favourites = userDoc.data().favourites;
+    currentUser.get().then(userDoc => {     // Check current user and gets user ID
+        let favourites = userDoc.data().favourites;     // Assigns user favourites as variable
         let iconID = "heart_icon"       // ID of icon in html
-        let isFavourited = (favourites.includes(parkingLotID)); // check if this parkingLotID exists in favourites array
+        let isFavourited = (favourites.includes(parkingLotID)); // Checks if parkingLotID exists in favourites array
 
         if (isFavourited) {
             currentUser.update({
-                favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotID)
+                favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotID)     // Removes favourite from array
             })
                 .then(() => {
                     console.log("item was removed " + parkingLotID)
-                    document.getElementById(iconID).innerText = 'favorite_border'
+                    document.getElementById(iconID).innerText = 'favorite_border'       // Changes icon to heart outline
                 })
         } else {
             currentUser.update({
-                favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotID)
+                favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotID)      // Adds favourite into array
             })
                 .then(() => {
                     console.log("item was added " + parkingLotID)
-                    document.getElementById(iconID).innerText = 'favorite'
+                    document.getElementById(iconID).innerText = 'favorite'              // Changes icon to filled heart
                 })
         }
     }
     )
 }
 
-// let iconID = "heart_icon"
-// currentUser.get().then(userDoc => {     // Checks the database if user has favourited parking lot already
-//     //get the user name
-//     var favourites = userDoc.data().favourites;
-//     if (favourites.includes(parkingLotID)) {
-//         document.getElementById(iconID).innerText = 'favorite';
-//     }
-// })
+
+function checkUserFavourites(parkingLotID) {
+    currentUser.get().then(userDoc => {         // Check current user and gets user ID
+        let favourites = userDoc.data().favourites;     // Assigns user favourites as variable
+        let iconID = "heart_icon";      // ID of icon in HTML
+        let isFavourited = favourites.includes(parkingLotID);       // Checks if parkingLotID exists in favourites array
+
+        if (isFavourited) {
+            document.getElementById(iconID).innerText = 'favorite';     // Filled heart
+        } else {
+            document.getElementById(iconID).innerText = 'favorite_border';      // Heart outline
+        }
+    });
+}
 
 
 /* Populate the reviews */
@@ -112,10 +97,8 @@ function populateReviews() {
     console.log("test");
     let parkingLotCardTemplate = document.getElementById("reviewCardTemplate");
     let parkingLotCardGroup = document.getElementById("reviewCardGroup");
-
     let params = new URL(window.location.href); // Get the URL from the search bar
     let parkingLotID = params.searchParams.get("docID");
-
 
     // Double-check: is your collection called "Reviews" or "reviews"?
     db.collection("reviews")
@@ -194,3 +177,29 @@ function displayUserProfileImage() {
 };
 
 displayUserProfileImage()
+
+
+// Unused code
+
+// function writeReviewBtn() {
+//     let params = new URL(window.location.href) //get the url from the search bar
+//     let ID = params.searchParams.get("docID");
+//     localStorage.setItem('parkingLotDocID', ID);
+//     window.location.href = 'review.html';
+// }
+
+
+// Add parking lot ID as favourites
+// function saveFavouriteParkingLot(userID, parkingLotId) {
+//     var userDocRef = db.collection("users").doc(userID);        // Get a reference to the user document in Firestore
+
+//     userDocRef.update({         // Update the user document with the parking lot ID with favourites as a variable
+//         favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotId)
+//     })
+//         .then(function () {
+//             console.log('Added Parking Lot ID to user favorites.');
+//         })
+//         .catch(function (error) {
+//             console.error('Error updating user favorites:', error);
+//         });
+// }
