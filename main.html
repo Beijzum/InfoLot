@@ -73,12 +73,12 @@
             <a href="./map.html" type="button" class="style_button btn btn-success">Find Parking Near Me</a>
           </div>
           <br />
-          <form class="d-flex mt-5 w-100">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button href="#" button class="btn btn-outline-light" type="submit">
-              Search
-            </button>
-          </form>
+          <div class="d-flex mt-5 w-100">
+            <!-- https://stackoverflow.com/questions/33329366/how-to-get-search-bar-to-take-input-and-go-to-page -->
+            <!-- https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp -->
+            <input class="form-control me-2" id="search" method="put" type="text" placeholder="Search" value="" />
+            <input id="search-btn" button class="btn btn-outline-light" type="submit" onclick="sendToPage();">
+          </div>
           <br />
         </div>
       </div>

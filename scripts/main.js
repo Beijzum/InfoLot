@@ -65,3 +65,38 @@ function readQuote() {
 };
 
 readQuote()
+
+
+//  https://stackoverflow.com/questions/33329366/how-to-get-search-bar-to-take-input-and-go-to-page
+function sendToPage() {
+  var input = document.getElementById("search").value;
+
+  db.collection("parkingLots")
+    .get()
+    .then((docRef) => {
+      docRef.forEach((doc) => {   // Loop through the results
+        const docID = doc.id;
+        const parkingLotCode = doc.data().code
+
+        if (parkingLotCode == input) {    // Input parking lot code (e.g BCITLot1631)
+          location.replace("each_parking_lot.html?docID=" + docID);   // Redirect to the appropriate page using the retrieved data
+        }
+      });
+    })
+}
+
+
+//  https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
+function getEnterKey() {
+  var input = document.getElementById("search");    // Get the input field
+
+  input.addEventListener("keypress", function (event) {   // Execute a function when the user presses a key on the keyboard
+    if (event.key === "Enter") {    // If the user presses the "Enter" key on the keyboard
+      event.preventDefault();   // Cancel the default action, if needed
+
+      document.getElementById("search-btn").click();     // Trigger the button element with a click
+    }
+  });
+}
+
+getEnterKey()
