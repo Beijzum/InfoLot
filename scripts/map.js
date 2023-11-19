@@ -58,7 +58,7 @@ function showMap() {
                                 <p>${hours}</p>
                                 <a href="./reserve.html?docID=${doc.id}" type="button" class="style_button btn btn-success">Reserve Now</a>
                                 <br> 
-                                <a href="/each_parking_lot.html?docID=${doc.id}" target="_blank" title="Opens in a new window">Read more</a>
+                                <a href="/each_parking_lot.html?docID=${doc.id}">Read more</a>
                                 </div>`
                             },
                             'geometry': {
