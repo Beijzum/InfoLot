@@ -27,25 +27,25 @@ function generateHoursOptions() {
 generateHoursOptions();
 
 function displayParkingName() {
-    let params = new URL(window.location.href); //get URL of search bar
-    let ID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(ID);
+  let params = new URL(window.location.href); //get URL of search bar
+  let ID = params.searchParams.get("docID"); //get value for key "id"
+  console.log(ID);
 
-    db.collection("parkingLots")        // This looks at parkingLots database to pull parking lot name
-        .doc(ID)
-        .get()
-        .then(doc => {      // Assign variables to collection data
-            thisLot = doc.data();
-            parkingCode = thisLot.code;
-            parkingLotName = doc.data().name;
+  db.collection("parkingLots") // This looks at parkingLots database to pull parking lot name
+    .doc(ID)
+    .get()
+    .then((doc) => {
+      // Assign variables to collection data
+      thisLot = doc.data();
+      parkingCode = thisLot.code;
+      parkingLotName = doc.data().name;
 
-            // Populate Title, image, and other details
-            document.getElementById("parkingLotName").innerHTML = parkingLotName;
-        });
+      // Populate Title, image, and other details
+      document.getElementById("parkingLotName").innerHTML = parkingLotName;
+    });
 }
 
 displayParkingName();
-
 
 function provideReserveDetails(userID, parkingLotDocID) {
   console.log("inside fill out reserve details");
@@ -59,6 +59,7 @@ function provideReserveDetails(userID, parkingLotDocID) {
   if (user) {
     var currentUser = db.collection("users").doc(user.uid);
     var userID = user.uid;
+    var docRef;
 
     // Get the document for the current user.
     db.collection("reserve_details")
@@ -71,26 +72,35 @@ function provideReserveDetails(userID, parkingLotDocID) {
 
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
+      .then((addedDocRef) => {
+        docRef = addedDocRef;
+        // Update the user collection with the reservation details
+        return currentUser.update({
+          reservations: firebase.firestore.FieldValue.arrayUnion(
+            addedDocRef.id
+          ),
+          history: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID),
+        });
+      })
+
       .then(() => {
-        window.location.href = "thanks_reserve.html"; // Redirect to the thanks page
+        //Redirect to thanks for reservation page
+        window.location.href = `thanks_reserve.html?docRef=${docRef.id}`;
       });
   } else {
     console.log("No user is signed in");
     window.location.href = "reserve.html";
   }
-
-  
 }
 
 function submitReserve() {
-    var userId = firebase.auth().currentUser.uid;
-    let params = new URL(window.location.href);         // Parse the parameters from the URL of current window
-    var parkingLotId = params.searchParams.get("docID");    // Grabs docID from URL 
+  var userId = firebase.auth().currentUser.uid;
+  let params = new URL(window.location.href); // Parse the parameters from the URL of current window
+  var parkingLotId = params.searchParams.get("docID"); // Grabs docID from URL
 
-    if (parkingLotId) {
-        provideReserveDetails(userId, parkingLotId);      // Call the function to reserve details
-    } else {
-        console.error("Parking lot ID not found in the URL.");
-    }
+  if (parkingLotId) {
+    provideReserveDetails(userId, parkingLotId); // Call the function to reserve details
+  } else {
+    console.error("Parking lot ID not found in the URL.");
   }
-
+}
