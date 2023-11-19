@@ -76,3 +76,10 @@ It has the following subfolders and files:
 
 https://mdbootstrap.com/docs/standard/extended/hero/
 https://bootstraplily.com/three-column-circle-image-ui-made-with-bootstrap-html/
+https://bbbootstrap.com/snippets/simple-navbar-hover-17011029
+https://mdbootstrap.com/how-to/bootstrap/circle-image/
+
+https://github.com/orrbcit/techtips-202310      **(Techtips Github)**
+https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
+https://github.com/orrbcit/techtips-202310/blob/main/main.html
+https://github.com/orrbcit/techtips-202310/blob/main/profile.html

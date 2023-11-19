@@ -1,3 +1,5 @@
+// https://github.com/orrbcit/techtips-202310/blob/main/main.html
+
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("parkingLotsCardTemplate"); // Retrieve the HTML element with the ID "parkingLotCardTemplate" and store it in the cardTemplate variable. 
 

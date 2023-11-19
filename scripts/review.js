@@ -1,3 +1,5 @@
+// https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
+
 // Parking lot ID visible to all functions on this page
 var parkingLotDocID = localStorage.getItem("parkingLotDocID");
 
@@ -109,7 +111,7 @@ function uploadPic(reviewDocID) {       // Uploading a pic to reviews collection
             storageRef.getDownloadURL()         // get URL of the uploaded file
                 .then(function (url) {          // AFTER .getDownloadURL is done, 
                     console.log("3. Got the download URL.");
-                    
+
                     // Now that the image is on Storage, we can go back to the
                     // review document, and update it with an "image" field
                     // that contains the url of where the picture is stored.
