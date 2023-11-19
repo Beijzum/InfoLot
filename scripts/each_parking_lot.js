@@ -151,11 +151,13 @@ function populateReviews() {
                 var underground = doc.data().underground;
                 var time = doc.data().timestamp.toDate();
                 var rating = doc.data().rating; // Get the rating value
+                var image = doc.data().image;
                 console.log(rating)
 
                 console.log(time);
 
                 let reviewCard = parkingLotCardTemplate.content.cloneNode(true);
+
                 reviewCard.querySelector(".title").innerHTML = title;
                 reviewCard.querySelector(".time").innerHTML = new Date(
                     time
@@ -166,6 +168,7 @@ function populateReviews() {
                 reviewCard.querySelector(".gated").innerHTML = `Gated: ${gated}`;
                 reviewCard.querySelector(".underground").innerHTML = `Underground: ${underground}`;
                 reviewCard.querySelector(".rating").innerHTML = `Rating: ${rating}`;
+                reviewCard.querySelector("img").src = image;
 
 
                 // Populate the star rating based on the rating value
