@@ -83,3 +83,5 @@ https://github.com/orrbcit/techtips-202310      **(Techtips Github)**
 https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
 https://github.com/orrbcit/techtips-202310/blob/main/main.html
 https://github.com/orrbcit/techtips-202310/blob/main/profile.html
+
+https://bcit-cst.notion.site/1800-Tech-Tips-202330-375ca5b360eb49eeb78be913730ade84 **Techtips Notions**
