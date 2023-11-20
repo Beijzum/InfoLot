@@ -50,7 +50,7 @@ function renderSpot(container, spotClass, spotKey, spotAvailability, data) {
     iconElement.classList.add("takenSpot");
   }
 
-  // Create a label element displaying the spot key (e.g., 'a1', 'a2' or 'b1', 'b2')
+  // Create a label element displaying the spot key (e.g., 'A1', 'A2' or 'B1', 'B2', etc.)
   const labelElement = document.createElement("span");
   labelElement.textContent = spotKey;
 
@@ -88,6 +88,33 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Function to check for expired reservations and update spot availability
+async function checkExpiredReservations(data) {
+  // Check spotsA
+  await checkExpiredReservationsForSpotClass(
+    "spotsA",
+    reservationDocumentId,
+    data
+  );
+
+  // Check spotsB
+  await checkExpiredReservationsForSpotClass(
+    "spotsB",
+    reservationDocumentId,
+    data
+  );
+}
+
+setInterval(async () => {
+  const parkingSpotData = db.collection("parkings").doc("irTl1dU7fok3OYsKSYcF");
+  const doc = await parkingSpotData.get();
+
+  if (doc.exists) {
+    const data = doc.data();
+    await checkExpiredReservations(data);
+  }
+}, 1000); // 1 second in milliseconds
+
 // Function to render the parking spots and handle save button click
 async function renderParkingSpotsAndSave() {
   const spotsAContainer = document.getElementById("spotsA-container");
@@ -98,7 +125,9 @@ async function renderParkingSpotsAndSave() {
 
   const parkingSpotData = db.collection("parkings").doc("irTl1dU7fok3OYsKSYcF");
 
-  parkingSpotData.get().then((doc) => {
+  try {
+    const doc = await parkingSpotData.get();
+
     if (doc.exists) {
       const data = doc.data();
 
@@ -132,25 +161,88 @@ async function renderParkingSpotsAndSave() {
           updateObject[`spotsB.${selectedKeyB}`] = false;
         });
 
-        db.collection("parkings")
+        await db
+          .collection("parkings")
           .doc("irTl1dU7fok3OYsKSYcF")
-          .update(updateObject)
-          .then(async () => {
-            data[selectedSpotsKey("spotsA")] = [];
-            data[selectedSpotsKey("spotsB")] = [];
+          .update(updateObject);
 
-            // Add a delay before reloading the page
-            await delay(500);
+        data[selectedSpotsKey("spotsA")] = [];
+        data[selectedSpotsKey("spotsB")] = [];
 
-            // Reload the page to reflect the latest updates from the database
-            location.reload();
-          })
-          .catch((error) => {
-            console.error("Error updating database:", error);
-          });
+        // Add a delay before reloading the page
+        await delay(500);
+
+        // Reload the page to reflect the latest updates from the database
+        location.reload();
       });
+
+      // Check for expired reservations and update spot availability
+      await checkExpiredReservations(data);
     }
-  });
+  } catch (error) {
+    console.error("Error fetching data from the database:", error);
+  }
+}
+
+async function checkExpiredReservationsForSpotClass(
+  spotClass,
+  reservationDocumentId,
+  data
+) {
+  const currentTimestamp = new Date();
+  const selectedSpots = data[selectedSpotsKey(spotClass)] || [];
+  const spotKeys = Object.keys(data[spotClass]).sort();
+
+  for (const spotKey of spotKeys) {
+    const reservationExpirationTime = data[spotClass][spotKey].expirationTime;
+
+    if (reservationExpirationTime) {
+      const expirationTimestamp = new Date(reservationExpirationTime);
+
+      console.log(
+        `Spot: ${spotClass}-${spotKey}, Expiration: ${expirationTimestamp}, Current: ${currentTimestamp}`
+      );
+
+      if (expirationTimestamp <= currentTimestamp) {
+        // Reservation has expired, remove the reservation from the database
+        try {
+          await db
+            .collection("parkings")
+            .doc("irTl1dU7fok3OYsKSYcF")
+            .update({
+              [`${spotClass}.${spotKey}`]: true,
+            });
+
+          // Remove the reservation document from the reserve_details collection
+          const reservationDocument = await db
+            .collection("reserve_details")
+            .doc(reservationDocumentId)
+            .get();
+
+          if (reservationDocument.exists) {
+            await reservationDocument.ref.delete();
+            console.log("Reservation document deleted successfully.");
+          } else {
+            console.log("Reservation document not found.");
+          }
+
+          // Render the spot after the database update
+          renderSpot(
+            document.getElementById(`${spotClass}-container`),
+            spotClass,
+            spotKey,
+            true,
+            data
+          );
+        } catch (error) {
+          console.error(
+            "Error updating spot availability or removing reservation from the database:",
+            error
+          );
+        }
+      }
+    }
+  }
 }
 
 // Function to show or hide the next button based on spot selection
@@ -169,9 +261,10 @@ function toggleNextButtonVisibility() {
 }
 
 // Event listener for the next button click
-let parkingLotID = (new URL(window.location.href)).searchParams.get("docID");
+let parkingLotID = new URL(window.location.href).searchParams.get("docID");
 document.getElementById("next-button").addEventListener("click", () => {
-  window.location.href = `/reserve_details.html?docID=${parkingLotID}`});
+  window.location.href = `/reserve_details.html?docID=${parkingLotID}`;
+});
 
 // Initial rendering and save button click handling
 renderParkingSpotsAndSave();

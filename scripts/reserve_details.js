@@ -47,7 +47,7 @@ function displayParkingName() {
 
 displayParkingName();
 
-function provideReserveDetails(userID, parkingLotDocID) {
+async function provideReserveDetails(userID, parkingLotDocID) {
   console.log("inside fill out reserve details");
   let dateSelect = document.getElementById("dateInput").value;
   let reserveStartTime = document.getElementById("startTime").value;
@@ -61,7 +61,25 @@ function provideReserveDetails(userID, parkingLotDocID) {
     var userID = user.uid;
     var docRef;
 
-    // Get the document for the current user.
+    // Calculate the expiration time based on the selected start time and duration
+    const startTime = new Date(`${dateSelect}T${reserveStartTime}:00`);
+    const durationInHours = parseFloat(duration);
+
+    // Use server timestamp for accurate time calculation
+    const serverTimestamp =
+      await firebase.firestore.FieldValue.serverTimestamp();
+    const endTime = new Date(
+      startTime.getTime() + durationInHours * 60 * 60 * 1000
+    );
+
+    // Components of the expiration time
+    const hours = endTime.getHours().toString().padStart(2, "0");
+    const minutes = endTime.getMinutes().toString().padStart(2, "0");
+
+    // Format the expiration time without seconds
+    const expirationTime = `${hours}:${minutes}`;
+
+    // Retrieve reserve_details for the current user.
     db.collection("reserve_details")
       .add({
         parkingLotDocID: parkingLotDocID,
@@ -69,8 +87,8 @@ function provideReserveDetails(userID, parkingLotDocID) {
         date: dateSelect,
         start: reserveStartTime,
         duration: duration,
-
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        expirationTime: expirationTime,
+        timestamp: serverTimestamp, // Use server timestamp here
       })
       .then((addedDocRef) => {
         docRef = addedDocRef;
@@ -82,15 +100,46 @@ function provideReserveDetails(userID, parkingLotDocID) {
           history: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID),
         });
       })
-
       .then(() => {
-        //Redirect to thanks for reservation page
+        // Redirect to thanks for reservation page
         window.location.href = `thanks_reserve.html?docRef=${docRef.id}`;
+      })
+      .catch((error) => {
+        console.error("Error updating database:", error);
       });
   } else {
     console.log("No user is signed in");
     window.location.href = "reserve.html";
   }
+}
+
+function checkExpiredReservations(parkingLotDocID, reservationDocumentId) {
+  // Check for expired reservations and update spot availability
+  db.collection("parkings")
+    .doc(parkingLotDocID)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        return checkExpiredReservationsForSpotClass(
+          "spotsA",
+          reservationDocumentId,
+          data
+        );
+      } else {
+        console.error("Parking lot document not found");
+      }
+    })
+    .then(() => {
+      return checkExpiredReservationsForSpotClass(
+        "spotsB",
+        reservationDocumentId,
+        data
+      );
+    })
+    .catch((error) => {
+      console.error("Error checking expired reservations:", error);
+    });
 }
 
 function submitReserve() {
