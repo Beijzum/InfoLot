@@ -62,7 +62,7 @@ function showMap() {
                                 <a href="./reserve.html?docID=${doc.id}" type="button" class="reserve_now_btn btn btn-success">Reserve Now</a>
                                 <br><br> 
                                 <div id="heart-detail-container">
-                                <i id="heart_icon_map" class="material-icons" cursor: pointer;">favorite_border</i>
+                                <i id="heart_icon_map" class="material-icons" onclick="addFavouritesIcon(${doc.id})" cursor: pointer;">favorite_border</i>
                                 <a href="/each_parking_lot.html?docID=${doc.id}" class="read_more_btn">Details</a>
                                 </div>  
                                 </div>`,
@@ -220,3 +220,90 @@ function showMap() {
 
 // Call the function to display the map with the user's location and event pins
 showMap();
+
+
+
+
+
+/*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
+
+/* --------Displays correct favourites icon, empty or full ---------- */
+function checkAndUpdateFavouritesIcon() {
+    let parkingLotDocId = (new URL(window.location.href)).searchParams.get("docID");
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            db.collection("users").doc(user.uid).get().then(userDoc => {
+                if (userDoc.exists) {
+                    let userData = userDoc.data();
+                    let favourites = userDoc.data().favourites;// Replace with your field name
+                    let iconID = "heart_icon"
+
+                    // Check if the field exists and contains the specific item
+                    if (favourites && favourites.includes(parkingLotDocId)) {
+                        console.log("The item is favourited");
+                        document.getElementById(iconID).innerText = 'favorite'; // Change the icon to filled heart
+                        // Perform operations based on the presence of the item
+                    } else {
+                        console.log("The item is not favourited");
+                        document.getElementById(iconID).innerText = 'favorite_border'; // Change icon to empty heart
+                        // Handle the absence of the item
+                    }
+                } else {
+                    document.getElementById(iconID).innerText = 'favorite_border';
+                }
+            })
+        } else {
+            // No user is signed in.
+            console.log("No user is logged in.");
+            document.getElementById(iconID).innerText = 'favorite_border';
+        }
+    });
+}
+checkAndUpdateFavouritesIcon();
+
+
+/* What happens when the favourites icon is clicked */
+function addFavouritesIcon(docID) {
+    let currentUser = firebase.auth().currentUser;
+
+    if (currentUser) {
+        // Updates user's favourites in firestore 
+        updateFavouritesIcon(docID);
+
+    } else {
+        // If no user is signed in, redirect to the login page
+        window.location.href = "/login.html";
+    }
+}
+
+
+/* Function to update firestore favourites in user collection and changes
+the favourites button */
+function updateFavouritesIcon(parkingLotDocID) {
+    currentUser.get().then(userDoc => {
+        let favourites = userDoc.data().favourites;
+        let isFavourited = favourites.includes(parkingLotDocID); // check if hikeID exists in the bookmarks array
+        console.log(isFavourited)
+        let iconID = "heart_icon"
+
+        if (isFavourited) {
+            currentUser.update({
+                favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
+            }).then(function () {
+                document.getElementById("favourites").innerText = "Add to favourites";
+                document.getElementById(iconID).innerText = 'favorite_border';
+                console.log("Favourites has been removed for " + parkingLotDocID);
+            })
+
+        } else {
+            currentUser.update({
+                favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
+            }).then(function () {
+                document.getElementById("favourites").innerText = "Remove from favourites";
+                document.getElementById(iconID).innerText = 'favorite';
+                console.log("Favourites has been saved for " + parkingLotDocID);
+            })
+        }
+    })
+}
