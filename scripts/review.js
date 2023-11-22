@@ -147,7 +147,7 @@ function saveReviewIDforUser(reviewDocID) { // uses reviewDocID (from writeRevie
         })
             .then(() => {
                 console.log("5. Saved to user's document!");
-                window.location.href = "thanks.html"; // Redirect to the thanks page
+                window.location.href = "thanks_review.html"; // Redirect to the thanks page
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
