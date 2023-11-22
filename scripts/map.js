@@ -53,12 +53,21 @@ function showMap() {
                                 'description':
                                     // Edit popup box contents
                                     `<div class="mapboxgl-popup-content">
+                                    
                                 <p style="font-weight: bold;">${event_name}</p>
                                 <p>${price}</p>
                                 <p>${hours}</p>
-                                <a href="./reserve.html?docID=${doc.id}" type="button" class="style_button btn btn-success">Reserve Now</a>
-                                <br> 
-                                <a href="/each_parking_lot.html?docID=${doc.id}">Read more</a>
+
+            
+                                
+
+                                <a href="./reserve.html?docID=${doc.id}" type="button" class="reserve_now_btn btn btn-success">Reserve Now</a>
+                                <br><br> 
+                                <i id="heart_icon_map" class="material-icons" cursor: pointer;">favorite_border</i>
+                                <a href="/each_parking_lot.html?docID=${doc.id}" class="read_more_btn">Details</a>
+                                
+                                
+                                
                                 </div>`
                             },
                             'geometry': {

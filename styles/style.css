@@ -70,6 +70,20 @@ body {
   border-width: 2px;
 }
 
+.style_button_index {
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #4a5759;
+  /* Light shade for text */
+  font-size: 150%;
+  background-color: #7ac968;
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: 2px;
+  border-radius: 50px;
+}
+
 .style_button:hover {
   background-color: white;
   color: #4a5759;
@@ -90,6 +104,23 @@ body {
   background-color: white;
   color: #4a5759;
 }
+
+.read_more_btn {
+  text-decoration: none;
+  color: #394141;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.read_more_btn:hover {
+  text-decoration: none;
+  color: #7ac968;
+}
+
+.reserve_now_btn {
+  font-size: 1em;
+}
+
 
 /*Styles image in each parking lot page */
 .parking-img {
