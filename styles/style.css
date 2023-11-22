@@ -161,9 +161,16 @@ h1 {
   color: #4a5759;
 }
 
+
 /* Mapbox Popup Customization */
 .mapboxgl-popup-content {
   text-align: center;
+}
+
+#heart-detail-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 50%
 }
 
 /* Hero */
