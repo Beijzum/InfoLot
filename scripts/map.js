@@ -53,13 +53,10 @@ function showMap() {
                                 'description':
                                     // Edit popup box contents
                                     `<div class="mapboxgl-popup-content">
-                                    
+
                                 <p style="font-weight: bold;">${event_name}</p>
                                 <p>${price}</p>
                                 <p>${hours}</p>
-
-            
-                                
 
                                 <a href="./reserve.html?docID=${doc.id}" type="button" class="reserve_now_btn btn btn-success">Reserve Now</a>
                                 <br><br> 
