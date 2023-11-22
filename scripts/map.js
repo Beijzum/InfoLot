@@ -47,21 +47,6 @@ function showMap() {
                             img = doc.data().posterurl; // Image
                             url = doc.data().link; // URL
 
-<<<<<<< HEAD
-                        // Pushes information into the features array
-                        // in our application, we have a string description of the parking lot
-                        features.push({
-                            'type': 'Feature',
-                            'properties': {
-                                'description':
-                                    // Edit popup box contents
-                                    `<div class="mapboxgl-popup-content">
-
-                                <p style="font-weight: bold;">${event_name}</p>
-                                <p>${price}</p>
-                                <p>${hours}</p>
-
-=======
                             // Pushes information into the features array
                             // in our application, we have a string description of the parking lot
                             features.push({
@@ -74,7 +59,6 @@ function showMap() {
                                 <p style="font-weight: bold;">${event_name}</p>
                                 <p>${price}</p>
                                 <p>${hours}</p>
->>>>>>> 534107e4eb575d5ea2c4c53fa5acdf728e7c8dcf
                                 <a href="./reserve.html?docID=${doc.id}" type="button" class="reserve_now_btn btn btn-success">Reserve Now</a>
                                 <br><br> 
                                 <div id="heart-detail-container">
