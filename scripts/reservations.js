@@ -100,13 +100,7 @@ function cancelReservation(reservationID, spotsDocID) {
                 // Check if spotInfo is null before accessing its properties
                 if (spotInfo) {
                     // Update parking lot spot first
-                    const parkingLotsRef = db
-                        .collection("parkingLots")
-                        .doc(spotInfo.parkingLotDocID);
-                    let updateSpot = {};
-                    updateSpot[`spots.${spotInfo.spots}`] = true; // Switch false to true
-                    parkingLotsRef
-                        .update(updateSpot)
+                    updateParkingSpot(spotInfo.parkingLotDocID, spotInfo.spots)
                         .then(() => {
                             console.log(
                                 `Parking lot spot ${spotInfo.spots} updated to true`
