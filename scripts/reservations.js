@@ -95,9 +95,8 @@ function cancelReservation(reservationID, spotsDocID) {
         ); // Double check! Usability Heuristics #5
         if (result) {
             // If confirmed, then go ahead
-            let tempSpots = db.collection("temp_spots");
             // Call findSpot function and handle the promise resolution
-            findSpot(tempSpots).then((spotInfo) => {
+            findSpot(reservationID).then((spotInfo) => {
                 // Check if spotInfo is null before accessing its properties
                 if (spotInfo) {
                     // Update parking lot spot first
@@ -163,30 +162,58 @@ function cancelReservation(reservationID, spotsDocID) {
 }
 
 // Finds the spot in temp_spots collection
-function findSpot(tempSpotsCollection) {
-    return tempSpotsCollection
+function findSpot(reservationID) {
+    return db
+        .collection("reserve_details")
+        .doc(reservationID)
         .get()
-        .then((querySnapshot) => {
-            let result = null;
-            querySnapshot.forEach((doc) => {
-                let spotsMap = doc.data().spots;
-                let parkingLotDocID = doc.data().parkingLotDocID;
+        .then((reservationDoc) => {
+            if (reservationDoc.exists) {
+                let spotID = reservationDoc.data().spotID;
 
-                for (let key in spotsMap) {
-                    if (spotsMap[key] === false) {
-                        console.log("Key with value false:", key);
-                        result = {
-                            parkingLotDocID: parkingLotDocID,
-                            spots: key,
-                        };
-                        return result;
-                    }
-                }
-            });
-            return result;
+                // Retrieve the spot information from temp_spots collection
+                return db
+                    .collection("temp_spots")
+                    .doc(spotID)
+                    .get()
+                    .then((spotDoc) => {
+                        if (spotDoc.exists) {
+                            let parkingLotDocID =
+                                spotDoc.data().parkingLotDocID;
+                            let spotsMap = spotDoc.data().spots;
+
+                            // Find the first available spot
+                            for (let key in spotsMap) {
+                                if (spotsMap[key] === false) {
+                                    console.log("Key with value false:", key);
+                                    return {
+                                        parkingLotDocID: parkingLotDocID,
+                                        spots: key,
+                                    };
+                                }
+                            }
+                            console.error(
+                                "No available spot found in spots map."
+                            );
+                            return null;
+                        } else {
+                            console.error(
+                                "Spot document not found in temp_spots."
+                            );
+                            return null;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error getting spot document: ", error);
+                        return null;
+                    });
+            } else {
+                console.error("Reservation document not found.");
+                return null;
+            }
         })
         .catch((error) => {
-            console.error("Error getting documents: ", error);
+            console.error("Error getting reservation document: ", error);
             return null;
         });
 }
