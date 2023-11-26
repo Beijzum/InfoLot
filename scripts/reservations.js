@@ -35,6 +35,11 @@ function getReservation(user) {
                             let duration = reservationDoc.data().duration;
                             let start = reservationDoc.data().start;
                             let end = reservationDoc.data().endTime;
+                            const hours = Math.floor(duration / 60);
+                            const minutes = Math.floor(duration % 60);
+                            let durationActual = `${hours}:${
+                                minutes < 10 ? "0" : ""
+                            }${minutes}`;
                             console.log(parkingLotID);
                             db.collection("parkingLots")
                                 .doc(parkingLotID)
@@ -58,7 +63,7 @@ function getReservation(user) {
                                     ).innerHTML = title;
                                     newcard.querySelector(
                                         ".card-text"
-                                    ).innerHTML = `Reservation Date: ${date} <br> Start: ${start} <br> End: ${end} <br> Duration: ${duration} `;
+                                    ).innerHTML = `Reservation Date: ${date} <br> Start: ${start} <br> End: ${end} <br> Duration: ${durationActual} `;
                                     newcard.querySelector(
                                         ".card-image"
                                     ).src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
