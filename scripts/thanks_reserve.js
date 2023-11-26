@@ -26,9 +26,6 @@ docRef.get().then((doc) => {
     const hours = Math.floor(timeDiff / (1000 * 60 * 60));
     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-    // Format minutes to always display two digits
-    const formattedMinutes = minutes.toString().padStart(2, "0");
-
     // Create a human-readable duration string
     const durationString = `${hours} hours ${minutes} minutes`;
 
