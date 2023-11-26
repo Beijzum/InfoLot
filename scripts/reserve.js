@@ -1,15 +1,15 @@
 // Create a function to render the parking spots and handle save button click
 function renderParkingSpotsAndSave() {
     // Get the container element where parking spots will be displayed
+    let parkingLotID = new URL(window.location.href).searchParams.get("docID");
+
     const parkingSpotsContainer = document.getElementById("parking-spots");
 
     // Clear existing content within the container
     parkingSpotsContainer.innerHTML = ""; // Clear existing content
 
     // Fetch parking spot data from Firestore using a specific document ID
-    const parkingSpotData = db
-        .collection("parkings")
-        .doc("0os10CoKqLYiW1L5w2Bz");
+    const parkingSpotData = db.collection("parkingLots").doc(parkingLotID);
 
     // Retrieve data from the Firestore document
     parkingSpotData.get().then((doc) => {
@@ -85,8 +85,8 @@ function renderParkingSpotsAndSave() {
                 const selectedKey = data.selected; // Get the selected key
                 if (selectedKey !== null) {
                     // Update the selected key to 'false' in the database
-                    db.collection("parkings")
-                        .doc("0os10CoKqLYiW1L5w2Bz")
+                    db.collection("parkingLots")
+                        .doc(parkingLotID)
                         .update({
                             [`spots.${selectedKey}`]: false,
                         })
@@ -105,3 +105,8 @@ function renderParkingSpotsAndSave() {
 
 // Initial rendering and save button click handling
 renderParkingSpotsAndSave();
+
+let parkingLotID = new URL(window.location.href).searchParams.get("docID");
+document.getElementById("next-button").addEventListener("click", () => {
+    window.location.href = `/reserve_details.html?docID=${parkingLotID}`;
+});
