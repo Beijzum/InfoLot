@@ -45,7 +45,10 @@
         body {
             background-color: rgba(0, 0, 0, 0.7);
         }
-        label, h1, input {
+
+        label,
+        h1,
+        input {
             color: white;
         }
     </style>
@@ -90,7 +93,9 @@
             <div class="d-flex justify-content-end mt-5">
                 <button type="button" class="btn btn-info" onclick="editUserInfo()">Edit</button>
                 <span style="width: 10px"></span>
-                <button type="button" class="btn btn-warning" onclick="saveUserInfo()">Save</button>
+                <button type="button" class="btn btn-warning" onclick="saveUserInfo()" data-bs-toggle="popover"
+                    data-bs-placement="top" data-bs-trigger="manual" title="Save"
+                    data-bs-content="Profile saved!">Save</button>
                 <span style="width: 10px"></span>
                 <button type="button" class="btn btn-secondary" onclick="deleteUser()">Delete</button>
             </div>
