@@ -154,7 +154,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
             })
             .then(() => {
                 // Redirect to thanks for reservation page
-                window.location.href = `thanks_reserve.html?docRef=${docRef.id}&spotID=${spotID}`;
+                window.location.href = `thanks_reserve.html?docRef=${docRef.id}&spotID=${spotRefDocID}`;
             })
             .catch((error) => {
                 console.error("Error updating database:", error);
