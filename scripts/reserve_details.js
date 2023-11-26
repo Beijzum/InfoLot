@@ -56,15 +56,21 @@ function updateDuration() {
   const minutes = Math.floor(durationInMinutes % 60);
 
   // Display duration in the HTML span element
-  document.getElementById("duration").textContent = `${hours}:${
-    minutes < 10 ? "0" : ""
-  }${minutes}`;
+  let durationText;
 
-  console.log(
-    dateSelect,
-    reserveStartTime,
-    hours + ":" + (minutes < 10 ? "0" : "") + minutes
-  );
+  if (hours > 0) {
+    // If hours is greater than 0
+    durationText = `${hours} ${hours === 1 ? "hour" : "hours"} ${minutes} ${
+      minutes === 1 ? "minute" : "minutes"
+    }`;
+  } else {
+    // If hours is not greater than 0 (e.g., it's 0)
+    durationText = `${minutes} ${minutes === 1 ? "minute" : "minutes"}`;
+  }
+
+  document.getElementById("duration").textContent = `${durationText}`;
+
+  console.log(dateSelect, reserveStartTime, durationText);
 }
 
 // Event listener for the "change" event on the "endTime" input field
