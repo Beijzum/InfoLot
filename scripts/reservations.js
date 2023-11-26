@@ -31,6 +31,10 @@ function getReservation(user) {
                         if (reservationDoc) {
                             let parkingLotID =
                                 reservationDoc.data().parkingLotDocID;
+                            let date = reservationDoc.data().date;
+                            let duration = reservationDoc.data().duration;
+                            let start = reservationDoc.data().start;
+                            let end = reservationDoc.data().endTime;
                             console.log(parkingLotID);
                             db.collection("parkingLots")
                                 .doc(parkingLotID)
@@ -54,13 +58,12 @@ function getReservation(user) {
                                     ).innerHTML = title;
                                     newcard.querySelector(
                                         ".card-text"
-                                    ).innerHTML = `${parkingAddress}<br><br>${parkingHours} | ${parkingRate}`;
+                                    ).innerHTML = `Reservation Date: ${date} <br> Start: ${start} <br> End: ${end} <br> Duration: ${duration} `;
                                     newcard.querySelector(
                                         ".card-image"
                                     ).src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
                                     newcard.querySelector("a").href =
                                         "each_parking_lot.html?docID=" + docID;
-
                                     //attach to gallery, Example: "parking-lot-go-here"
                                     parkingLotsCardGroup.appendChild(newcard);
                                 });
@@ -69,3 +72,4 @@ function getReservation(user) {
             });
         });
 }
+
