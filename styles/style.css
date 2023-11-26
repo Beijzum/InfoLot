@@ -223,11 +223,11 @@ h1 {
   border-radius: 200px;
 }
 
-.vv img {
+/* .vv img {
   transition: all 0.3s ease;
-}
+} */
 
-.vv img:hover {
+/* .vv img:hover {
   opacity: 0.8;
   box-shadow: 0px 0px 5px 8px rgba(0, 0, 0, 0.08);
-}
+} */
