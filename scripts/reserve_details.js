@@ -21,13 +21,93 @@ function displayParkingName() {
 
 displayParkingName();
 
+// Function to update duration when end time changes
+function updateDuration() {
+  let dateSelect = document.getElementById("dateInput").value;
+  let reserveStartTime = document.getElementById("startTime").value;
+  let reserveEndTime = document.getElementById("endTime").value;
+
+  // Parse time strings to Date objects
+  const startTime = new Date(`${dateSelect}T${reserveStartTime}:00Z`);
+  const endTime = new Date(`${dateSelect}T${reserveEndTime}:00Z`);
+
+  // Check if either start time or end time is not a valid date
+  if (isNaN(startTime) || isNaN(endTime)) {
+    // Clear the duration if either time is not valid
+    document.getElementById("duration").textContent = "";
+    return;
+  }
+
+  // If endTime is before startTime, adjust date to the next day
+  if (endTime < startTime) {
+    endTime.setDate(endTime.getDate() + 1);
+  }
+
+  // Calculate duration in minutes
+  let durationInMinutes = (endTime - startTime) / (1000 * 60);
+
+  // If duration is negative, adjust it
+  if (durationInMinutes < 0) {
+    durationInMinutes += 24 * 60; // Add 24 hours in minutes
+  }
+
+  // Convert duration to hours and minutes
+  const hours = Math.floor(durationInMinutes / 60);
+  const minutes = Math.floor(durationInMinutes % 60);
+
+  // Display duration in the HTML span element
+  document.getElementById("duration").textContent = `${hours}:${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
+
+  console.log(
+    dateSelect,
+    reserveStartTime,
+    hours + ":" + (minutes < 10 ? "0" : "") + minutes
+  );
+}
+
+// Event listener for the "change" event on the "endTime" input field
+document.getElementById("startTime").addEventListener("change", updateDuration);
+document.getElementById("endTime").addEventListener("change", updateDuration);
+
 async function provideReserveDetails(userID, parkingLotDocID) {
   console.log("inside fill out reserve details");
   let dateSelect = document.getElementById("dateInput").value;
   let reserveStartTime = document.getElementById("startTime").value;
-  let duration = document.getElementById("endTime").value;
+  let reserveEndTime = document.getElementById("endTime").value;
 
-  console.log(dateSelect, reserveStartTime, duration);
+  // Parse time strings to Date objects for easy manipulation
+  const startTime = new Date(`${dateSelect}T${reserveStartTime}:00Z`);
+  let endTime = new Date(`${dateSelect}T${reserveEndTime}:00Z`);
+
+  // If endTime is before startTime, adjust date to the next day
+  if (endTime < startTime) {
+    endTime.setDate(endTime.getDate() + 1);
+  }
+
+  // Calculate duration in minutes
+  let duration = (endTime - startTime) / (1000 * 60);
+
+  // If duration is negative, adjust it
+  if (duration < 0) {
+    duration += 24 * 60; // Add 24 hours in minutes
+  }
+
+  // Convert duration back to hours and minutes
+  const hours = Math.floor(duration / 60);
+  const minutes = Math.floor(duration % 60);
+
+  // Display duration in the HTML span element
+  document.getElementById("duration").textContent = `${hours}:${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
+
+  console.log(
+    dateSelect,
+    reserveStartTime,
+    hours + ":" + (minutes < 10 ? "0" : "") + minutes
+  );
 
   var user = firebase.auth().currentUser;
   if (user) {
@@ -35,29 +115,9 @@ async function provideReserveDetails(userID, parkingLotDocID) {
     var userID = user.uid;
     var docRef;
 
-    // Calculate the expiration time based on the selected start time and duration
-    const startTime = new Date(`${dateSelect}T${reserveStartTime}:00`);
-    const endTime = new Date(`${dateSelect}T${duration}:00`);
-
-    // Calculate duration in milliseconds
-    const durationInMilliseconds = endTime - startTime;
-
-    // Convert duration to hours and minutes
-    const durationInHours = Math.floor(
-      durationInMilliseconds / (60 * 60 * 1000)
-    );
-    const durationInMinutes = Math.floor(
-      (durationInMilliseconds % (60 * 60 * 1000)) / (60 * 1000)
-    );
-
     // Use server timestamp for accurate time calculation
     const serverTimestamp =
       await firebase.firestore.FieldValue.serverTimestamp();
-
-    // Format the duration as "hh:mm"
-    const formattedDuration = `${durationInHours}:${durationInMinutes
-      .toString()
-      .padStart(2, "0")}`;
 
     // Retrieve reserve_details for the current user.
     db.collection("reserve_details")
@@ -66,8 +126,8 @@ async function provideReserveDetails(userID, parkingLotDocID) {
         userID: userID,
         date: dateSelect,
         start: reserveStartTime,
-        endTime: duration, // Use the selected end time as is
-        duration: formattedDuration,
+        endTime: reserveEndTime, // Use the selected end time as is
+        duration: duration,
         timestamp: serverTimestamp,
       })
       .then((addedDocRef) => {
@@ -93,28 +153,6 @@ async function provideReserveDetails(userID, parkingLotDocID) {
   }
 }
 
-function checkExpiredReservations(parkingLotDocID, reservationDocumentId) {
-  // Check for expired reservations and update spot availability
-  db.collection("parkings")
-    .doc(parkingLotDocID)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        return checkExpiredReservationsForSpotClass(
-          "spotsA",
-          reservationDocumentId,
-          data
-        );
-      } else {
-        console.error("Parking lot document not found");
-      }
-    })
-    .catch((error) => {
-      console.error("Error checking expired reservations:", error);
-    });
-}
-
 function submitReserve() {
   var userId = firebase.auth().currentUser.uid;
   let params = new URL(window.location.href); // Parse the parameters from the URL of current window
@@ -125,17 +163,4 @@ function submitReserve() {
   } else {
     console.error("Parking lot ID not found in the URL.");
   }
-}
-
-// Helper function to parse duration in "hh:mm" format and return the total minutes
-function parseDuration(duration) {
-  const [hours, minutes] = duration.split(":").map(Number);
-  return hours * 60 + minutes;
-}
-
-// Helper function to format time as "hh:mm"
-function formatTime(time) {
-  const hours = time.getHours().toString().padStart(2, "0");
-  const minutes = time.getMinutes().toString().padStart(2, "0");
-  return `${hours}:${minutes}`;
 }

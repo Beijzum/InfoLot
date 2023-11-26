@@ -109,25 +109,23 @@
               placeholder="End Time"
             />
           </div>
-
-          <!-- Number of Hours
-        <div class="form-group">
-          <label for="hoursSelect">Select Duration of Parking:</label>
-          <select id="hoursSelect" placeholder="Duration">
-          </select>
-        </div>
-      </div> -->
-
           <br />
-          <div class="d-flex justify-content-end">
-            <button
-              type="button"
-              class="btn btn-lg btn-primary pull-right"
-              onclick="submitReserve()"
-            >
-              Submit
-            </button>
+          <!-- Duration -->
+          <div style="width: 50%; margin: 0 auto;">            
+            <div id="durationBox" style="border: 1px solid #ccc; padding: 20px">
+              Duration:
+              <div id="duration"></div>
+            </div>
           </div>
+        <br />
+        <div class="d-flex justify-content-end">
+          <button
+            type="button"
+            class="btn btn-lg btn-primary pull-right"
+            onclick="submitReserve()"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>
