@@ -1,31 +1,5 @@
 var parkingLotDocID = localStorage.getItem("parkingLotDocID"); //visible to all functions on this page
 
-// Select Time
-function generateHoursOptions() {
-  const selectElement = document.getElementById("hoursSelect");
-
-  const startTime = new Date();
-  startTime.setHours(0, 0, 0, 0); // Set to midnight
-
-  for (let i = 0; i < 96; i++) {
-    // 96 intervals for 24 hours
-    const currentTime = new Date(startTime.getTime() + i * 15 * 60 * 1000);
-    const hours = currentTime.getHours().toString().padStart(2, "0");
-    const minutes = currentTime.getMinutes().toString().padStart(2, "0");
-    const timeValue = `${hours}:${minutes}`;
-    const displayValue = `${hours}:${minutes}`;
-
-    const optionElement = document.createElement("option");
-    optionElement.value = timeValue;
-    optionElement.textContent = displayValue;
-
-    selectElement.appendChild(optionElement);
-  }
-}
-
-// Call the function to generate time options
-generateHoursOptions();
-
 function displayParkingName() {
   let params = new URL(window.location.href); //get URL of search bar
   let ID = params.searchParams.get("docID"); //get value for key "id"
@@ -51,7 +25,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
   console.log("inside fill out reserve details");
   let dateSelect = document.getElementById("dateInput").value;
   let reserveStartTime = document.getElementById("startTime").value;
-  let duration = document.getElementById("hoursSelect").value;
+  let duration = document.getElementById("endTime").value;
 
   console.log(dateSelect, reserveStartTime, duration);
 
@@ -63,21 +37,27 @@ async function provideReserveDetails(userID, parkingLotDocID) {
 
     // Calculate the expiration time based on the selected start time and duration
     const startTime = new Date(`${dateSelect}T${reserveStartTime}:00`);
-    const durationInHours = parseFloat(duration);
+    const endTime = new Date(`${dateSelect}T${duration}:00`);
+
+    // Calculate duration in milliseconds
+    const durationInMilliseconds = endTime - startTime;
+
+    // Convert duration to hours and minutes
+    const durationInHours = Math.floor(
+      durationInMilliseconds / (60 * 60 * 1000)
+    );
+    const durationInMinutes = Math.floor(
+      (durationInMilliseconds % (60 * 60 * 1000)) / (60 * 1000)
+    );
 
     // Use server timestamp for accurate time calculation
     const serverTimestamp =
       await firebase.firestore.FieldValue.serverTimestamp();
-    const endTime = new Date(
-      startTime.getTime() + durationInHours * 60 * 60 * 1000
-    );
 
-    // Components of the expiration time
-    const hours = endTime.getHours().toString().padStart(2, "0");
-    const minutes = endTime.getMinutes().toString().padStart(2, "0");
-
-    // Format the expiration time without seconds
-    const expirationTime = `${hours}:${minutes}`;
+    // Format the duration as "hh:mm"
+    const formattedDuration = `${durationInHours}:${durationInMinutes
+      .toString()
+      .padStart(2, "0")}`;
 
     // Retrieve reserve_details for the current user.
     db.collection("reserve_details")
@@ -86,9 +66,9 @@ async function provideReserveDetails(userID, parkingLotDocID) {
         userID: userID,
         date: dateSelect,
         start: reserveStartTime,
-        duration: duration,
-        expirationTime: expirationTime,
-        timestamp: serverTimestamp, // Use server timestamp here
+        endTime: duration, // Use the selected end time as is
+        duration: formattedDuration,
+        timestamp: serverTimestamp,
       })
       .then((addedDocRef) => {
         docRef = addedDocRef;
@@ -130,13 +110,6 @@ function checkExpiredReservations(parkingLotDocID, reservationDocumentId) {
         console.error("Parking lot document not found");
       }
     })
-    .then(() => {
-      return checkExpiredReservationsForSpotClass(
-        "spotsB",
-        reservationDocumentId,
-        data
-      );
-    })
     .catch((error) => {
       console.error("Error checking expired reservations:", error);
     });
@@ -152,4 +125,17 @@ function submitReserve() {
   } else {
     console.error("Parking lot ID not found in the URL.");
   }
+}
+
+// Helper function to parse duration in "hh:mm" format and return the total minutes
+function parseDuration(duration) {
+  const [hours, minutes] = duration.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+// Helper function to format time as "hh:mm"
+function formatTime(time) {
+  const hours = time.getHours().toString().padStart(2, "0");
+  const minutes = time.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
 }
