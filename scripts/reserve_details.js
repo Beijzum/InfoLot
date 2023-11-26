@@ -55,16 +55,16 @@ function updateDuration() {
   const hours = Math.floor(durationInMinutes / 60);
   const minutes = Math.floor(durationInMinutes % 60);
 
-  // Display duration in the HTML span element
+  // Display duration in HTML
   let durationText;
 
   if (hours > 0) {
-    // If hours is greater than 0
+    // If hours is 1, then 1 hour, else hours. Same for minutes. If minute = 1, then minute, else minutes
     durationText = `${hours} ${hours === 1 ? "hour" : "hours"} ${minutes} ${
       minutes === 1 ? "minute" : "minutes"
     }`;
   } else {
-    // If hours is not greater than 0 (e.g., it's 0)
+    // If minutes is equal to 1, then minute, else minutes)
     durationText = `${minutes} ${minutes === 1 ? "minute" : "minutes"}`;
   }
 
