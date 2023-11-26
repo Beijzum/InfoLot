@@ -80,7 +80,7 @@ document.getElementById("endTime").addEventListener("change", updateDuration);
 
 async function provideReserveDetails(userID, parkingLotDocID) {
     console.log("inside fill out reserve details");
-    let spotID = new URL(window.location.href).searchParams.get("spotID");
+    let spotRefDocID = new URL(window.location.href).searchParams.get("spotID");
     let dateSelect = document.getElementById("dateInput").value;
     let reserveStartTime = document.getElementById("startTime").value;
     let reserveEndTime = document.getElementById("endTime").value;
@@ -122,7 +122,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
         var currentUser = db.collection("users").doc(user.uid);
         var userID = user.uid;
         var docRef;
-        var spots = spotID;
+        var spotDocID = spotRefDocID;
         // Use server timestamp for accurate time calculation
         const serverTimestamp =
             await firebase.firestore.FieldValue.serverTimestamp();
@@ -137,7 +137,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
                 endTime: reserveEndTime, // Use the selected end time as is
                 duration: duration,
                 timestamp: serverTimestamp,
-                spots: spots,
+                spotID: spotDocID,
             })
             .then((addedDocRef) => {
                 docRef = addedDocRef;
