@@ -35,6 +35,7 @@ function getReservation(user) {
                             let duration = reservationDoc.data().duration;
                             let start = reservationDoc.data().start;
                             let end = reservationDoc.data().endTime;
+                            // let spotsDocID = reservationDoc.data().spots;
                             const hours = Math.floor(duration / 60);
                             const minutes = Math.floor(duration % 60);
                             let durationActual = `${hours}:${
@@ -89,38 +90,131 @@ function cancelReservation(reservationID) {
         var result = confirm(
             "WARNING " + user.displayName + ": Cancelling your reservation!!"
         ); // Double check! Usability Heuristics #5
-
         if (result) {
             // If confirmed, then go ahead
-            db.collection("reserve_details")
-                .doc(reservationID)
-                .delete() // Delete reservation from user array
-                .then(() => {
-                    console.log("Reservation deleted from reserve_details");
-                    const userDocRef = db.collection("users").doc(user.uid);
-                    userDocRef
-                        //  Updates user collection by removing reservation ID
-                        .update({
-                            reservations:
-                                firebase.firestore.FieldValue.arrayRemove(
-                                    reservationID
-                                ),
-                        })
+            let tempSpots = db.collection("temp_spots");
+            // Call findSpot function and handle the promise resolution
+            findSpot(tempSpots).then((spotInfo) => {
+                // Check if spotInfo is null before accessing its properties
+                if (spotInfo) {
+                    // Update parking lot spot first
+                    const parkingLotsRef = db
+                        .collection("parkingLots")
+                        .doc(spotInfo.parkingLotDocID);
+                    let updateSpot = {};
+                    updateSpot[`spots.${spotInfo.spots}`] = true;
+
+                    parkingLotsRef
+                        .update(updateSpot)
                         .then(() => {
-                            // Next, delete reservation from user collection
-                            console.log("Deleted from Firebase Auth.");
-                            alert("Reservation has been cancelled");
-                            window.location.href = "reservations.html";
+                            console.log(
+                                `Parking lot spot ${spotInfo.spots} updated to true`
+                            );
+                            // Now proceed with updating reservations in the user collection
+                            const userDocRef = db
+                                .collection("users")
+                                .doc(user.uid);
+                            updateReservations(userDocRef, reservationID)
+                                .then(() => {
+                                    console.log(
+                                        "Updated reservations in Firebase Auth."
+                                    );
+                                    // Finally, delete reservation from reserve_details
+                                    const reserveDetails =
+                                        db.collection("reserve_details");
+                                    reserveDetails
+                                        .doc(reservationID)
+                                        .delete()
+                                        .then(() => {
+                                            console.log(
+                                                "Reservation deleted from reserve_details"
+                                            );
+                                            alert(
+                                                "Reservation has been cancelled"
+                                            );
+                                            window.location.href =
+                                                "reservations.html";
+                                        })
+                                        .catch((error) => {
+                                            console.error(
+                                                "Error deleting reservation: ",
+                                                error
+                                            );
+                                        });
+                                })
+                                .catch((error) => {
+                                    console.log(
+                                        "Error updating user collection: " +
+                                            error
+                                    );
+                                });
                         })
                         .catch((error) => {
-                            console.log(
-                                "Error deleting from user collection " + error
+                            console.error(
+                                "Error updating parking lot spot: ",
+                                error
                             );
                         });
-                })
-                .catch((error) => {
-                    console.error("Error deleting reservation: ", error);
-                });
+                } else {
+                    console.error("No suitable spot found.");
+                }
+            });
         }
     });
+}
+
+// Finds the spot in temp_spots collection
+function findSpot(tempSpotsCollection) {
+    return tempSpotsCollection
+        .get()
+        .then((querySnapshot) => {
+            let result = null;
+            querySnapshot.forEach((doc) => {
+                let spotsMap = doc.data().spots;
+                let parkingLotDocID = doc.data().parkingLotDocID;
+
+                for (let key in spotsMap) {
+                    if (spotsMap[key] === false) {
+                        console.log("Key with value false:", key);
+                        result = {
+                            parkingLotDocID: parkingLotDocID,
+                            spots: key,
+                        };
+                        return result;
+                    }
+                }
+            });
+            return result;
+        })
+        .catch((error) => {
+            console.error("Error getting documents: ", error);
+            return null;
+        });
+}
+
+// Updates reserverations in user collection
+function updateReservations(userDocRef, reservationID) {
+    return userDocRef.update({
+        reservations: firebase.firestore.FieldValue.arrayRemove(reservationID),
+    });
+}
+
+// Updates parking spot by switching key value to true
+function updateParkingSpot(parkingLotDocID, spotKey) {
+    const parkingLotsRef = db.collection("parkingLots").doc(parkingLotDocID);
+    let updateSpot = {};
+    updateSpot[`spots.${spotKey}`] = true;
+    return parkingLotsRef
+        .update(updateSpot)
+        .then(() => {
+            console.log(`Parking lot spot ${spotKey} updated to true`);
+            return {
+                success: true,
+                message: `Parking lot spot ${spotKey} updated to true`,
+            };
+        })
+        .catch((error) => {
+            console.error("Error updating parking lot spot: ", error);
+            throw error;
+        });
 }
