@@ -97,6 +97,7 @@ function renderParkingSpotsAndSave() {
                                 [`spots.${selectedKey}`]: false,
                             })
                             .then(() => {
+                                // Adds spot to temp_spots
                                 return db.collection("temp_spots").add({
                                     parkingLotDocID: parkingLotID,
                                     spots: {
@@ -105,6 +106,7 @@ function renderParkingSpotsAndSave() {
                                 });
                             })
                             .then((tempSpotRef) => {
+                                // Redirects to reserve_details page with spot info
                                 console.log(tempSpotRef.id);
                                 redirectReserveDetails(tempSpotRef.id);
                             })
