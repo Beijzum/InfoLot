@@ -64,6 +64,12 @@ function getReservation(user) {
                                     ).src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
                                     newcard.querySelector("a").href =
                                         "each_parking_lot.html?docID=" + docID;
+                                    // Cancel Button
+                                    newcard
+                                        .querySelector(".style_button_cancel")
+                                        .addEventListener("click", () => {
+                                            cancelReservation(reservationID);
+                                        });
                                     //attach to gallery, Example: "parking-lot-go-here"
                                     parkingLotsCardGroup.appendChild(newcard);
                                 });
@@ -73,3 +79,43 @@ function getReservation(user) {
         });
 }
 
+function cancelReservation(reservationID) {
+    firebase.auth().onAuthStateChanged((user) => {
+        var result = confirm(
+            "WARNING " + user.displayName + ": Cancelling your reservation!!"
+        ); // Double check! Usability Heuristics #5
+
+        if (result) {
+            // If confirmed, then go ahead
+            db.collection("reserve_details")
+                .doc(reservationID)
+                .delete() // Delete reservation from user array
+                .then(() => {
+                    console.log("Reservation deleted from reserve_details");
+                    const userDocRef = db.collection("users").doc(user.uid);
+                    userDocRef
+                        //  Updates user collection by removing reservation ID
+                        .update({
+                            reservations:
+                                firebase.firestore.FieldValue.arrayRemove(
+                                    reservationID
+                                ),
+                        })
+                        .then(() => {
+                            // Next, delete reservation from user collection
+                            console.log("Deleted from Firebase Auth.");
+                            alert("Reservation has been cancelled");
+                            window.location.href = "reservations.html";
+                        })
+                        .catch((error) => {
+                            console.log(
+                                "Error deleting from user collection " + error
+                            );
+                        });
+                })
+                .catch((error) => {
+                    console.error("Error deleting reservation: ", error);
+                });
+        }
+    });
+}

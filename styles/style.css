@@ -98,10 +98,27 @@ body {
   border-color: #4a5759;
   /* Darkest shade for border */
   border-width: 2px;
+  margin-right: 10px;
 }
 
 .style_button_moreinfo:hover {
   background-color: white;
+  color: #4a5759;
+}
+
+.style_button_cancel {
+  color: white;
+  /* Light shade for text */
+  background-color: rgb(248, 108, 83);
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: 2px;
+  margin-left: 10px;
+}
+
+.style_button_cancel:hover {
+  background-color: rgb(211, 86, 86);
   color: #4a5759;
 }
 
