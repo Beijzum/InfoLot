@@ -84,43 +84,48 @@ function renderParkingSpotsAndSave() {
             saveButton.addEventListener("click", () => {
                 const selectedKey = data.selected; // Get the selected key
                 if (selectedKey !== null && selectedKey !== undefined) {
-                    // Update the selected key to 'false' in the database
-                    db.collection("parkingLots")
-                        .doc(parkingLotID)
-                        .update({
-                            [`spots.${selectedKey}`]: false,
-                        })
-                        .then(() => {
-                            // After the update, retrieve the updated data from the database
-                            return db
-                                .collection("parkingLots")
-                                .doc(parkingLotID)
-                                .get();
-                        })
-                        .then((doc) => {
-                            // Access the updated 'spots' property from the retrieved document
-                            const updatedSpots = doc.data().spots;
-
-                            // Now 'updatedSpots' contains the latest value after the update
-                            console.log(updatedSpots);
-
-                            // Reload the page to reflect the latest updates from the database
-                            location.reload();
-                        })
-                        .catch((error) => {
-                            console.error("Error updating database:", error);
-                        });
+                    // Get user confirmation
+                    const isConfirmed = window.confirm(
+                        "Are you sure you want to reserve this spot?"
+                    );
+                    // Check if the user confirmed
+                    if (isConfirmed) {
+                        // Update the selected key to 'false' in the database
+                        db.collection("parkingLots")
+                            .doc(parkingLotID)
+                            .update({
+                                [`spots.${selectedKey}`]: false,
+                            })
+                            .then(() => {
+                                return db.collection("temp_spots").add({
+                                    parkingLotDocID: parkingLotID,
+                                    spots: {
+                                        [selectedKey]: false,
+                                    },
+                                });
+                            })
+                            .then((tempSpotRef) => {
+                                console.log(tempSpotRef.id);
+                                redirectReserveDetails(tempSpotRef.id);
+                            })
+                            .catch((error) => {
+                                console.error(
+                                    "Error updating database:",
+                                    error
+                                );
+                            });
+                    }
                 }
             });
         }
     });
 }
 
-
 // Initial rendering and save button click handling
 renderParkingSpotsAndSave();
 
-let parkingLotID = new URL(window.location.href).searchParams.get("docID");
-document.getElementById("next-button").addEventListener("click", () => {
-    window.location.href = `/reserve_details.html?docID=${parkingLotID}`;
-});
+function redirectReserveDetails(tempSpotID) {
+    let spotID = tempSpotID;
+    let parkingLotID = new URL(window.location.href).searchParams.get("docID");
+    window.location.href = `/reserve_details.html?docID=${parkingLotID}&spotID=${spotID}`;
+}
