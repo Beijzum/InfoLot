@@ -91,11 +91,12 @@
                 </div>
             </fieldset>
             <div class="d-flex justify-content-end mt-5">
-                <button type="button" class="btn btn-info" onclick="editUserInfo()">Edit</button>
+                <button type="button" class="btn btn-info" onclick="editUserInfo()" data-bs-toggle="popover-edit"
+                    data-bs-placement="top" data-bs-trigger="manual" title="Edit">Edit</button>
                 <span style="width: 10px"></span>
-                <button type="button" class="btn btn-warning" onclick="saveUserInfo()" data-bs-toggle="popover"
-                    data-bs-placement="top" data-bs-trigger="manual" title="Save"
-                    data-bs-content="Profile saved!">Save</button>
+                <!-- https://getbootstrap.com/docs/5.0/components/popovers/ -->
+                <button type="button" class="btn btn-warning" onclick="saveUserInfo()" data-bs-toggle="popover-save"
+                    data-bs-placement="top" data-bs-trigger="manual" title="Save">Save</button>
                 <span style="width: 10px"></span>
                 <button type="button" class="btn btn-secondary" onclick="deleteUser()">Delete</button>
             </div>

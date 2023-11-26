@@ -75,6 +75,19 @@ populateUserInfo(); //call the function to run it
 
 // Enable the form fields with this button
 function editUserInfo() {
+    // Edit button triggers popover
+    $('[data-bs-toggle="popover-edit"]').popover({
+        content: "Editing profile!",
+        placement: "top",
+        trigger: "manual", // Trigger the popover manually
+    });
+
+    // Show the popover
+    $('[data-bs-toggle="popover-edit"]').popover("show");
+    // Close the popover after a specified duration (e.g., 2 seconds)
+    setTimeout(() => {
+        $('[data-bs-toggle="popover-edit"]').popover("hide");
+    }, 2000);
     document.getElementById("personalInfoFields").disabled = false;
 }
 
@@ -117,17 +130,17 @@ function saveUserInfo() {
                                 );
                                 console.log("Saved use profile info");
                                 // Save button triggers popover
-                                $('[data-bs-toggle="popover"]').popover({
+                                $('[data-bs-toggle="popover-save"]').popover({
                                     content: "Profile saved successfully!",
                                     placement: "top",
                                     trigger: "manual", // Trigger the popover manually
                                 });
 
                                 // Show the popover
-                                $('[data-bs-toggle="popover"]').popover("show");
+                                $('[data-bs-toggle="popover-save"]').popover("show");
                                 // Close the popover after a specified duration (e.g., 2 seconds)
                                 setTimeout(() => {
-                                    $('[data-bs-toggle="popover"]').popover(
+                                    $('[data-bs-toggle="popover-save"]').popover(
                                         "hide"
                                     );
                                 }, 2000);
