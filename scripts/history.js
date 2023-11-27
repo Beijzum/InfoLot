@@ -16,14 +16,14 @@ function getHistory(user) {
         .doc(user.uid)
         .get()
         .then((userDoc) => {
-            // Get the Array of bookmarks
+            // Get the Array of favourites
             let history = userDoc.data().history;
             console.log(history);
 
             // Get pointer the new card template
             let newcardTemplate = document.getElementById("savedCardTemplate");
 
-            // Iterate through the ARRAY of bookmarked hikes (document ID's)
+            // Iterate through the ARRAY of favourited parking lots (document ID's)
             history.forEach((parkingLotID) => {
                 console.log(parkingLotID);
                 db.collection("parkingLots")

@@ -283,7 +283,7 @@ the favourites button */
 function updateFavouritesIcon(parkingLotDocID) {
     currentUser.get().then(userDoc => {
         let favourites = userDoc.data().favourites;
-        let isFavourited = favourites.includes(parkingLotDocID); // check if hikeID exists in the bookmarks array
+        let isFavourited = favourites.includes(parkingLotDocID); // check if parking lot id exists in favourites array
         console.log(isFavourited)
         let iconID = "heart_icon"
 
