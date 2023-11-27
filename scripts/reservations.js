@@ -95,7 +95,7 @@ function cancelReservation(reservationID, spotsDocID) {
         var result = confirm(
             "WARNING " +
                 user.displayName +
-                ": Are you sure you want to cancel your reservation?"
+                ": Are you sure you want to cancel your reservation? Click OK to confirm cancellation."
         ); // Double check! Usability Heuristics #5
         if (result) {
             // If confirmed, then go ahead
