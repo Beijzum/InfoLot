@@ -74,6 +74,7 @@ function getReservation(user) {
                                     newcard
                                         .querySelector(".style_button_cancel")
                                         .addEventListener("click", () => {
+                                            // Passes reserve detail ID and spotID into cancel reservation function
                                             cancelReservation(
                                                 reservationID,
                                                 spotsDocID
@@ -90,8 +91,11 @@ function getReservation(user) {
 
 function cancelReservation(reservationID, spotsDocID) {
     firebase.auth().onAuthStateChanged((user) => {
+        // Warns user about cancelling reservation
         var result = confirm(
-            "WARNING " + user.displayName + ": Cancelling your reservation!!"
+            "WARNING " +
+                user.displayName +
+                ": Are you sure you want to cancel your reservation?"
         ); // Double check! Usability Heuristics #5
         if (result) {
             // If confirmed, then go ahead
@@ -180,6 +184,7 @@ function findSpot(reservationID) {
                             for (let key in spotsMap) {
                                 if (spotsMap[key] === false) {
                                     console.log("Key with value false:", key);
+                                    // Returns parking lot id and key
                                     return {
                                         parkingLotDocID: parkingLotDocID,
                                         spots: key,
@@ -222,6 +227,7 @@ function updateReservations(userDocRef, reservationID) {
 // Updates parking spot by switching key value to true
 function updateParkingSpot(parkingLotDocID, spotKey) {
     const parkingLotsRef = db.collection("parkingLots").doc(parkingLotDocID);
+    // Initialize updateSpot
     let updateSpot = {};
     updateSpot[`spots.${spotKey}`] = true;
     // Changes key from false to true to open up spot

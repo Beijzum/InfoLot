@@ -137,12 +137,14 @@ function saveUserInfo() {
                                 });
 
                                 // Show the popover
-                                $('[data-bs-toggle="popover-save"]').popover("show");
+                                $('[data-bs-toggle="popover-save"]').popover(
+                                    "show"
+                                );
                                 // Close the popover after a specified duration (e.g., 2 seconds)
                                 setTimeout(() => {
-                                    $('[data-bs-toggle="popover-save"]').popover(
-                                        "hide"
-                                    );
+                                    $(
+                                        '[data-bs-toggle="popover-save"]'
+                                    ).popover("hide");
                                 }, 2000);
                                 document.getElementById(
                                     "personalInfoFields"
