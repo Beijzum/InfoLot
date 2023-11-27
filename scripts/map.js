@@ -46,6 +46,7 @@ function showMap() {
                             hours = doc.data().hours_of_operation; // Hours
                             img = doc.data().posterurl; // Image
                             url = doc.data().link; // URL
+                            docID = doc.id;
 
 
                             // Pushes information into the features array
@@ -60,11 +61,11 @@ function showMap() {
                                 <p style="font-weight: bold;">${event_name}</p>
                                 <p>${price}</p>
                                 <p>${hours}</p>
-                                <a href="./reserve.html?docID=${doc.id}" type="button" class="reserve_now_btn btn btn-success">Reserve Now</a>
+                                <a href="./reserve.html?docID=${docID}" type="button" class="reserve_now_btn btn btn-success">Reserve Now</a>
                                 <br><br> 
                                 <div id="heart-detail-container">
-                                <i id="heart_icon_map" class="material-icons" onclick="addFavouritesIcon(${doc.id})" cursor: pointer;">favorite_border</i>
-                                <a href="/each_parking_lot.html?docID=${doc.id}" class="read_more_btn">Details</a>
+                                <i id="heart_icon_map_${docID}" class="material-icons" onclick="addFavouritesIcon('${docID}')" cursor: pointer;">favorite_border</i>
+                                <a href="/each_parking_lot.html?docID=${docID}" class="read_more_btn">Details</a>
                                 </div>  
                                 </div>`,
                                 },
@@ -74,6 +75,7 @@ function showMap() {
                                 },
                             });
                         });
+
 
                         // Adds features as a source of data for the map
                         map.addSource("places", {
@@ -225,12 +227,12 @@ showMap();
 
 
 
-
 /*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
 
 /* --------Displays correct favourites icon, empty or full ---------- */
 function addFavouritesIcon(parkingLotDocID) {
     let currentUser = firebase.auth().currentUser;
+
 
     if (currentUser) {
         // Get Firestore reference for the current user
@@ -240,8 +242,8 @@ function addFavouritesIcon(parkingLotDocID) {
         userDocRef.get().then(doc => {
             if (doc.exists) {
                 let userFavourites = doc.data().favourites;
-                let isFavourited = userFavourites.includes(parkingLotDocID);
-                let iconID = 'save-' + parkingLotDocID; // Construct the icon ID
+                let isFavourited = userFavourites.includes(parkingLotDocID); // Construct the icon ID
+                let iconID = 'heart_icon_map_' + parkingLotDocID;
 
                 if (isFavourited) {
                     // Remove from favourites
