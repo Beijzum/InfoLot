@@ -47,6 +47,7 @@ function showMap() {
                             img = doc.data().posterurl; // Image
                             url = doc.data().link; // URL
 
+
                             // Pushes information into the features array
                             // in our application, we have a string description of the parking lot
                             features.push({
@@ -228,82 +229,44 @@ showMap();
 /*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
 
 /* --------Displays correct favourites icon, empty or full ---------- */
-function checkAndUpdateFavouritesIcon() {
-    let parkingLotDocId = (new URL(window.location.href)).searchParams.get("docID");
-
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            db.collection("users").doc(user.uid).get().then(userDoc => {
-                if (userDoc.exists) {
-                    let userData = userDoc.data();
-                    let favourites = userDoc.data().favourites;// Replace with your field name
-                    let iconID = "heart_icon"
-
-                    // Check if the field exists and contains the specific item
-                    if (favourites && favourites.includes(parkingLotDocId)) {
-                        console.log("The item is favourited");
-                        document.getElementById(iconID).innerText = 'favorite'; // Change the icon to filled heart
-                        // Perform operations based on the presence of the item
-                    } else {
-                        console.log("The item is not favourited");
-                        document.getElementById(iconID).innerText = 'favorite_border'; // Change icon to empty heart
-                        // Handle the absence of the item
-                    }
-                } else {
-                    document.getElementById(iconID).innerText = 'favorite_border';
-                }
-            })
-        } else {
-            // No user is signed in.
-            console.log("No user is logged in.");
-            document.getElementById(iconID).innerText = 'favorite_border';
-        }
-    });
-}
-checkAndUpdateFavouritesIcon();
-
-
-/* What happens when the favourites icon is clicked */
-function addFavouritesIcon(docID) {
+function addFavouritesIcon(parkingLotDocID) {
     let currentUser = firebase.auth().currentUser;
 
     if (currentUser) {
-        // Updates user's favourites in firestore 
-        updateFavouritesIcon(docID);
+        // Get Firestore reference for the current user
+        let userDocRef = firebase.firestore().collection('users').doc(currentUser.uid);
+
+        // Fetch the current user document to check the status of favourites
+        userDocRef.get().then(doc => {
+            if (doc.exists) {
+                let userFavourites = doc.data().favourites;
+                let isFavourited = userFavourites.includes(parkingLotDocID);
+                let iconID = 'save-' + parkingLotDocID; // Construct the icon ID
+
+                if (isFavourited) {
+                    // Remove from favourites
+                    userDocRef.update({
+                        favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
+                    }).then(function () {
+                        console.log("Favourite has been removed for " + parkingLotDocID);
+                        document.getElementById(iconID).innerText = 'favorite_border';
+                    });
+                } else {
+                    // Add to favourites
+                    userDocRef.update({
+                        favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
+                    }).then(function () {
+                        console.log("Favourite has been saved for " + parkingLotDocID);
+                        document.getElementById(iconID).innerText = 'favorite';
+                    });
+                }
+            } else {
+                console.log("No such document!");
+            }
+        });
 
     } else {
         // If no user is signed in, redirect to the login page
         window.location.href = "/login.html";
     }
-}
-
-
-/* Function to update firestore favourites in user collection and changes
-the favourites button */
-function updateFavouritesIcon(parkingLotDocID) {
-    currentUser.get().then(userDoc => {
-        let favourites = userDoc.data().favourites;
-        let isFavourited = favourites.includes(parkingLotDocID); // check if parking lot id exists in favourites array
-        console.log(isFavourited)
-        let iconID = "heart_icon"
-
-        if (isFavourited) {
-            currentUser.update({
-                favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
-            }).then(function () {
-                document.getElementById("favourites").innerText = "Add to favourites";
-                document.getElementById(iconID).innerText = 'favorite_border';
-                console.log("Favourites has been removed for " + parkingLotDocID);
-            })
-
-        } else {
-            currentUser.update({
-                favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
-            }).then(function () {
-                document.getElementById("favourites").innerText = "Remove from favourites";
-                document.getElementById(iconID).innerText = 'favorite';
-                console.log("Favourites has been saved for " + parkingLotDocID);
-            })
-        }
-    })
 }
