@@ -44,6 +44,21 @@
         .card_each {
             margin: 20px;
         }
+
+
+        #list_view_buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #heart_icon2 {
+            padding-right: 10px;
+        }
+
+        .style_button_moreinfo {
+            margin-left: 20px;
+        }
     </style>
 </head>
 
@@ -75,7 +90,12 @@
                     Some quick example text to build on the card title and make up the
                     bulk of the card's content.
                 </p>
-                <a class="style_button_moreinfo btn btn-success">More Info</a>
+
+                <div id="list_view_buttons">
+                    <i id="heart_icon2" class="material-icons">favorite_border</i>
+                    <a class="style_button_moreinfo btn btn-success">More Info</a>
+                </div>
+
             </div>
         </div>
     </template>

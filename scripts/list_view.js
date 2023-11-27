@@ -16,16 +16,35 @@ function displayCardsDynamically(collection) {
                 var docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
+                newcard.querySelector('i').id = 'save-' + docID; // Set the ID of the icon to be the same as the docID
                 //update title and text and image
                 newcard.querySelector('.card-title').innerHTML = title;
                 newcard.querySelector('.card-text').innerHTML = `${parkingAddress}<br><br>${parkingHours} | ${parkingRate}`;
                 newcard.querySelector('.card-image').src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
                 newcard.querySelector('a').href = "each_parking_lot.html?docID=" + docID;
+                newcard.querySelector('i').onclick = () => updateFavourites(docID);
 
-                //Optional: give unique ids to all elements for future use
-                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
+                // Ensure that favourites icon is correctly displayed as filled in if docID is in user's favourites
+                let currentUser = firebase.auth().currentUser;
+                if (currentUser) {
+                    let userDocRef = firebase.firestore().collection('users').doc(currentUser.uid);
+                    let iconID = 'save-' + docID;
+
+                    db.collection(collection).get().then(allLots => {
+                        allLots.forEach(doc => {
+
+                            // Fetch the current user document to check the status of favourites
+                            userDocRef.get().then(userDoc => {
+                                if (userDoc.exists) {
+                                    var favourites = userDoc.data().favourites;
+                                    if (favourites.includes(docID)) {
+                                        document.getElementById(iconID).innerText = 'favorite'; // Update the icon text
+                                    }
+                                }
+                            });
+                        });
+                    });
+                }
 
                 //attach to gallery, Example: "parking-lot-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
@@ -36,3 +55,51 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("parkingLots");  //input param is the name of the collection
+
+
+/* FAVOURITES FUNCTIONS */
+
+function updateFavourites(parkingLotDocID) {
+    let currentUser = firebase.auth().currentUser;
+
+    if (currentUser) {
+        // Get Firestore reference for the current user
+        let userDocRef = firebase.firestore().collection('users').doc(currentUser.uid);
+
+        // Fetch the current user document to check the status of favourites
+        userDocRef.get().then(doc => {
+            if (doc.exists) {
+                let userFavourites = doc.data().favourites;
+                let isFavourited = userFavourites.includes(parkingLotDocID);
+                let iconID = 'save-' + parkingLotDocID; // Construct the icon ID
+
+                if (isFavourited) {
+                    // Remove from favourites
+                    userDocRef.update({
+                        favourites: firebase.firestore.FieldValue.arrayRemove(parkingLotDocID)
+                    }).then(function () {
+                        console.log("Favourite has been removed for " + parkingLotDocID);
+                        document.getElementById(iconID).innerText = 'favorite_border';
+                    });
+                } else {
+                    // Add to favourites
+                    userDocRef.update({
+                        favourites: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID)
+                    }).then(function () {
+                        console.log("Favourite has been saved for " + parkingLotDocID);
+                        document.getElementById(iconID).innerText = 'favorite';
+                    });
+                }
+            } else {
+                console.log("No such document!");
+            }
+        });
+
+    } else {
+        // If no user is signed in, redirect to the login page
+        window.location.href = "/login.html";
+    }
+}
+
+
+
