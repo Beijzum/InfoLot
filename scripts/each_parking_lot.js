@@ -146,13 +146,20 @@ function updateFavourites(parkingLotDocID) {
 
 /*---------------------------- REVIEWS FUNCTIONS --------------------------------------- */
 
-/* Upon clicking write review button, user is directed to review page to fill out review */
+/* Upon clicking write review button, user is directed to review page to fill out review
+If user is not logged in, redirect user to the login page */
 function writeReviewBtn() {
+    let currentUser = firebase.auth().currentUser;
     let parkingLotID = new URL(window.location.href).searchParams.get("docID"); // Searches for the value of docID in the current windows URL
 
     if (parkingLotID) {
-        localStorage.setItem("parkingLotDocID", parkingLotID); // Save the parking lot ID to local storage
-        window.location.href = `/review.html?docID=${parkingLotID}`; // Redirects to review.html with the parking lot ID as its docID
+        if (currentUser) {
+            localStorage.setItem("parkingLotDocID", parkingLotID); // Save the parking lot ID to local storage
+            window.location.href = `/review.html?docID=${parkingLotID}`; // Redirects to review.html with the parking lot ID as its docID
+        } else {
+            // If no user is signed in, redirect to the login page
+            window.location.href = "/login.html";
+        }     
     }
 }
 
