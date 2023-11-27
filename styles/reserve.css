@@ -89,22 +89,21 @@ html {
   flex-wrap: wrap;
 }
 
-#spotsA-container {
+#spots-container {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-#spotsB-container {
+/* #spotsB-container {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
+} */
 
-.spotsA,
-.spotsB {
+.spots {
   width: 80%;
   height: 50px;
   margin: 5px;

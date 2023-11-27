@@ -45,7 +45,10 @@
         body {
             background-color: rgba(0, 0, 0, 0.7);
         }
-        label, h1, input {
+
+        label,
+        h1,
+        input {
             color: white;
         }
     </style>
@@ -88,11 +91,15 @@
                 </div>
             </fieldset>
             <div class="d-flex justify-content-end mt-5">
-                <button type="button" class="btn btn-info" onclick="editUserInfo()">Edit</button>
+                <!-- https://getbootstrap.com/docs/5.0/components/popovers/ -->
+                <button type="button" class="btn btn-info" onclick="editUserInfo()" data-bs-toggle="popover-edit"
+                    data-bs-placement="top" data-bs-trigger="manual">Edit</button>
                 <span style="width: 10px"></span>
-                <button type="button" class="btn btn-warning" onclick="saveUserInfo()">Save</button>
+
+                <button type="button" class="btn btn-warning" onclick="saveUserInfo()" data-bs-toggle="popover-save"
+                    data-bs-placement="top" data-bs-trigger="manual">Save</button>
                 <span style="width: 10px"></span>
-                <button type="button" class="btn btn-secondary" onclick="deleteUser()">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteUser()" style="background-color: red;">Delete</button>
             </div>
         </form>
     </div>

@@ -1,163 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>My BCIT Project</title>
+        <meta name="comp1800 template" content="My 1800 App" />
 
-<head>
-    <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App" />
+        <!------------------------>
+        <!-- Required meta tags -->
+        <!------------------------>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!------------------------>
-    <!-- Required meta tags -->
-    <!------------------------>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!------------------------------------------>
+        <!-- Bootstrap Library CSS JS CDN go here -->
+        <!------------------------------------------>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
 
-    <!------------------------------------------>
-    <!-- Bootstrap Library CSS JS CDN go here -->
-    <!------------------------------------------>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        <!-------------------------------------------------------->
+        <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
+        <!-------------------------------------------------------->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-------------------------------------------------------->
-    <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
-    <!-------------------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap" rel="stylesheet" />
+        <!-------------------------------------------->
+        <!-- Other libraries and styles of your own -->
+        <!-------------------------------------------->
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./styles/style.css" />
 
-    <!-------------------------------------------->
-    <!-- Other libraries and styles of your own -->
-    <!-------------------------------------------->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/style.css">
+        <style>
+            #heart_icon {
+                font-size: 1em;
+                margin-right: 0px;
+                margin-top: 5px;
+            }
 
-    <style>
-        #heart_icon {
-            font-size: 1em;
-            margin-right: 0px;
-            margin-top: 5px;
-        }
+            .reserve_button,
+            .review_button,
+            .favourites_button {
+                margin: 20px;
+            }
 
-        .review_button,
-        .favourites_button {
-            margin: 20px;
-        }
+            /* Add CSS styles for the card container with vertical scrolling */
+            .card-container {
+                max-height: 350px;
+                /* Adjust the maximum height as needed */
+                overflow-y: auto;
+            }
 
-        /* Add CSS styles for the card container with vertical scrolling */
-        .card-container {
-            max-height: 350px;
-            /* Adjust the maximum height as needed */
-            overflow-y: auto;
-        }
+            /* Style the individual cards as needed */
+            .card {
+                width: 45%;
+                /* Adjust the width as per your design, leaving a little space for margins */
+                margin: 2%;
+                /* Add margin between cards */
+            }
 
-        /* Style the individual cards as needed */
-        .card {
-            width: 45%;
-            /* Adjust the width as per your design, leaving a little space for margins */
-            margin: 2%;
-            /* Add margin between cards */
-        }
+            .card-container img {
+                max-width: 200px;
+                height: auto;
+                align-self: center;
+            }
+        </style>
+    </head>
 
-        .card-container img {
-            max-width: 200px;
-            height: auto;
-            align-self: center;
-        }
-    </style>
+    <body>
+        <!------------------------------>
+        <!-- Your HTML Layout go here -->
+        <!------------------------------>
 
-</head>
+        <!-- Navbar -->
+        <nav id="navbarPlaceholder"></nav>
 
-<body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
+        <!-- Main -->
+        <div class="container">
+            <h1><span id="parkingLotName">this Lot </span></h1>
+            <br />
 
-    <!-- Navbar -->
-    <nav id="navbarPlaceholder"></nav>
+            <img class="parking-img img-fluid" src="" />
 
-    <!-- Main -->
-    <div class="container">
-        <h1><span id="parkingLotName">this Lot </span></h1>
-        <br>
+            <div id="details-go-here"></div>
 
+            <div class="button_container">
+                <button
+                    class="btn mt-3 reserve_button"  style="background-color: #006400; color: white"
+                    onclick="getReservationBtn()"
+                >
+                    Reserve Now
+                </button>
+                <button
+                    class="btn mt-3 review_button" style="background-color: green; color: white"
+                    onclick="writeReviewBtn()"
+                >
+                    Write Review
+                </button>
 
-        <img class="parking-img img-fluid" src="" />
-
-        <button class="btn btn-primary mt-3 review_button">Reserve Now</button>
-
-        <div id="details-go-here"></div>
-
-
-
-        <div class="button_container">
-
-            <button class="btn btn-primary mt-3 review_button" onclick="writeReviewBtn()">Write
-                Review</button>
-
-            <button class="btn btn-primary mt-3 favourites_button" onclick="addFavouritesBtn()">
-                <i id="heart_icon" class="material-icons">favorite_border</i>
-                <span id="favourites">Placeholder</span>
-            </button>
-        </div>
-    </div>
-
-    <!--Populate Reviews Here-->
-
-    <div class="container">
-        <h2>Reviews:</h2>
-        <div id="details-go-here"></div>
-        <!-- Here is the container for cards with horizontal scrolling -->
-        <div class="card-container">
-            <div id="reviewCardGroup" class="row row-cols-auto">
-                <!-- Add your card templates here -->
+                <button
+                    class="btn mt-3 favourites_button" style="background-color: olive; color: white"
+                    onclick="addFavouritesBtn()"
+                >
+                    <i id="heart_icon" class="material-icons"
+                        >favorite_border</i
+                    >
+                    <span id="favourites">Placeholder</span>
+                </button>
             </div>
         </div>
-    </div>
 
-    <template id="reviewCardTemplate">
-        <div class="card bg-secondary">
-            <img class="card-img-top">
-            <div class="card-body bg-light">
+        <!--Populate Reviews Here-->
 
-                <div class="profile-pic-container profile-circle-image-150 img-fluid">
-                    <img id="mypic-goes-here" src="images/CarIcon2.png" height="100rem" width="100rem" />
+        <div class="container">
+            <h2>Reviews:</h2>
+            <div id="details-go-here"></div>
+            <!-- Here is the container for cards with horizontal scrolling -->
+            <div class="card-container">
+                <div id="reviewCardGroup" class="row row-cols-auto">
+                    <!-- Add your card templates here -->
                 </div>
-
-                <h5 class="title">placeholder</h5>
-                <p class="star-rating"></p>
-                <p class="time">placeholder</p>
-                <p class="experience">placeholder</p>
-                <p class="traffic">placeholder</p>
-                <p class="gated">placeholder</p>
-                <p class="underground">placeholder</p>
-                <p class="rating">placeholder</p>
-                <br>
-                <p class="description">This card has supporting text below as a natural lead-in to additional content.
-                </p>
             </div>
         </div>
-    </template>
 
+        <template id="reviewCardTemplate">
+            <div class="card bg-secondary">
+                <img class="card-img-top" />
+                <div class="card-body bg-light">
+                    <div
+                        class="profile-pic-container profile-circle-image-150 img-fluid"
+                    >
+                        <img
+                            id="mypic-goes-here"
+                            src="images/CarIcon2.png"
+                            height="100rem"
+                            width="100rem"
+                        />
+                    </div>
 
-    <!-- Footer -->
-    <nav id="footerPlaceholder"></nav>
+                    <h5 class="title">placeholder</h5>
+                    <p class="star-rating"></p>
+                    <p class="time">placeholder</p>
+                    <p class="experience">placeholder</p>
+                    <p class="traffic">placeholder</p>
+                    <p class="gated">placeholder</p>
+                    <p class="underground">placeholder</p>
+                    <p class="rating">placeholder</p>
+                    <br />
+                    <p class="description">
+                        This card has supporting text below as a natural lead-in
+                        to additional content.
+                    </p>
+                </div>
+            </div>
+        </template>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-    <script src="./scripts/firebaseAPI_DTC_09.js"></script>
-    <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/each_parking_lot.js"></script>
-</body>
+        <!-- Footer -->
+        <nav id="footerPlaceholder"></nav>
 
+        <!---------------------------------------------->
+        <!-- Your own JavaScript functions go here    -->
+        <!---------------------------------------------->
+        <script src="./scripts/firebaseAPI_DTC_09.js"></script>
+        <script src="./scripts/skeleton.js"></script>
+        <script src="./scripts/script.js"></script>
+        <script src="./scripts/each_parking_lot.js"></script>
+    </body>
 </html>

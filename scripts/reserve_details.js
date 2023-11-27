@@ -1,155 +1,178 @@
 var parkingLotDocID = localStorage.getItem("parkingLotDocID"); //visible to all functions on this page
 
-// Select Time
-function generateHoursOptions() {
-  const selectElement = document.getElementById("hoursSelect");
-
-  const startTime = new Date();
-  startTime.setHours(0, 0, 0, 0); // Set to midnight
-
-  for (let i = 0; i < 96; i++) {
-    // 96 intervals for 24 hours
-    const currentTime = new Date(startTime.getTime() + i * 15 * 60 * 1000);
-    const hours = currentTime.getHours().toString().padStart(2, "0");
-    const minutes = currentTime.getMinutes().toString().padStart(2, "0");
-    const timeValue = `${hours}:${minutes}`;
-    const displayValue = `${hours}:${minutes}`;
-
-    const optionElement = document.createElement("option");
-    optionElement.value = timeValue;
-    optionElement.textContent = displayValue;
-
-    selectElement.appendChild(optionElement);
-  }
-}
-
-// Call the function to generate time options
-generateHoursOptions();
-
 function displayParkingName() {
-  let params = new URL(window.location.href); //get URL of search bar
-  let ID = params.searchParams.get("docID"); //get value for key "id"
-  console.log(ID);
+    let params = new URL(window.location.href); //get URL of search bar
+    let ID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(ID);
 
-  db.collection("parkingLots") // This looks at parkingLots database to pull parking lot name
-    .doc(ID)
-    .get()
-    .then((doc) => {
-      // Assign variables to collection data
-      thisLot = doc.data();
-      parkingCode = thisLot.code;
-      parkingLotName = doc.data().name;
+    db.collection("parkingLots") // This looks at parkingLots database to pull parking lot name
+        .doc(ID)
+        .get()
+        .then((doc) => {
+            // Assign variables to collection data
+            thisLot = doc.data();
+            parkingCode = thisLot.code;
+            parkingLotName = doc.data().name;
 
-      // Populate Title, image, and other details
-      document.getElementById("parkingLotName").innerHTML = parkingLotName;
-    });
+            // Populate Title, image, and other details
+            document.getElementById("parkingLotName").innerHTML =
+                parkingLotName;
+        });
 }
 
 displayParkingName();
 
-async function provideReserveDetails(userID, parkingLotDocID) {
-  console.log("inside fill out reserve details");
-  let dateSelect = document.getElementById("dateInput").value;
-  let reserveStartTime = document.getElementById("startTime").value;
-  let duration = document.getElementById("hoursSelect").value;
+// Function to update duration when end time changes
+function updateDuration() {
+    let dateSelect = document.getElementById("dateInput").value;
+    let reserveStartTime = document.getElementById("startTime").value;
+    let reserveEndTime = document.getElementById("endTime").value;
 
-  console.log(dateSelect, reserveStartTime, duration);
+    // Parse time strings to Date objects
+    const startTime = new Date(`${dateSelect}T${reserveStartTime}:00Z`);
+    const endTime = new Date(`${dateSelect}T${reserveEndTime}:00Z`);
 
-  var user = firebase.auth().currentUser;
-  if (user) {
-    var currentUser = db.collection("users").doc(user.uid);
-    var userID = user.uid;
-    var docRef;
+    // Check if either start time or end time is not a valid date
+    if (isNaN(startTime) || isNaN(endTime)) {
+        // Clear the duration if either time is not valid
+        document.getElementById("duration").textContent = "";
+        return;
+    }
 
-    // Calculate the expiration time based on the selected start time and duration
-    const startTime = new Date(`${dateSelect}T${reserveStartTime}:00`);
-    const durationInHours = parseFloat(duration);
+    // If endTime is before startTime, adjust date to the next day
+    if (endTime < startTime) {
+        endTime.setDate(endTime.getDate() + 1);
+    }
 
-    // Use server timestamp for accurate time calculation
-    const serverTimestamp =
-      await firebase.firestore.FieldValue.serverTimestamp();
-    const endTime = new Date(
-      startTime.getTime() + durationInHours * 60 * 60 * 1000
-    );
+    // Calculate duration in minutes
+    let durationInMinutes = (endTime - startTime) / (1000 * 60);
 
-    // Components of the expiration time
-    const hours = endTime.getHours().toString().padStart(2, "0");
-    const minutes = endTime.getMinutes().toString().padStart(2, "0");
+    // If duration is negative, adjust it
+    if (durationInMinutes < 0) {
+        durationInMinutes += 24 * 60; // Add 24 hours in minutes
+    }
 
-    // Format the expiration time without seconds
-    const expirationTime = `${hours}:${minutes}`;
+    // Convert duration to hours and minutes
+    const hours = Math.floor(durationInMinutes / 60);
+    const minutes = Math.floor(durationInMinutes % 60);
 
-    // Retrieve reserve_details for the current user.
-    db.collection("reserve_details")
-      .add({
-        parkingLotDocID: parkingLotDocID,
-        userID: userID,
-        date: dateSelect,
-        start: reserveStartTime,
-        duration: duration,
-        expirationTime: expirationTime,
-        timestamp: serverTimestamp, // Use server timestamp here
-      })
-      .then((addedDocRef) => {
-        docRef = addedDocRef;
-        // Update the user collection with the reservation details
-        return currentUser.update({
-          reservations: firebase.firestore.FieldValue.arrayUnion(
-            addedDocRef.id
-          ),
-          history: firebase.firestore.FieldValue.arrayUnion(parkingLotDocID),
-        });
-      })
-      .then(() => {
-        // Redirect to thanks for reservation page
-        window.location.href = `thanks_reserve.html?docRef=${docRef.id}`;
-      })
-      .catch((error) => {
-        console.error("Error updating database:", error);
-      });
-  } else {
-    console.log("No user is signed in");
-    window.location.href = "reserve.html";
-  }
+    // Display duration in HTML
+    let durationText;
+
+    if (hours > 0) {
+        // If hours is 1, then 1 hour, else hours. Same for minutes. If minute = 1, then minute, else minutes
+        durationText = `${hours} ${hours === 1 ? "hour" : "hours"} ${minutes} ${
+            minutes === 1 ? "minute" : "minutes"
+        }`;
+    } else {
+        // If minutes is equal to 1, then minute, else minutes)
+        durationText = `${minutes} ${minutes === 1 ? "minute" : "minutes"}`;
+    }
+
+    document.getElementById("duration").textContent = `${durationText}`;
+
+    console.log(dateSelect, reserveStartTime, durationText);
 }
 
-function checkExpiredReservations(parkingLotDocID, reservationDocumentId) {
-  // Check for expired reservations and update spot availability
-  db.collection("parkings")
-    .doc(parkingLotDocID)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        return checkExpiredReservationsForSpotClass(
-          "spotsA",
-          reservationDocumentId,
-          data
-        );
-      } else {
-        console.error("Parking lot document not found");
-      }
-    })
-    .then(() => {
-      return checkExpiredReservationsForSpotClass(
-        "spotsB",
-        reservationDocumentId,
-        data
-      );
-    })
-    .catch((error) => {
-      console.error("Error checking expired reservations:", error);
-    });
+// Event listener for the "change" event on the "endTime" input field
+document.getElementById("startTime").addEventListener("change", updateDuration);
+document.getElementById("endTime").addEventListener("change", updateDuration);
+
+async function provideReserveDetails(userID, parkingLotDocID) {
+    console.log("inside fill out reserve details");
+    let spotRefDocID = new URL(window.location.href).searchParams.get("spotID");
+    let dateSelect = document.getElementById("dateInput").value;
+    let reserveStartTime = document.getElementById("startTime").value;
+    let reserveEndTime = document.getElementById("endTime").value;
+
+    // Parse time strings to Date objects for easy manipulation
+    const startTime = new Date(`${dateSelect}T${reserveStartTime}:00Z`);
+    let endTime = new Date(`${dateSelect}T${reserveEndTime}:00Z`);
+
+    // If endTime is before startTime, adjust date to the next day
+    if (endTime < startTime) {
+        endTime.setDate(endTime.getDate() + 1);
+    }
+
+    // Calculate duration in minutes
+    let duration = (endTime - startTime) / (1000 * 60);
+
+    // If duration is negative, adjust it
+    if (duration < 0) {
+        duration += 24 * 60; // Add 24 hours in minutes
+    }
+
+    // Convert duration back to hours and minutes
+    const hours = Math.floor(duration / 60);
+    const minutes = Math.floor(duration % 60);
+
+    // Display duration in the HTML span element
+    document.getElementById("duration").textContent = `${hours}:${
+        minutes < 10 ? "0" : ""
+    }${minutes}`;
+
+    console.log(
+        dateSelect,
+        reserveStartTime,
+        hours + ":" + (minutes < 10 ? "0" : "") + minutes
+    );
+
+    var user = firebase.auth().currentUser;
+    if (user) {
+        var currentUser = db.collection("users").doc(user.uid);
+        var userID = user.uid;
+        var docRef;
+        var spotDocID = spotRefDocID;
+        // Use server timestamp for accurate time calculation
+        const serverTimestamp =
+            await firebase.firestore.FieldValue.serverTimestamp();
+
+        // Retrieve reserve_details for the current user.
+        db.collection("reserve_details")
+            .add({
+                parkingLotDocID: parkingLotDocID,
+                userID: userID,
+                date: dateSelect,
+                start: reserveStartTime,
+                endTime: reserveEndTime, // Use the selected end time as is
+                duration: duration,
+                timestamp: serverTimestamp,
+                spotID: spotDocID,
+            })
+            .then((addedDocRef) => {
+                docRef = addedDocRef;
+                // Update the user collection with the reservation details
+                return currentUser.update({
+                    reservations: firebase.firestore.FieldValue.arrayUnion(
+                        addedDocRef.id
+                    ),
+                    history:
+                        firebase.firestore.FieldValue.arrayUnion(
+                            parkingLotDocID
+                        ),
+                });
+            })
+            .then(() => {
+                // Redirect to thanks for reservation page
+                window.location.href = `thanks_reserve.html?docRef=${docRef.id}&spotID=${spotRefDocID}`;
+            })
+            .catch((error) => {
+                console.error("Error updating database:", error);
+            });
+    } else {
+        console.log("No user is signed in");
+        window.location.href = "reserve.html";
+    }
 }
 
 function submitReserve() {
-  var userId = firebase.auth().currentUser.uid;
-  let params = new URL(window.location.href); // Parse the parameters from the URL of current window
-  var parkingLotId = params.searchParams.get("docID"); // Grabs docID from URL
+    var userId = firebase.auth().currentUser.uid;
+    let params = new URL(window.location.href); // Parse the parameters from the URL of current window
+    var parkingLotId = params.searchParams.get("docID"); // Grabs docID from URL
 
-  if (parkingLotId) {
-    provideReserveDetails(userId, parkingLotId); // Call the function to reserve details
-  } else {
-    console.error("Parking lot ID not found in the URL.");
-  }
+    if (parkingLotId) {
+        provideReserveDetails(userId, parkingLotId); // Call the function to reserve details
+    } else {
+        console.error("Parking lot ID not found in the URL.");
+    }
 }

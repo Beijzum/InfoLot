@@ -55,7 +55,7 @@ body {
 
 /* Hover thingy */
 .nav-item:hover::after {
-  width: 100%;
+  width: 50%;
 }
 
 /*The find parking, switch to list view, and switch to map view buttons */
@@ -98,10 +98,27 @@ body {
   border-color: #4a5759;
   /* Darkest shade for border */
   border-width: 2px;
+  margin-right: 10px;
 }
 
 .style_button_moreinfo:hover {
   background-color: white;
+  color: #4a5759;
+}
+
+.style_button_cancel {
+  color: white;
+  /* Light shade for text */
+  background-color: rgb(248, 108, 83);
+  /* Dark shade for primary button background */
+  border-color: #4a5759;
+  /* Darkest shade for border */
+  border-width: 2px;
+  margin-left: 10px;
+}
+
+.style_button_cancel:hover {
+  background-color: rgb(211, 86, 86);
   color: #4a5759;
 }
 
@@ -206,11 +223,11 @@ h1 {
   border-radius: 200px;
 }
 
-.vv img {
+/* .vv img {
   transition: all 0.3s ease;
-}
+} */
 
-.vv img:hover {
+/* .vv img:hover {
   opacity: 0.8;
   box-shadow: 0px 0px 5px 8px rgba(0, 0, 0, 0.08);
-}
+} */

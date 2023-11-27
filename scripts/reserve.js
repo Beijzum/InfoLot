@@ -1,278 +1,133 @@
-// Function to generate keys for selected spots
-function selectedSpotsKey(spotClass) {
-  return `selected${spotClass === "spotsA" ? "A" : "B"}Spots`;
-}
+// Create a function to render the parking spots and handle save button click
+function renderParkingSpotsAndSave() {
+    // Get the container element where parking spots will be displayed
+    let parkingLotID = new URL(window.location.href).searchParams.get("docID");
 
-// Function to set selected spots in localStorage
-function setSelectedSpotsLocalStorage(spotClass, selectedSpots) {
-  localStorage.setItem(
-    selectedSpotsKey(spotClass),
-    JSON.stringify(selectedSpots)
-  );
-}
+    const parkingSpotsContainer = document.getElementById("parking-spots");
 
-// Function to remove event listeners from all spot elements
-function removeEventListeners() {
-  const allSpotElements = document.querySelectorAll(".spotsA, .spotsB");
-  allSpotElements.forEach((spotElement) => {
-    spotElement.removeEventListener("click", handleSpotClick);
-  });
-}
+    // Clear existing content within the container
+    parkingSpotsContainer.innerHTML = ""; // Clear existing content
 
-// Function to render a parking spot
-function renderSpot(container, spotClass, spotKey, spotAvailability, data) {
-  // Create a new HTML element for the parking spot
-  const spotElement = document.createElement("div");
-  spotElement.classList.add(spotClass);
+    // Fetch parking spot data from Firestore using a specific document ID
+    const parkingSpotData = db.collection("parkingLots").doc(parkingLotID);
 
-  // Create an HTML element for the icon
-  const iconElement = document.createElement("span");
-  iconElement.classList.add("material-icons");
+    // Retrieve data from the Firestore document
+    parkingSpotData.get().then((doc) => {
+        if (doc.exists) {
+            const data = doc.data();
 
-  // Initialize selectedSpots array if it doesn't exist
-  data[selectedSpotsKey(spotClass)] = data[selectedSpotsKey(spotClass)] || [];
+            // Sort keys (e.g., 'A1', 'A2') for consistent display order
+            const keys = Object.keys(data.spots).sort();
 
-  // Determine the icon and styling based on spot availability
-  if (spotAvailability === true) {
-    const selectedSpots = data[selectedSpotsKey(spotClass)];
-    if (selectedSpots && selectedSpots.includes(spotKey)) {
-      // If spot is available and selected, show a checked box
-      iconElement.textContent = "check_box";
-      iconElement.classList.add("selectedSpot");
-    } else {
-      // If spot is available but not selected, show an unchecked box
-      iconElement.textContent = "check_box_outline_blank";
-      iconElement.classList.add("availableSpot");
-    }
-  } else {
-    // If spot is not available, show an indeterminate checked box
-    iconElement.textContent = "indeterminate_check_box";
-    iconElement.classList.add("takenSpot");
-  }
+            // Loop through each parking spot key
+            keys.forEach((key) => {
+                const spot = data.spots[key];
 
-  // Create a label element displaying the spot key (e.g., 'A1', 'A2' or 'B1', 'B2', etc.)
-  const labelElement = document.createElement("span");
-  labelElement.textContent = spotKey;
+                // Create a new HTML element for the parking spot
+                const spotElement = document.createElement("div");
+                spotElement.classList.add("spot");
 
-  // Add a click event to toggle spot selection
-  spotElement.addEventListener("click", () => {
-    if (spotAvailability === true) {
-      const selectedSpots = data[selectedSpotsKey(spotClass)];
-      if (selectedSpots.includes(spotKey)) {
-        // Unselect the item if it was previously selected
-        selectedSpots.splice(selectedSpots.indexOf(spotKey), 1);
-        iconElement.textContent = "check_box_outline_blank";
-        iconElement.classList.remove("selectedSpot");
-        iconElement.classList.add("availableSpot");
-      } else {
-        // Select the item if it was not previously selected
-        selectedSpots.push(spotKey);
-        iconElement.textContent = "check_box";
-        iconElement.classList.remove("availableSpot");
-        iconElement.classList.add("selectedSpot");
-      }
-      setSelectedSpotsLocalStorage(spotClass, selectedSpots); // Set selected spots in localStorage
-    }
-  });
+                // Create an HTML element for the icon
+                const iconElement = document.createElement("span");
+                iconElement.classList.add("material-icons");
 
-  // Append the icon and label elements to the spot element
-  spotElement.appendChild(iconElement);
-  spotElement.appendChild(labelElement);
+                // Determine the icon and styling based on spot availability
+                if (spot === true) {
+                    if (data.selected === key) {
+                        // If spot is available and selected, show a checked box
+                        iconElement.textContent = "check_box";
+                        iconElement.classList.add("selectedSpot");
+                    } else {
+                        // If spot is available but not selected, show an unchecked box
+                        iconElement.textContent = "check_box_outline_blank";
+                        iconElement.classList.add("availableSpot");
+                    }
+                } else {
+                    // If spot is not available, show an indeterminate checked box
+                    iconElement.textContent = "indeterminate_check_box";
+                    iconElement.classList.add("takenSpot");
+                }
 
-  // Append the spot element to the parking spots container
-  container.appendChild(spotElement);
-}
+                // Create a label element displaying the spot key (e.g., 'a1', 'a2')
+                const labelElement = document.createElement("span");
+                labelElement.textContent = key;
 
-// Function to create a delay
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+                // Add a click event to toggle spot selection
+                spotElement.addEventListener("click", () => {
+                    if (spot === true) {
+                        if (data.selected === key) {
+                            // Unselect the item if it was previously selected
+                            data.selected = null;
+                            iconElement.textContent = "check_box_outline_blank";
+                            iconElement.classList.remove("selectedSpot");
+                            iconElement.classList.add("availableSpot");
+                        } else {
+                            // Select the item if it was not previously selected
+                            data.selected = key;
+                            iconElement.textContent = "check_box";
+                            iconElement.classList.remove("availableSpot");
+                            iconElement.classList.add("selectedSpot");
+                        }
+                    }
+                });
 
-// Function to check for expired reservations and update spot availability
-async function checkExpiredReservations(data) {
-  // Check spotsA
-  await checkExpiredReservationsForSpotClass(
-    "spotsA",
-    reservationDocumentId,
-    data
-  );
+                // Append the icon and label elements to the spot element
+                spotElement.appendChild(iconElement);
+                spotElement.appendChild(labelElement);
 
-  // Check spotsB
-  await checkExpiredReservationsForSpotClass(
-    "spotsB",
-    reservationDocumentId,
-    data
-  );
-}
-
-setInterval(async () => {
-  const parkingSpotData = db.collection("parkings").doc("irTl1dU7fok3OYsKSYcF");
-  const doc = await parkingSpotData.get();
-
-  if (doc.exists) {
-    const data = doc.data();
-    await checkExpiredReservations(data);
-  }
-}, 1000); // 1 second in milliseconds
-
-// Function to render the parking spots and handle save button click
-async function renderParkingSpotsAndSave() {
-  const spotsAContainer = document.getElementById("spotsA-container");
-  const spotsBContainer = document.getElementById("spotsB-container");
-
-  spotsAContainer.innerHTML = "";
-  spotsBContainer.innerHTML = "";
-
-  const parkingSpotData = db.collection("parkings").doc("irTl1dU7fok3OYsKSYcF");
-
-  try {
-    const doc = await parkingSpotData.get();
-
-    if (doc.exists) {
-      const data = doc.data();
-
-      const spotsAkeys = Object.keys(data.spotsA).sort();
-      const spotsBkeys = Object.keys(data.spotsB).sort();
-
-      removeEventListeners();
-
-      spotsAkeys.forEach((keyA) => {
-        const spotsA = data.spotsA[keyA];
-        renderSpot(spotsAContainer, "spotsA", keyA, spotsA, data);
-      });
-
-      spotsBkeys.forEach((keyB) => {
-        const spotsB = data.spotsB[keyB];
-        renderSpot(spotsBContainer, "spotsB", keyB, spotsB, data);
-      });
-
-      const saveButton = document.getElementById("save-button");
-      saveButton.addEventListener("click", async () => {
-        const selectedSpotsA = data[selectedSpotsKey("spotsA")] || [];
-        const selectedSpotsB = data[selectedSpotsKey("spotsB")] || [];
-
-        const updateObject = {};
-
-        selectedSpotsA.forEach((selectedKeyA) => {
-          updateObject[`spotsA.${selectedKeyA}`] = false;
-        });
-
-        selectedSpotsB.forEach((selectedKeyB) => {
-          updateObject[`spotsB.${selectedKeyB}`] = false;
-        });
-
-        await db
-          .collection("parkings")
-          .doc("irTl1dU7fok3OYsKSYcF")
-          .update(updateObject);
-
-        data[selectedSpotsKey("spotsA")] = [];
-        data[selectedSpotsKey("spotsB")] = [];
-
-        // Add a delay before reloading the page
-        await delay(500);
-
-        // Reload the page to reflect the latest updates from the database
-        location.reload();
-      });
-
-      // Check for expired reservations and update spot availability
-      await checkExpiredReservations(data);
-    }
-  } catch (error) {
-    console.error("Error fetching data from the database:", error);
-  }
-}
-
-async function checkExpiredReservationsForSpotClass(
-  spotClass,
-  reservationDocumentId,
-  data
-) {
-  const currentTimestamp = new Date();
-  const selectedSpots = data[selectedSpotsKey(spotClass)] || [];
-  const spotKeys = Object.keys(data[spotClass]).sort();
-
-  for (const spotKey of spotKeys) {
-    const reservationExpirationTime = data[spotClass][spotKey].expirationTime;
-
-    if (reservationExpirationTime) {
-      const expirationTimestamp = new Date(reservationExpirationTime);
-
-      console.log(
-        `Spot: ${spotClass}-${spotKey}, Expiration: ${expirationTimestamp}, Current: ${currentTimestamp}`
-      );
-
-      if (expirationTimestamp <= currentTimestamp) {
-        // Reservation has expired, remove the reservation from the database
-        try {
-          await db
-            .collection("parkings")
-            .doc("irTl1dU7fok3OYsKSYcF")
-            .update({
-              [`${spotClass}.${spotKey}`]: true,
+                // Append the spot element to the parking spots container
+                parkingSpotsContainer.appendChild(spotElement);
             });
 
-          // Remove the reservation document from the reserve_details collection
-          const reservationDocument = await db
-            .collection("reserve_details")
-            .doc(reservationDocumentId)
-            .get();
-
-          if (reservationDocument.exists) {
-            await reservationDocument.ref.delete();
-            console.log("Reservation document deleted successfully.");
-          } else {
-            console.log("Reservation document not found.");
-          }
-
-          // Render the spot after the database update
-          renderSpot(
-            document.getElementById(`${spotClass}-container`),
-            spotClass,
-            spotKey,
-            true,
-            data
-          );
-        } catch (error) {
-          console.error(
-            "Error updating spot availability or removing reservation from the database:",
-            error
-          );
+            // Attach a click event listener to the 'Save' button
+            const saveButton = document.getElementById("save-button");
+            saveButton.addEventListener("click", () => {
+                const selectedKey = data.selected; // Get the selected key
+                if (selectedKey !== null && selectedKey !== undefined) {
+                    // Get user confirmation
+                    const isConfirmed = window.confirm(
+                        "Are you sure you want to reserve this spot?"
+                    );
+                    // Check if the user confirmed
+                    if (isConfirmed) {
+                        // Update the selected key to 'false' in the database
+                        db.collection("parkingLots")
+                            .doc(parkingLotID)
+                            .update({
+                                [`spots.${selectedKey}`]: false,
+                            })
+                            .then(() => {
+                                // Adds spot to temp_spots
+                                return db.collection("temp_spots").add({
+                                    parkingLotDocID: parkingLotID,
+                                    spots: {
+                                        [selectedKey]: false,
+                                    },
+                                });
+                            })
+                            .then((tempSpotRef) => {
+                                // Redirects to reserve_details page with spot info
+                                console.log(tempSpotRef.id);
+                                redirectReserveDetails(tempSpotRef.id);
+                            })
+                            .catch((error) => {
+                                console.error(
+                                    "Error updating database:",
+                                    error
+                                );
+                            });
+                    }
+                }
+            });
         }
-      }
-    }
-  }
+    });
 }
-
-// Function to show or hide the next button based on spot selection
-function toggleNextButtonVisibility() {
-  const nextButton = document.getElementById("next-button");
-  const selectedSpotsA =
-    JSON.parse(localStorage.getItem(selectedSpotsKey("spotsA"))) || [];
-  const selectedSpotsB =
-    JSON.parse(localStorage.getItem(selectedSpotsKey("spotsB"))) || [];
-
-  if (selectedSpotsA.length > 0 || selectedSpotsB.length > 0) {
-    nextButton.style.display = "inline";
-  } else {
-    nextButton.style.display = "none";
-  }
-}
-
-// Event listener for the next button click
-let parkingLotID = new URL(window.location.href).searchParams.get("docID");
-document.getElementById("next-button").addEventListener("click", () => {
-  window.location.href = `/reserve_details.html?docID=${parkingLotID}`;
-});
 
 // Initial rendering and save button click handling
 renderParkingSpotsAndSave();
 
-// Check spot selection on page load
-toggleNextButtonVisibility();
-
-// Check spot selection whenever the page gains focus
-window.addEventListener("focus", () => {
-  toggleNextButtonVisibility();
-});
+function redirectReserveDetails(tempSpotID) {
+    let spotID = tempSpotID;
+    let parkingLotID = new URL(window.location.href).searchParams.get("docID");
+    window.location.href = `/reserve_details.html?docID=${parkingLotID}&spotID=${spotID}`;
+}
