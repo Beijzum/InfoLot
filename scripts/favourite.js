@@ -51,7 +51,7 @@ function getFavourites(user) {
                         newcard.querySelector(
                             ".card-image"
                         ).src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
-                        newcard.querySelector("a").href =
+                        newcard.querySelector(".style_button_moreinfo").href =
                             "each_parking_lot.html?docID=" + docID;
                         newcard
                             .querySelector(".reserve_button")

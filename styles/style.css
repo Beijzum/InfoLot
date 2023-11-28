@@ -138,6 +138,17 @@ body {
   font-size: 1em;
 }
 
+.reserve_button {
+  border: 1px black solid;
+  border-width: 2px;
+  background-color: #006400;
+  color: white;
+}
+
+.reserve_button:hover {
+  background-color: green;
+  color: white;
+}
 
 /*Styles image in each parking lot page */
 .parking-img {

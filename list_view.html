@@ -37,14 +37,13 @@
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/style.css" />
 
     <style>
         .card_each {
             margin: 20px;
         }
-
 
         #list_view_buttons {
             display: flex;
@@ -53,7 +52,7 @@
         }
 
         #heart_icon2 {
-            padding-right: 10px;
+            padding-left: 10px;
         }
 
         .style_button_moreinfo {
@@ -75,8 +74,7 @@
         <h1>List View Parking Lots</h1>
         <!-- Here is the container for cards  -->
         <div class="container">
-            <div id="parkingLots-go-here" class="row row-cols-auto">
-            </div>
+            <div id="parkingLots-go-here" class="row row-cols-auto"></div>
         </div>
     </div>
 
@@ -87,15 +85,17 @@
                 <h5 class="card-title">Card title</h5>
                 <br />
                 <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Some quick example text to build on the card title and
+                    make up the bulk of the card's content.
                 </p>
 
                 <div id="list_view_buttons">
-                    <i id="heart_icon2" class="material-icons">favorite_border</i>
+                    <a class="reserve_button btn">
+                        Reserve Now
+                    </a>
                     <a class="style_button_moreinfo btn btn-success">More Info</a>
+                    <i id="heart_icon2" class="material-icons">favorite_border</i>
                 </div>
-
             </div>
         </div>
     </template>
