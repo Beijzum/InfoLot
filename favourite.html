@@ -60,11 +60,9 @@
     <h1>My Saved Parking Lots</h1>
     <!-- Here is container for cards  -->
     <div class="container">
-      <div id="parkingLotsCardGroup" class="row row-cols-auto">
-      </div>
+      <div id="parkingLotsCardGroup" class="row row-cols-auto"></div>
     </div>
   </div>
-
 
   <template id="savedCardTemplate">
     <div class="card_each card py-2 mx-auto" style="width: 30rem">
@@ -73,14 +71,16 @@
         <h5 class="card-title">Card title</h5>
         <br />
         <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          Some quick example text to build on the card title and
+          make up the bulk of the card's content.
         </p>
+        <button class="reserve_button btn" style="background-color: #006400; color: white; margin-right: 25px;">
+          Reserve Now
+        </button>
         <a class="style_button_moreinfo btn btn-success">More Info</a>
       </div>
     </div>
   </template>
-
 
   <!-- Footer -->
   <nav id="footerPlaceholder"></nav>

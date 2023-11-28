@@ -159,7 +159,7 @@ function writeReviewBtn() {
         } else {
             // If no user is signed in, redirect to the login page
             window.location.href = "/login.html";
-        }     
+        }
     }
 }
 

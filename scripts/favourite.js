@@ -1,7 +1,7 @@
 function doAll() {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            getFavourites(user)
+            getFavourites(user);
         } else {
             console.log("No user is signed in");
         }
@@ -9,15 +9,16 @@ function doAll() {
 }
 doAll();
 
-
 //----------------------------------------------------------
 // This function takes input param User's Firestore document pointer
-// and retrieves the "saved" array (of favourites) 
+// and retrieves the "saved" array (of favourites)
 // and dynamically displays them in the gallery
 //----------------------------------------------------------
 function getFavourites(user) {
-    db.collection("users").doc(user.uid).get()
-        .then(userDoc => {
+    db.collection("users")
+        .doc(user.uid)
+        .get()
+        .then((userDoc) => {
             // Get the Array of favourites
             let favourites = userDoc.data().favourites;
             console.log(favourites);
@@ -52,10 +53,24 @@ function getFavourites(user) {
                         ).src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
                         newcard.querySelector("a").href =
                             "each_parking_lot.html?docID=" + docID;
+                        newcard
+                            .querySelector(".reserve_button")
+                            .addEventListener("click", () => {
+                                getReservationBtn(docID);
+                            });
 
                         //attach to gallery, Example: "parking-lot-go-here"
                         parkingLotsCardGroup.appendChild(newcard);
                     });
             });
-        })
+        });
+}
+
+/*---------------------------- RESERVE FUNCTIONS --------------------------------------- */
+
+function getReservationBtn(parkingLotID) {
+    if (parkingLotID) {
+        localStorage.setItem("parkingLotDocID", parkingLotID); // Save the parking lot ID to local storage
+        window.location.href = `/reserve.html?docID=${parkingLotID}`; // Redirects to review.html with the parking lot ID as its docID
+    }
 }

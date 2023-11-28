@@ -10,7 +10,6 @@ function doAll() {
 
 doAll();
 
-
 function getHistory(user) {
     db.collection("users")
         .doc(user.uid)
@@ -50,10 +49,23 @@ function getHistory(user) {
                         ).src = `./lot_images/${parkingCode}.jpg`; //Example: NV01.jpg
                         newcard.querySelector("a").href =
                             "each_parking_lot.html?docID=" + docID;
-
+                        newcard
+                            .querySelector(".reserve_button")
+                            .addEventListener("click", () => {
+                                getReservationBtn(docID);
+                            });
                         //attach to gallery, Example: "parking-lot-go-here"
                         parkingLotsCardGroup.appendChild(newcard);
                     });
             });
         });
+}
+
+/*---------------------------- RESERVE FUNCTIONS --------------------------------------- */
+
+function getReservationBtn(parkingLotID) {
+    if (parkingLotID) {
+        localStorage.setItem("parkingLotDocID", parkingLotID); // Save the parking lot ID to local storage
+        window.location.href = `/reserve.html?docID=${parkingLotID}`; // Redirects to review.html with the parking lot ID as its docID
+    }
 }
