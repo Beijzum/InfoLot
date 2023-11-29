@@ -99,7 +99,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
 
     // If duration is negative, adjust it
     if (duration < 0) {
-        duration += 24 * 60; // Add 24 hours in minutes to make duration all in minutes
+        duration += 24 * 60; // Add 24 hours in minutes to keep duration all in minutes
     }
 
     // Convert duration back to hours and minutes
