@@ -27,7 +27,7 @@ docRef.get().then((doc) => {
     const hours = Math.floor(timeDiff / (1000 * 60 * 60));
     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-    // Create a human-readable duration string
+    // Create a readable duration string in words
     const durationString = `${hours} hours ${minutes} minutes`;
 
     // Retrieve parking lot name based on parkingLotDocID
