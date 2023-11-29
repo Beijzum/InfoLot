@@ -44,6 +44,12 @@
     .card_each {
       margin: 20px;
     }
+
+    .favourite_button_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
 </head>
 
@@ -74,8 +80,11 @@
           Some quick example text to build on the card title and
           make up the bulk of the card's content.
         </p>
-        <a class="reserve_button btn" style="margin-right: 20px"> Reserve Now </a>
-        <a class="style_button_moreinfo btn btn-success">More Info</a>
+        <div class="favourite_button_container">
+          <a class="reserve_button btn" style="margin-right: 20px"> Reserve Now </a>
+          <a class="style_button_moreinfo btn btn-success">More Info</a>
+          <i id="heart_icon2" class="material-icons">favorite_border</i>
+        </div>
       </div>
     </div>
   </template>

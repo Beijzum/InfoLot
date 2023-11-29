@@ -37,6 +37,7 @@ function displayCardsDynamically(collection) {
                         getReservationBtn(docID);
                     });
 
+
                 // Ensure that favourites icon is correctly displayed as filled in if docID is in user's favourites
                 let currentUser = firebase.auth().currentUser;
                 if (currentUser) {
@@ -66,6 +67,8 @@ function displayCardsDynamically(collection) {
                         });
                 }
 
+
+
                 //attach to gallery, Example: "parking-lot-go-here"
                 document
                     .getElementById(collection + "-go-here")
@@ -77,6 +80,7 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("parkingLots"); //input param is the name of the collection
+
 
 /* FAVOURITES FUNCTIONS */
 
@@ -142,6 +146,7 @@ function updateFavourites(parkingLotDocID) {
     }
 }
 
+/* Reserve button */
 function getReservationBtn(parkingLotID) {
     if (parkingLotID) {
         localStorage.setItem("parkingLotDocID", parkingLotID); // Save the parking lot ID to local storage
