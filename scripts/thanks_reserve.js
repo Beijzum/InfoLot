@@ -16,7 +16,8 @@ docRef.get().then((doc) => {
 
     // Adjust end time date if it's before the start time
     if (endTime < startTime) {
-      endTime = new Date(endTime.getTime() + 24 * 60 * 60 * 1000); // Add one day
+      // This adds one day
+      endTime = new Date(endTime.getTime() + 24 * 60 * 60 * 1000);
     }
 
     // Calculate time difference in milliseconds
