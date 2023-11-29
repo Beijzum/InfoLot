@@ -49,8 +49,9 @@ function updateDuration() {
 
     // If duration is negative, adjust it
     if (durationInMinutes < 0) {
-        durationInMinutes += 24 * 60; // Add 24 hours in minutes
+        durationInMinutes += 24 * 60; // Add 24 hours in minutes to keep duration all in minutes
     }
+    
 
     // Convert duration to hours and minutes
     const hours = Math.floor(durationInMinutes / 60);
