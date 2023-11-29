@@ -99,7 +99,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
 
     // If duration is negative, adjust it
     if (duration < 0) {
-        duration += 24 * 60; // Add 24 hours in minutes
+        duration += 24 * 60; // Add 24 hours in minutes to make duration all in minutes
     }
 
     // Convert duration back to hours and minutes
@@ -153,7 +153,7 @@ async function provideReserveDetails(userID, parkingLotDocID) {
                 });
             })
             .then(() => {
-                // Redirect to thanks for reservation page
+                // Redirect to reserve confirmation page
                 window.location.href = `thanks_reserve.html?docRef=${docRef.id}&spotID=${spotRefDocID}`;
             })
             .catch((error) => {
