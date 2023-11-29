@@ -28,6 +28,7 @@ function displayParkingInfo() {
             ).innerHTML = `${thisLot.address}<br>${thisLot.hours_of_operation}<br><br>${parkingLotDetails}`;
         });
 }
+
 displayParkingInfo();
 
 /*---------------------------- FAVOURITES FUNCTIONS --------------------------------------- */
@@ -81,6 +82,7 @@ function checkAndUpdateFavouritesButton() {
         }
     });
 }
+
 checkAndUpdateFavouritesButton();
 
 /* What happens when the favourites button is clicked */
@@ -237,6 +239,7 @@ function populateReviews() {
             });
         });
 }
+
 populateReviews();
 
 /* Display profile image when leaving reviews */
@@ -257,6 +260,7 @@ function displayUserProfileImage() {
         }
     });
 }
+
 displayUserProfileImage();
 
 /*---------------------------- RESERVE FUNCTIONS --------------------------------------- */

@@ -62,8 +62,6 @@ function getFavourites(user) {
                                 getReservationBtn(docID);
                             });
 
-
-
                         // Ensure that favourites icon is correctly displayed as filled in if docID is in user's favourites
                         let currentUser = firebase.auth().currentUser;
                         if (currentUser) {
@@ -71,7 +69,7 @@ function getFavourites(user) {
                                 .firestore()
                                 .collection("users")
                                 .doc(currentUser.uid);
-                            let iconID = "save-" + docID;
+                            let iconID = "save-" + docID; // Assigns iconID as a unique ID tied to parkingLotIDs
 
                             db.collection("parkingLots")
                                 .get()
@@ -82,7 +80,9 @@ function getFavourites(user) {
                                             if (userDoc.exists) {
                                                 var favourites =
                                                     userDoc.data().favourites;
-                                                if (favourites.includes(docID)) {
+                                                if (
+                                                    favourites.includes(docID)
+                                                ) {
                                                     document.getElementById(
                                                         iconID
                                                     ).innerText = "favorite"; // Update the icon text
@@ -101,7 +101,6 @@ function getFavourites(user) {
 }
 
 /*-------------------------- FAVOURITE FUNCTIONS ---------------------------------------- */
-
 
 function updateFavourites(parkingLotDocID) {
     let currentUser = firebase.auth().currentUser;
@@ -132,7 +131,7 @@ function updateFavourites(parkingLotDocID) {
                         .then(function () {
                             console.log(
                                 "Favourite has been removed for " +
-                                parkingLotDocID
+                                    parkingLotDocID
                             );
                             document.getElementById(iconID).innerText =
                                 "favorite_border";
@@ -149,7 +148,7 @@ function updateFavourites(parkingLotDocID) {
                         .then(function () {
                             console.log(
                                 "Favourite has been saved for " +
-                                parkingLotDocID
+                                    parkingLotDocID
                             );
                             document.getElementById(iconID).innerText =
                                 "favorite";
@@ -173,5 +172,3 @@ function getReservationBtn(parkingLotID) {
         window.location.href = `/reserve.html?docID=${parkingLotID}`; // Redirects to review.html with the parking lot ID as its docID
     }
 }
-
-

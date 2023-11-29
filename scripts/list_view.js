@@ -37,7 +37,6 @@ function displayCardsDynamically(collection) {
                         getReservationBtn(docID);
                     });
 
-
                 // Ensure that favourites icon is correctly displayed as filled in if docID is in user's favourites
                 let currentUser = firebase.auth().currentUser;
                 if (currentUser) {
@@ -45,7 +44,7 @@ function displayCardsDynamically(collection) {
                         .firestore()
                         .collection("users")
                         .doc(currentUser.uid);
-                    let iconID = "save-" + docID;
+                    let iconID = "save-" + docID; // Assigns iconID as a unique ID tied to parkingLotIDs
 
                     db.collection(collection)
                         .get()
@@ -67,8 +66,6 @@ function displayCardsDynamically(collection) {
                         });
                 }
 
-
-
                 //attach to gallery, Example: "parking-lot-go-here"
                 document
                     .getElementById(collection + "-go-here")
@@ -80,7 +77,6 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("parkingLots"); //input param is the name of the collection
-
 
 /* FAVOURITES FUNCTIONS */
 
