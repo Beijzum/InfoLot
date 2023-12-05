@@ -40,7 +40,7 @@ function populateUserInfo() {
                     // Assign variables to data
                     // don't forget to add these also in saveUserInfo()
                     var userName = userDoc.data().name;
-                    var userSchool = userDoc.data().school;
+                    var userOccupation = userDoc.data().occupation;
                     var userCity = userDoc.data().city;
                     var userImage = userDoc.data().profilePic;
                     var userQuote = userDoc.data().quote;
@@ -49,9 +49,9 @@ function populateUserInfo() {
                     if (userName != null) {
                         document.getElementById("nameInput").value = userName;
                     }
-                    if (userSchool != null) {
-                        document.getElementById("schoolInput").value =
-                            userSchool;
+                    if (userOccupation != null) {
+                        document.getElementById("occupationInput").value =
+                            userOccupation;
                     }
                     if (userCity != null) {
                         document.getElementById("cityInput").value = userCity;
@@ -109,8 +109,8 @@ function saveUserInfo() {
                         // Assign variables to values
                         // don't forget to check with populateUserInfo()
                         userName = document.getElementById("nameInput").value;
-                        userSchool =
-                            document.getElementById("schoolInput").value;
+                        userOccupation =
+                            document.getElementById("occupationInput").value;
                         userCity = document.getElementById("cityInput").value;
                         userQuote = document.getElementById("quoteInput").value;
 
@@ -119,7 +119,7 @@ function saveUserInfo() {
                             .update({
                                 //Asynch call to save the form fields into Firestore.
                                 name: userName,
-                                school: userSchool,
+                                occupation: userOccupation,
                                 city: userCity,
                                 quote: userQuote,
                                 profilePic: url, // Save the URL into users collection
