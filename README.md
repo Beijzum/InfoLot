@@ -194,17 +194,29 @@ It has the following subfolders and files:
 **Websites**
 <br>
 https://mdbootstrap.com/docs/standard/extended/hero/
+<br>
 https://bootstraplily.com/three-column-circle-image-ui-made-with-bootstrap-html/
+<br>
 https://bbbootstrap.com/snippets/simple-navbar-hover-17011029
+<br>
 https://mdbootstrap.com/how-to/bootstrap/circle-image/
+<br>
 https://stackoverflow.com/questions/33329366/how-to-get-search-bar-to-take-input-and-go-to-page
+<br>
 https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
+<br>
 https://getbootstrap.com/docs/5.0/components/popovers/
+<br>
 https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/#!
+<br>
 https://www.mapbox.com/
+<br>
 https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
+<br>
 https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
+<br>
 https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/#!
+<br>
 
 **Parking Lot Photos**
 <br>
@@ -213,36 +225,61 @@ Google Maps for all the parking lot images
 **Images Folder**
 <br>
 https://www.vecteezy.com/vector-art/8348920-eco-car-and-electric-green-car-technology-icon-logo-vector
+<br>
 https://www.cleanpng.com/png-clip-art-portable-network-graphics-car-thai-cuisin-7294339/
+<br>
 https://www.anyrgb.com/en-clipart-hbl43
+<br>
 https://unsplash.com/photos/white-volkswagen-car-parked-during-white-and-blue-cloudy-sky-gJ6mlD1kb_g
+<br>
 https://parksmart.gbci.org/sustainable-innovation-surface-parking
+<br>
 https://www.shutterstock.com/image-photo/shot-landline-telephone-receiver-copy-space-1449121976
+<br>
 https://countyarts.ca/artscene/where-im-from/
+<br>
 Edro Gonzales - Phantom Thief
+<br>
 https://www.resonai.com/blog/indoor-positioning-system
-https://en.m.wikipedia.org/wiki/File:Pin-location.pnghttps://commons.wikimedia.org/wiki/File:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
+<br>
+https://en.m.wikipedia.org/wiki/File:Pin-location.pnghttps://commons.wikimedia.org/wiki/
+File:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
+<br>
 
 **How It Works Images**
 <br>
 https://www.strongtowns.org/journal/2022/11/22/what-comes-next-after-abolishing-parking-mandates
+<br>
 https://figma.com/ - icons
+<br>
 https://www.shutterstock.com/image-vector/globe-icon-global-internet-search-vector-1608005833
+<br>
 
 **Techtips Github**
 <br>
 https://github.com/orrbcit/techtips-202310
+<br>
 https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
+<br>
 https://github.com/orrbcit/techtips-202310/blob/main/main.html
+<br>
 https://github.com/orrbcit/techtips-202310/blob/main/profile.html
+<br>
 
 **Techtips Notions**
 <br>
 https://bcit-cst.notion.site/1800-Tech-Tips-202330-375ca5b360eb49eeb78be913730ade84
+<br>
 https://bcit-cst.notion.site/Demo-06-More-Front-End-617fe502a74749039fa924555341382b
+<br>
 https://bcit-cst.notion.siteDemo-07-Firebase-Quick-Start-and-Authentication-2952b92ddb0048f79e73120664a146ce
+<br>
 https://bcit-cst.notion.site/Demo-09-Firebase-Firestore-Database-f61080202173436396e55851240fc277
+<br>
 https://bcit-cst.notion.site/Demo-10-More-interaction-with-Firestore-Database-573d87d0e72548509d249fd6deb4467b
+<br>
 https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6
+<br>
 https://bcit-cst.notion.site/Tech-Tip-B01a-How-to-make-a-Post-upload-an-image-with-the-post-7e052ed0ea9b4428807a730df1b7125d
+<br>
 https://bcit-cst.notion.site/Tech-Tip-B02-How-can-we-link-parking-spot-buttons-to-the-database-for-toggling-availability-and-en-988b5cb4883245d2828a4509dcacdd7a
