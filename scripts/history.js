@@ -1,3 +1,6 @@
+// https://bcit-cst.notion.site/Demo-09-Firebase-Firestore-Database-f61080202173436396e55851240fc277
+// https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6#9cec4b6aeaad42cfaa8c6b398be271bb
+
 function doAll() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {

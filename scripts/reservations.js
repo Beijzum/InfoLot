@@ -1,3 +1,5 @@
+// https://bcit-cst.notion.site/1800-Tech-Tips-202330-375ca5b360eb49eeb78be913730ade84
+// https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6#9cec4b6aeaad42cfaa8c6b398be271bb
 function doAll() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {

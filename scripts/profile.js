@@ -1,5 +1,6 @@
 // https://github.com/orrbcit/techtips-202310/blob/main/profile.html
 // https://getbootstrap.com/docs/5.0/components/popovers/
+// https://bcit-cst.notion.site/Tech-Tip-B01a-How-to-make-a-Post-upload-an-image-with-the-post-7e052ed0ea9b4428807a730df1b7125d
 
 // Global variable with default
 var ImageFile = "./images/phantom_thief.png"; // this is the default profile pic for user without profile picture

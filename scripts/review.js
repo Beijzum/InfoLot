@@ -1,4 +1,5 @@
 // https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
+// https://bcit-cst.notion.site/Demo-10-More-interaction-with-Firestore-Database-573d87d0e72548509d249fd6deb4467b
 
 // Parking lot ID visible to all functions on this page
 var parkingLotDocID = localStorage.getItem("parkingLotDocID");

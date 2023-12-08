@@ -1,3 +1,4 @@
+// https://bcit-cst.notion.site/Demo-09-Firebase-Firestore-Database-f61080202173436396e55851240fc277
 function writeParkingLots() {
     //define a variable for the collection you want to create in Firestore to populate data
     var parkingRef = db.collection("parkingLots");
