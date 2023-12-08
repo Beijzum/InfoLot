@@ -1,6 +1,6 @@
 # Project Title
 
-Infolot
+InfoLot
 
 ## 1. Project Description
 
@@ -191,6 +191,8 @@ It has the following subfolders and files:
 
 ## 8. References/Citation
 
+**Websites**
+<br>
 https://mdbootstrap.com/docs/standard/extended/hero/
 https://bootstraplily.com/three-column-circle-image-ui-made-with-bootstrap-html/
 https://bbbootstrap.com/snippets/simple-navbar-hover-17011029
@@ -202,6 +204,30 @@ https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/#!
 https://www.mapbox.com/
 https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
 https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
+https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/#!
+
+**Parking Lot Photos**
+<br>
+Google Maps for all the parking lot images
+
+**Images Folder**
+<br>
+https://www.vecteezy.com/vector-art/8348920-eco-car-and-electric-green-car-technology-icon-logo-vector
+https://www.cleanpng.com/png-clip-art-portable-network-graphics-car-thai-cuisin-7294339/
+https://www.anyrgb.com/en-clipart-hbl43
+https://unsplash.com/photos/white-volkswagen-car-parked-during-white-and-blue-cloudy-sky-gJ6mlD1kb_g
+https://parksmart.gbci.org/sustainable-innovation-surface-parking
+https://www.shutterstock.com/image-photo/shot-landline-telephone-receiver-copy-space-1449121976
+https://countyarts.ca/artscene/where-im-from/
+Edro Gonzales - Phantom Thief
+https://www.resonai.com/blog/indoor-positioning-system
+https://en.m.wikipedia.org/wiki/File:Pin-location.pnghttps://commons.wikimedia.org/wiki/File:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
+
+**How It Works Images**
+<br>
+https://www.strongtowns.org/journal/2022/11/22/what-comes-next-after-abolishing-parking-mandates
+https://figma.com/ - icons
+https://www.shutterstock.com/image-vector/globe-icon-global-internet-search-vector-1608005833
 
 **Techtips Github**
 <br>
