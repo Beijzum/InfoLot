@@ -11,6 +11,7 @@ docRef.get().then((doc) => {
     const reserveDetails = doc.data();
 
     // Convert start and end times to Date objects
+    // https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
     const startTime = new Date(`1970-01-01T${reserveDetails.start}`);
     let endTime = new Date(`1970-01-01T${reserveDetails.endTime}`);
 

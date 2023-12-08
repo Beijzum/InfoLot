@@ -29,6 +29,7 @@ function updateDuration() {
     let reserveEndTime = document.getElementById("endTime").value;
 
     // Parse time strings to Date objects
+    // https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
     const startTime = new Date(`${dateSelect}T${reserveStartTime}:00Z`);
     const endTime = new Date(`${dateSelect}T${reserveEndTime}:00Z`);
 

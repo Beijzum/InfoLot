@@ -217,7 +217,7 @@ function findSpot(reservationID) {
         });
 }
 
-// Updates reserverations in user collection
+// Updates reservations in user collection
 function updateReservations(userDocRef, reservationID) {
     return userDocRef.update({
         reservations: firebase.firestore.FieldValue.arrayRemove(reservationID),

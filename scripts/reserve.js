@@ -1,3 +1,5 @@
+//https://bcit-cst.notion.site/Tech-Tip-B02-How-can-we-link-parking-spot-buttons-to-the-database-for-toggling-availability-and-en-988b5cb4883245d2828a4509dcacdd7a
+
 // Create a function to render the parking spots and handle save button click
 function renderParkingSpotsAndSave() {
     // Get the container element where parking spots will be displayed
