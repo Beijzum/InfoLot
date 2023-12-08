@@ -176,7 +176,6 @@ It has the following subfolders and files:
 
 ├── styles                         # Folder for styles
     /how_it_works.css              # Stylesheet for how it works page
-    /reserve_nice_parking_lot.css  # Stylesheet for parking lot selection page
     /reserve.css                   # Stylesheet for reserve page
     /style.css                     # Stylesheet for all other pages
 

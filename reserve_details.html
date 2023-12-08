@@ -1,154 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Reservation</title>
-    <meta name="comp1800 template" content="My 1800 App" />
 
-    <!------------------------>
-    <!-- Required meta tags -->
-    <!------------------------>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <title>Reservation</title>
+  <meta name="comp1800 template" content="My 1800 App" />
 
-    <!------------------------------------------>
-    <!-- Bootstrap Library CSS JS CDN go here -->
-    <!------------------------------------------>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
+  <!------------------------>
+  <!-- Required meta tags -->
+  <!------------------------>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-------------------------------------------------------->
-    <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
-    <!-------------------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap"
-      rel="stylesheet"
-    />
+  <!------------------------------------------>
+  <!-- Bootstrap Library CSS JS CDN go here -->
+  <!------------------------------------------>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 
-    <!-------------------------------------------->
-    <!-- Other libraries and styles of your own -->
-    <!-------------------------------------------->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!-- This is for the Select Time -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
+  <!-------------------------------------------------------->
+  <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
+  <!-------------------------------------------------------->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Autour+One&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="./styles/style.css" />
-  </head>
+  <!-------------------------------------------->
+  <!-- Other libraries and styles of your own -->
+  <!-------------------------------------------->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- This is for the Select Time -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 
-  <body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
+  <link rel="stylesheet" href="./styles/style.css" />
+</head>
 
-    <!-- Navbar -->
-    <nav id="navbarPlaceholder"></nav>
+<body>
+  <!------------------------------>
+  <!-- Your HTML Layout go here -->
+  <!------------------------------>
 
-    <!-- the body of your page goes here -->
-    <!-- stuff -->
-    <div class="container">
+  <!-- Navbar -->
+  <nav id="navbarPlaceholder"></nav>
+
+  <!-- the body of your page goes here -->
+  <!-- stuff -->
+  <div class="container">
+    <br />
+    <h1>Reserve for <span id="parkingLotName"> Lot Name</span></h1>
+    <br />
+    <form>
+      <div class="form-group">
+        <label for="dateInput">Select a date</label>
+        <input type="date" class="form-group" id="dateInput" placeholder="Date" />
+      </div>
       <br />
-      <h1>Reserve for <span id="parkingLotName"> Lot Name</span></h1>
-      <br />
-      <form>
+      <div class="time_container">
+        <!-- Start Time -->
         <div class="form-group">
-          <label for="dateInput">Select a date</label>
-          <input
-            type="date"
-            class="form-group"
-            id="dateInput"
-            placeholder="Date"
-          />
+          <label for="timeInput">Select Start Time:</label>
+          <input type="time" class="form-group" id="startTime" placeholder="Start Time" />
         </div>
         <br />
-        <div class="time_container">
-          <!-- Start Time -->
-          <div class="form-group">
-            <label for="timeInput">Select Start Time:</label>
-            <input
-              type="time"
-              class="form-group"
-              id="startTime"
-              placeholder="Start Time"
-            />
+        <!-- End Time -->
+        <div class="form-group">
+          <label for="timeInput">Select End Time:</label>
+          <input type="time" class="form-group" id="endTime" placeholder="End Time" />
+        </div>
+        <br />
+        <!-- Duration -->
+        <div style="width: 50%; margin: 0 auto;">
+          <div id="durationBox" style="border: 1px solid rgba(122, 201, 104, 0.5); padding: 20px">
+            Duration:
+            <div id="duration"></div>
           </div>
-          <br />
-          <!-- End Time -->
-          <div class="form-group">
-            <label for="timeInput">Select End Time:</label>
-            <input
-              type="time"
-              class="form-group"
-              id="endTime"
-              placeholder="End Time"
-            />
-          </div>
-          <br />
-          <!-- Duration -->
-          <div style="width: 50%; margin: 0 auto;">            
-            <div id="durationBox" style="border: 1px solid rgba(122, 201, 104, 0.5); padding: 20px">
-              Duration:
-              <div id="duration"></div>
-            </div>
-          </div>
+        </div>
         <br />
         <div class="d-flex justify-content-end">
-          <button
-            type="button"
-            class="btn btn-lg btn-primary pull-right"
-            onclick="submitReserve()"
-          >
+          <button type="button" class="btn btn-lg btn-primary pull-right" onclick="submitReserve()">
             Submit
           </button>
         </div>
-      </form>
-    </div>
+    </form>
+  </div>
 
-    <!-- Footer -->
-    <nav id="footerPlaceholder"></nav>
+  <!-- Footer -->
+  <nav id="footerPlaceholder"></nav>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-    <script src="./scripts/firebaseAPI_DTC_09.js"></script>
-    <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/reserve_details.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- <script>
-    flatpickr("#startTime", {
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: "H:i",
-      time_12hr: true,
-      minuteIncrement: 30
-    });
-  </script> -->
-  </body>
+  <!---------------------------------------------->
+  <!-- Your own JavaScript functions go here    -->
+  <!---------------------------------------------->
+  <script src="./scripts/firebaseAPI_DTC_09.js"></script>
+  <script src="./scripts/skeleton.js"></script>
+  <script src="./scripts/script.js"></script>
+  <script src="./scripts/reserve_details.js"></script>
+</body>
+
 </html>
