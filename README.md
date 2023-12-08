@@ -41,8 +41,9 @@ Here are some known bugs:
 - If the user edits the profile without changing the picture, then no picture is set. We want to make it so users don't have to change their picture every time.
 - The favourites button in the map doesn't accurately reflect the user's favourite status. We want to make it more accurate.
 - Users can reserve even if they're not logged in. We want to limit what non-users can do on our website.
-- Users can review a parking lot more than once.
-- 
+- Users can review a parking lot more than once. We want to limit what non-users can do on our website.
+- Confirming a spot without actually making a reservation still causes the spot to be taken. We want the spot to be taken only after the user confirms the reservation.
+- When reservations time-out it doesn't return the spot back to available. We want spots to be freed up after the reservation times out.
 
 ## 6. Features for Future
 
@@ -51,7 +52,11 @@ What we'd like to build in the future:
 - We want to keep track of users' reviews in their profiles. 
 - We want to dynamically populate parking lots. We want to use an API to find parking spots that's free or paid.
 - We want to build a payment system, so users can pay for reservations as well.
-- We want to
+- We want the reservation details to also give directions on how to get to the parking lot.
+- We want more info in our map bubble and markers. We also want the cost of the reservation on the markers
+- We want a search bar. We want experienced users to search for parking lots.
+- We want the contact us to actually send us feedback.
+- We want the reservation page to give more information to users.
 
 ## 7. Contents of Folder
 
