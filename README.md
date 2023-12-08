@@ -37,17 +37,21 @@ Here are the steps ...
 
 Here are some known bugs:
 
-- ...
-- ...
-- ...
+- Users can choose more than one parking spot to reserve. We want to limit the user to only one reserve spot.
+- If the user edits the profile without changing the picture, then no picture is set. We want to make it so users don't have to change their picture every time.
+- The favourites button in the map doesn't accurately reflect the user's favourite status. We want to make it more accurate.
+- Users can reserve even if they're not logged in. We want to limit what non-users can do on our website.
+- Users can review a parking lot more than once.
+- 
 
 ## 6. Features for Future
 
 What we'd like to build in the future:
 
-- ...
-- ...
-- ...
+- We want to keep track of users' reviews in their profiles. 
+- We want to dynamically populate parking lots. We want to use an API to find parking spots that's free or paid.
+- We want to build a payment system, so users can pay for reservations as well.
+- We want to
 
 ## 7. Contents of Folder
 
