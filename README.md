@@ -244,7 +244,7 @@ https://www.resonai.com/blog/indoor-positioning-system
 <br>
 https://en.m.wikipedia.org/wiki/File:Pin-location.png
 <br>
-https://commons.wikimedia.org/wikiFile:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
+https://commons.wikimedia.org/wiki/File:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
 <br>
 
 **How It Works Images**
