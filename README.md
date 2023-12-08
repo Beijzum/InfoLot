@@ -112,24 +112,24 @@ Content of the project folder:
 
 It has the following subfolders and files:
 ├── scripts                        # Folder for scripts
-    authentication.js              # Authentication script - allows users to sign up or log into the web app
-    contact_us.js                  # Contact us script - redirect users to a confirmation page
-    each_parking_lot.js            # Each parking lot script - auto-populates parking spots
-    favourites.js                  # Favourites script - auto-populates user's favourite parking lots
-    firebaseAPI_DTC_09.js          # Firebase API - contains project API and other information
-    history.js                     # History script - auto-populate user's previously reserved spots
-    list_view.js                   # List view script - auto-populates parking lots that are nearby
-    main.js                        # Main script - main page reflects user's profile and has buttons to search for parking
-    map.js                         # Map script - contains Mapbox API script that initializes a map that users can interact with
-    parking_info.js                # Parking info script - contains hard-coded parking lot data.
-    profile.js                     # Profile script - allows users to edit, save, and delete their profile
-    reservations.js                # Reservation script - allows users to see their reservation details and cancel reservations
-    reserve_details.js             # Reserve details script - redirects users to a page with their reservation details after confirming a reservation
-    reserve.js                     # Reserve script - allows users to confirm and reserve a parking spot at a specific date, time, and duration
-    review.js                      # Review script - allows users to review parking lots and upload pictures
-    script.js                      # Logout script - contains the logout function, so users can log out
-    skeleton.js                    # Skeleton script - contains different navbar and footer for users with and without an account
-    thanks_reserve.js              # Reservation confirmation script - redirect users to a page where users can see the detail of their reservation
+    /authentication.js              # Authentication script - allows users to sign up or log into the web app
+    /contact_us.js                  # Contact us script - redirect users to a confirmation page
+    /each_parking_lot.js            # Each parking lot script - auto-populates parking spots
+    /favourites.js                  # Favourites script - auto-populates user's favourite parking lots
+    /firebaseAPI_DTC_09.js          # Firebase API - contains project API and other information
+    /history.js                     # History script - auto-populate user's previously reserved spots
+    /list_view.js                   # List view script - auto-populates parking lots that are nearby
+    /main.js                        # Main script - main page reflects user's profile and has buttons to search for parking
+    /map.js                         # Map script - contains Mapbox API script that initializes a map that users can interact with
+    /parking_info.js                # Parking info script - contains hard-coded parking lot data.
+    /profile.js                     # Profile script - allows users to edit, save, and delete their profile
+    /reservations.js                # Reservation script - allows users to see their reservation details and cancel reservations
+    /reserve_details.js             # Reserve details script - redirects users to a page with their reservation details after confirming a reservation
+    /reserve.js                     # Reserve script - allows users to confirm and reserve a parking spot at a specific date, time, and duration
+    /review.js                      # Review script - allows users to review parking lots and upload pictures
+    /script.js                      # Logout script - contains the logout function, so users can log out
+    /skeleton.js                    # Skeleton script - contains different navbar and footer for users with and without an account
+    /thanks_reserve.js              # Reservation confirmation script - redirect users to a page where users can see the detail of their reservation
 
 ├── images                         # Folder for images
     /how_it_works                  # Photos for how_it_works page
@@ -185,6 +185,9 @@ It has the following subfolders and files:
     /footer_before_login.html      # Footer for non-logged in users
     /nav_after_login.html          # Navbar for logged in users
     /nav_before_login.html         # Navbar for non-logged in users
+
+├── .firebase
+    /hosting..cache                # Hosting cache for Firebase
 ```
 
 ## 8. References/Citation
