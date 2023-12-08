@@ -73,6 +73,7 @@ What we'd like to build in the future:
 - We want a search bar. We want experienced users to search for parking lots.
 - We want the contact us to actually send us feedback.
 - We want the reservation page to give more information to users.
+- We want to allow users to clear their history if they want to clean up their profile.
 
 ## 7. Contents of Folder
 
@@ -80,7 +81,7 @@ Content of the project folder:
 
 ```
  Top level of project folder:
-├── .gitignore               # Git ignore file.
+├── .gitignore               # Git ignore file. Ignores Firebase API and other files.
 ├── index.html               # landing HTML file - landing page for non-logged in users.
 ├── 404.html                 # 404 HTML file - informs users that the page doesn't exist.
 ├── contact_us.html          # Contact us page - users can give feedback to the team.
@@ -97,7 +98,7 @@ Content of the project folder:
 ├── reserve_details.html     # Reserve details page - details of a reservation after a user reserves a spot.
 ├── reserve.html             # Reserve page - each parking lot has its own reserve page that shows which spots are available.
 ├── review.html              # Review page - each parking lot has its own review page where users can.
-├── skeleton.html            # Skeleton page - every page is built off this skeleton.
+├── skeleton.html            # Skeleton page - every page is built off this skeleton
 ├── template.html            # Template - every page uses this page as a template.
 ├── thanks_reserve.html      # Reservation confirmation page - users will see this page after reserving a spot.
 ├── thanks_review.html       # Review confirmation page - users will see this page after reviewing a parking spot.
@@ -107,11 +108,29 @@ Content of the project folder:
 ├── firestore.indexes.json   # Firestore json file
 ├── firestore.rules          # Firestore rules file
 ├── storage.rules            # Firestore storage rule
-└── README.md               # You are reading this document right now.
+└── README.md                # You are reading this document right now.
 ├──
 
 It has the following subfolders and files:
-├── .git                     # Folder for git repo
+├── scripts                  # Folder for scripts
+    authentication.js        # Authentication script - allows users to sign up or log into the web app
+    contact_us.js            # Contact us script - redirect users to a confirmation page
+    each_parking_lot.js      # Each parking lot script - auto-populates parking spots
+    favourites.js            # Favourites script - auto-populates user's favourite parking lots
+    firebaseAPI_DTC_09.js    # Firebase API - contains project API and other information
+    history.js               # History script - auto-populate user's previously reserved spots
+    list_view.js             # List view script - auto-populates parking lots that are nearby
+    main.js                  # Main script - main page reflects user's profile and has buttons to search for parking
+    map.js                   # Map script - contains Mapbox API script that initializes a map that users can interact with
+    parking_info.js          # Parking info script - contains hard-coded parking lot data.
+    profile.js               # Profile script - allows users to edit, save, and delete their profile
+    reservations.js          # Reservation script - allows users to see their reservation details and cancel reservations
+    reserve_details.js       # Reserve details script - redirects users to a page with their reservation details after confirming a reservation
+    reserve.js               # Reserve script - allows users to confirm and reserve a parking spot at a specific date, time, and duration
+    review.js                # Review script - allows users to review parking lots and upload pictures
+    script.js                # Logout script - contains the logout function, so users can log out
+    skeleton.js              # Skeleton script - contains different navbar and footer for users with and without an account
+    thanks_reserve.js        # Reservation confirmation script - redirect users to a page where users can see the detail of their reservation after reserving
 ├── images                   # Folder for images
     /blah.jpg                # Acknowledge source
 ├── scripts                  # Folder for scripts
