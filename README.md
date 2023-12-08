@@ -22,16 +22,19 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 - HTML, CSS, JavaScript
 - Bootstrap 5.0 (Frontend library)
 - Firebase 8.0 (BAAS - Backend as a Service)
-- ...
+- Map Box API
 
 ## 4. Complete setup/installion/usage
 
 State what a user needs to do when they come to your project. How do others start using your code or application?
 Here are the steps ...
 
-- ...
-- ...
-- ...
+- Users should sign up/login, so they can access all the features of the web app
+- Users should take a look at the "How It Works" page for a small tutorial on what our web app does.
+- Users should use the "Find parking near me" button in the main screen to look for nearby parking.
+- Users should click on parking spots on the map or in list view.
+- Users should add to favourites, write reviews, or reserve a parking spot at the parking lot page.
+- Users should confirm a parking spot and review their reservation details.
 
 ## 5. Known Bugs and Limitations
 
@@ -88,7 +91,7 @@ Content of the project folder:
 ├──
 ├──
 ├──
-└── README.md
+└── README.md               # You are reading this document right now.
 
 
 It has the following subfolders and files:
