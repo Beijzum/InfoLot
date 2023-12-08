@@ -201,13 +201,15 @@ https://www.mapbox.com/
 https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
 https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
 
-**(Techtips Github)**
+**Techtips Github**
+<br>
 https://github.com/orrbcit/techtips-202310
 https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
 https://github.com/orrbcit/techtips-202310/blob/main/main.html
 https://github.com/orrbcit/techtips-202310/blob/main/profile.html
 
 **Techtips Notions**
+<br>
 https://bcit-cst.notion.site/1800-Tech-Tips-202330-375ca5b360eb49eeb78be913730ade84
 https://bcit-cst.notion.site/Demo-06-More-Front-End-617fe502a74749039fa924555341382b
 https://bcit-cst.notion.siteDemo-07-Firebase-Quick-Start-and-Authentication-2952b92ddb0048f79e73120664a146ce
