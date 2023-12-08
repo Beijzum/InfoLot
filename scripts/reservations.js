@@ -40,6 +40,7 @@ function getReservation(user) {
                             let spotsDocID = reservationDoc.data().spotID;
                             const hours = Math.floor(duration / 60);
                             const minutes = Math.floor(duration % 60);
+                            // Formatted time
                             let durationActual = `${hours}:${
                                 minutes < 10 ? "0" : ""
                             }${minutes}`;

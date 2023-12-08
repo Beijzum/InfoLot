@@ -43,6 +43,7 @@ function checkAndUpdateFavouritesButton() {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+            // Check if user is logged in
             db.collection("users")
                 .doc(user.uid)
                 .get()
@@ -120,6 +121,7 @@ function updateFavourites(parkingLotDocID) {
                         ),
                 })
                 .then(function () {
+                    // If no favourites, then change to unfilled heart and change text to "Add to favourites"
                     document.getElementById("favourites").innerText =
                         "Add to favourites";
                     document.getElementById(iconID).innerText =
@@ -129,6 +131,7 @@ function updateFavourites(parkingLotDocID) {
                     );
                 });
         } else {
+            // Update favourites array in user
             currentUser
                 .update({
                     favourites:
@@ -137,6 +140,7 @@ function updateFavourites(parkingLotDocID) {
                         ),
                 })
                 .then(function () {
+                    // If favourited, change to filled heart and change text to "Remove from favourites"
                     document.getElementById("favourites").innerText =
                         "Remove from favourites";
                     document.getElementById(iconID).innerText = "favorite";
@@ -197,8 +201,9 @@ function populateReviews() {
                 console.log(time);
 
                 let reviewCard = parkingLotCardTemplate.content.cloneNode(true);
-
+                // Review card stuff
                 reviewCard.querySelector(".title").innerHTML = title;
+                
                 reviewCard.querySelector(".time").innerHTML = new Date(
                     time
                 ).toLocaleString();
