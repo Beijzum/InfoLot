@@ -65,7 +65,7 @@ Here are some known bugs:
 
 What we'd like to build in the future:
 
-- We want to keep track of users' reviews in their profiles. 
+- We want to keep track of users' reviews in their profiles.
 - We want to dynamically populate parking lots. We want to use an API to find parking spots that's free or paid.
 - We want to build a payment system, so users can pay for reservations as well.
 - We want the reservation details to also give directions on how to get to the parking lot.
@@ -112,31 +112,72 @@ Content of the project folder:
 ├──
 
 It has the following subfolders and files:
-├── scripts                  # Folder for scripts
-    authentication.js        # Authentication script - allows users to sign up or log into the web app
-    contact_us.js            # Contact us script - redirect users to a confirmation page
-    each_parking_lot.js      # Each parking lot script - auto-populates parking spots
-    favourites.js            # Favourites script - auto-populates user's favourite parking lots
-    firebaseAPI_DTC_09.js    # Firebase API - contains project API and other information
-    history.js               # History script - auto-populate user's previously reserved spots
-    list_view.js             # List view script - auto-populates parking lots that are nearby
-    main.js                  # Main script - main page reflects user's profile and has buttons to search for parking
-    map.js                   # Map script - contains Mapbox API script that initializes a map that users can interact with
-    parking_info.js          # Parking info script - contains hard-coded parking lot data.
-    profile.js               # Profile script - allows users to edit, save, and delete their profile
-    reservations.js          # Reservation script - allows users to see their reservation details and cancel reservations
-    reserve_details.js       # Reserve details script - redirects users to a page with their reservation details after confirming a reservation
-    reserve.js               # Reserve script - allows users to confirm and reserve a parking spot at a specific date, time, and duration
-    review.js                # Review script - allows users to review parking lots and upload pictures
-    script.js                # Logout script - contains the logout function, so users can log out
-    skeleton.js              # Skeleton script - contains different navbar and footer for users with and without an account
-    thanks_reserve.js        # Reservation confirmation script - redirect users to a page where users can see the detail of their reservation after reserving
-├── images                   # Folder for images
-    /blah.jpg                # Acknowledge source
-├── scripts                  # Folder for scripts
-    /blah.js                 #
-├── styles                   # Folder for styles
-    /blah.css                #
+├── scripts                        # Folder for scripts
+    authentication.js              # Authentication script - allows users to sign up or log into the web app
+    contact_us.js                  # Contact us script - redirect users to a confirmation page
+    each_parking_lot.js            # Each parking lot script - auto-populates parking spots
+    favourites.js                  # Favourites script - auto-populates user's favourite parking lots
+    firebaseAPI_DTC_09.js          # Firebase API - contains project API and other information
+    history.js                     # History script - auto-populate user's previously reserved spots
+    list_view.js                   # List view script - auto-populates parking lots that are nearby
+    main.js                        # Main script - main page reflects user's profile and has buttons to search for parking
+    map.js                         # Map script - contains Mapbox API script that initializes a map that users can interact with
+    parking_info.js                # Parking info script - contains hard-coded parking lot data.
+    profile.js                     # Profile script - allows users to edit, save, and delete their profile
+    reservations.js                # Reservation script - allows users to see their reservation details and cancel reservations
+    reserve_details.js             # Reserve details script - redirects users to a page with their reservation details after confirming a reservation
+    reserve.js                     # Reserve script - allows users to confirm and reserve a parking spot at a specific date, time, and duration
+    review.js                      # Review script - allows users to review parking lots and upload pictures
+    script.js                      # Logout script - contains the logout function, so users can log out
+    skeleton.js                    # Skeleton script - contains different navbar and footer for users with and without an account
+    thanks_reserve.js              # Reservation confirmation script - redirect users to a page where users can see the detail of their reservation
+├── images                         # Folder for images
+    /how_it_works                  # Photos for how_it_works page
+        /browse.png                # Browse image
+        /header_img.jpg            # Parking lot header image
+        /park.png                  # Park image
+        /personalize.png           # Personalize image
+        /reserve.png               # Reserve image
+    /car1.jpg                      # Landing page header car image
+    /carIcon.png                   # Alternative Car icon
+    /carIcon2.jpg                  # Alternative car icon
+    /carIcon2.png                  # Selected car icon
+    /contact_us1.jpg               # Contact us header image
+    /explore.jpg                   # Landing page explore image
+    /heart_icon_empty.png          # Empty heart icon for favourites
+    /icons8-map-marker-48.png      # Map marker icon
+    /logo.jpg                      # Logo image
+    /personalize.jpg               # Landing page personalize image
+    /phantom_thief.png             # Profile demo image
+    /reserve.jpg                   # Landing page reserve image
+├── lot_images                     # Folder for parking lots
+    /AdvancedParkingHowe9167.jpg   # Parking lot image
+    /AdvancedParkingLot9023.jpg    # Parking lot image
+    /BCITLot1631.jpg               # Parking lot image
+    /CanadaPlaceLot034.jpg         # Parking lot image
+    /DavieStreet9027.jpg           # Parking lot image
+    /DenmanPendrell9175.jpg        # Parking lot image
+    /Diamond4264.jpg               # Parking lot image
+    /DiamondParkingLot4116.jpg     # Parking lot image
+    /EasyParkLot32.jpg             # Parking lot image
+    /GranvilleSquareLot525.jpg     # Parking lot image
+    /HarbourLot143.jpg             # Parking lot image
+    /IndigoLot077.jpg              # Parking lot image
+    /ParamountPlace9166.jpg        # Parking lot image
+    /ParkPlaceLot295.jpg           # Parking lot image
+    /PenderPlaceLot1.jpg           # Parking lot image
+    /PivotalBuilding1610.jpg       # Parking lot image
+    /TELUSGardens9174.jpg          # Parking lot image
+    /VCCLot.jpg                    # Parking lot image
+    /WaterfrontLot695.jpg          # Parking lot image
+    /WaterfrontLot1163.jpg         # Parking lot image
+    /WaterfrontLot1292.jpg         # Parking lot image
+├── styles                         # Folder for styles
+    /how_it_works.css              # Stylesheet for how it works and contact us page
+    /reserve_nice_parking_lot.css  # Stylesheet for parking lot selection page
+    /reserve.css                   # Stylesheet for reserve page
+    /style.css                     # Stylesheet for all others
+
 
 
 
@@ -156,9 +197,6 @@ https://www.mapbox.com/
 https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
 https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
 
-
-
-
 https://github.com/orrbcit/techtips-202310 **(Techtips Github)**
 https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
 https://github.com/orrbcit/techtips-202310/blob/main/main.html
@@ -172,4 +210,3 @@ https://bcit-cst.notion.site/Demo-10-More-interaction-with-Firestore-Database-57
 https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6
 https://bcit-cst.notion.site/Tech-Tip-B01a-How-to-make-a-Post-upload-an-image-with-the-post-7e052ed0ea9b4428807a730df1b7125d
 https://bcit-cst.notion.site/Tech-Tip-B02-How-can-we-link-parking-spot-buttons-to-the-database-for-toggling-availability-and-en-988b5cb4883245d2828a4509dcacdd7a
-
