@@ -215,7 +215,7 @@ https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
 <br>
 https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
 <br>
-https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/#!
+https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/
 <br>
 
 **Parking Lot Photos**
@@ -242,8 +242,7 @@ Edro Gonzales - Phantom Thief
 <br>
 https://www.resonai.com/blog/indoor-positioning-system
 <br>
-https://en.m.wikipedia.org/wiki/File:Pin-location.pnghttps://commons.wikimedia.org/wiki/
-File:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
+https://en.m.wikipedia.org/wiki/File:Pin-location.pnghttps://commons.wikimedia.org/wikiFile:Valentines-day-hearts-alphabet-blank2-at-coloring-pages-for-kids-boys-dotcom.gif
 <br>
 
 **How It Works Images**
