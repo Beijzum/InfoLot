@@ -92,6 +92,10 @@ https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
 https://getbootstrap.com/docs/5.0/components/popovers/
 https://bootstrapbrain.com/demo/?s=components/contacts/contact-4/#!
 https://www.mapbox.com/
+https://stackoverflow.com/questions/17952024/convert-date-to-end-of-day
+https://stackoverflow.com/questions/56663604/how-to-convert-string-to-date-object-in-javascript
+
+
 
 
 https://github.com/orrbcit/techtips-202310 **(Techtips Github)**
@@ -105,3 +109,5 @@ https://bcit-cst.notion.siteDemo-07-Firebase-Quick-Start-and-Authentication-2952
 https://bcit-cst.notion.site/Demo-09-Firebase-Firestore-Database-f61080202173436396e55851240fc277
 https://bcit-cst.notion.site/Demo-10-More-interaction-with-Firestore-Database-573d87d0e72548509d249fd6deb4467b
 https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6
+https://bcit-cst.notion.site/Tech-Tip-B02-How-can-we-link-parking-spot-buttons-to-the-database-for-toggling-availability-and-en-988b5cb4883245d2828a4509dcacdd7a
+
