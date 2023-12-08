@@ -44,7 +44,7 @@ Here are the steps ...
 - Users should click on "Reserve" on the parking lot page if they want to reserve a parking spot.
 - Users should add to favourites, write reviews, or reserve a parking spot at the parking lot page.
 - Users should confirm a parking spot, review their reservation details, and submit to confirm the reservation.
-- Users should use the hamburger menu to find features, such as their profile, reservations (shows their current reservation), favourites, history, and contact us.
+- Users should use the hamburger menu to find features, such as their profile, reservations (shows their current reservation), favourites, history and contact us.
 - Users should click on the back arrow button on the footer if they want to go to the previous page.
 - Users should click on the home button on the footer if they want to go to the main page.
 - Users should click on the map icon on the footer if they want to view the map.
@@ -109,7 +109,6 @@ Content of the project folder:
 ├── firestore.rules          # Firestore rules file
 ├── storage.rules            # Firestore storage rule
 └── README.md                # You are reading this document right now.
-├──
 
 It has the following subfolders and files:
 ├── scripts                        # Folder for scripts
@@ -131,6 +130,7 @@ It has the following subfolders and files:
     script.js                      # Logout script - contains the logout function, so users can log out
     skeleton.js                    # Skeleton script - contains different navbar and footer for users with and without an account
     thanks_reserve.js              # Reservation confirmation script - redirect users to a page where users can see the detail of their reservation
+
 ├── images                         # Folder for images
     /how_it_works                  # Photos for how_it_works page
         /browse.png                # Browse image
@@ -150,6 +150,7 @@ It has the following subfolders and files:
     /personalize.jpg               # Landing page personalize image
     /phantom_thief.png             # Profile demo image
     /reserve.jpg                   # Landing page reserve image
+
 ├── lot_images                     # Folder for parking lots
     /AdvancedParkingHowe9167.jpg   # Parking lot image
     /AdvancedParkingLot9023.jpg    # Parking lot image
@@ -172,15 +173,18 @@ It has the following subfolders and files:
     /WaterfrontLot695.jpg          # Parking lot image
     /WaterfrontLot1163.jpg         # Parking lot image
     /WaterfrontLot1292.jpg         # Parking lot image
+
 ├── styles                         # Folder for styles
     /how_it_works.css              # Stylesheet for how it works and contact us page
     /reserve_nice_parking_lot.css  # Stylesheet for parking lot selection page
     /reserve.css                   # Stylesheet for reserve page
-    /style.css                     # Stylesheet for all others
+    /style.css                     # Stylesheet for all other pages
 
-
-
-
+├── text                           # Pre-set footer and navbar
+    /footer_after_login.html       # Footer for logged in users
+    /footer_before_login.html      # Footer for non-logged in users
+    /nav_after_login.html          # Navbar for logged in users
+    /nav_before_login.html         # Navbar for non-logged in users
 ```
 
 ## 8. References/Citation
