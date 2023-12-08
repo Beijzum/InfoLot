@@ -65,8 +65,31 @@ Content of the project folder:
 ```
  Top level of project folder:
 ├── .gitignore               # Git ignore file
-├── index.html               # landing HTML file, this is what users see when you come to url
+├── index.html               # landing HTML file - landing page for non-logged in users
+├── 404.html                 # 404 HTML file - informs users that the page doesn't exist
+├── contact_us.html          # Contact us page - users can give feedback to the team.
+├── each_parking_lot.html    # Each parking lot HTML file, this is what users see when they go to a parking lot page
+├── favourite.html           # Favourites page - users can see their favourites.
+├── history.html             # History page - users can check previously reserved parking spots
+├── how_it_works.html        # How it works page - users can read a quick tutorial on how the web app works.
+├── list_view.html           # List view of parking lots - users can see a list view of all nearby parking lots.
+├── login.html               # Login page - where users can login to access additional features.
+├── main.html                # Main landing page for logged in users.
+├── map.html                 # Map box API - users can see nearby parking lots on the map and can click on markers for additional information
+├── profile.html             # Profile page - users can view and edit their profile here.
+├── reservations.html        # Reservations page - users can view their current reservation details.
+├── reserve_details.html     # Reserve details page - details of a reservation after a user reserves a spot
+├── reserve.html             # Reserve page - each parking lot has its own reserve page that shows which spots are available.
+├── review.html              # Review page - each parking lot has its own review page where users can
+├──
+├──
+├──
+├──
+├──
+├──
+├──
 └── README.md
+
 
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo
