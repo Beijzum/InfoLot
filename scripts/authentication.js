@@ -1,5 +1,3 @@
-// https://bcit-cst.notion.sitedemo-07-firebase-quick-start-and-authentication-2952b92ddb0048f79e73120664a146ce/
-
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 

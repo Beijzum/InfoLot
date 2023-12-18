@@ -255,32 +255,3 @@ https://figma.com/ - icons
 <br>
 https://www.shutterstock.com/image-vector/globe-icon-global-internet-search-vector-1608005833
 <br>
-
-**Techtips Github**
-<br>
-https://github.com/orrbcit/techtips-202310
-<br>
-https://github.com/orrbcit/techtips-202310/blob/main/makepost.html
-<br>
-https://github.com/orrbcit/techtips-202310/blob/main/main.html
-<br>
-https://github.com/orrbcit/techtips-202310/blob/main/profile.html
-<br>
-
-**Techtips Notions**
-<br>
-https://bcit-cst.notion.site/1800-Tech-Tips-202330-375ca5b360eb49eeb78be913730ade84
-<br>
-https://bcit-cst.notion.site/Demo-06-More-Front-End-617fe502a74749039fa924555341382b
-<br>
-https://bcit-cst.notion.siteDemo-07-Firebase-Quick-Start-and-Authentication-2952b92ddb0048f79e73120664a146ce
-<br>
-https://bcit-cst.notion.site/Demo-09-Firebase-Firestore-Database-f61080202173436396e55851240fc277
-<br>
-https://bcit-cst.notion.site/Demo-10-More-interaction-with-Firestore-Database-573d87d0e72548509d249fd6deb4467b
-<br>
-https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6
-<br>
-https://bcit-cst.notion.site/Tech-Tip-B01a-How-to-make-a-Post-upload-an-image-with-the-post-7e052ed0ea9b4428807a730df1b7125d
-<br>
-https://bcit-cst.notion.site/Tech-Tip-B02-How-can-we-link-parking-spot-buttons-to-the-database-for-toggling-availability-and-en-988b5cb4883245d2828a4509dcacdd7a

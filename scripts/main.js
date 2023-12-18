@@ -1,5 +1,3 @@
-// https://github.com/orrbcit/techtips-202310/blob/main/scripts/main.js
-// https://bcit-cst.notion.site/Demo-09-Firebase-Firestore-Database-f61080202173436396e55851240fc277
 function insertNameFromFirestore() {
     // Check if the user is logged in:
     firebase.auth().onAuthStateChanged((user) => {

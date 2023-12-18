@@ -1,6 +1,4 @@
 // https://www.mapbox.com/
-// https://bcit-cst.notion.site/M01-How-to-implement-a-Mapbox-and-put-coordinates-of-events-and-the-user-location-on-the-map-59184d709f254993b16cb40f14ed0480
-// https://bcit-cst.notion.site/Demo-11-More-fire-with-Firestore-Database-c226f74568b246738f779f6f31e039f6#9cec4b6aeaad42cfaa8c6b398be271bb
 function showMap() {
     //-----------------------------------------
     // Define and initialize basic mapbox data

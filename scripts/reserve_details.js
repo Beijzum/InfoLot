@@ -1,4 +1,3 @@
-// https://bcit-cst.notion.site/1800-Tech-Tips-202330-375ca5b360eb49eeb78be913730ade84
 var parkingLotDocID = localStorage.getItem("parkingLotDocID"); //visible to all functions on this page
 
 function displayParkingName() {
