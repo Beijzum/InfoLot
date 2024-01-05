@@ -4,12 +4,9 @@ InfoLot
 
 ## 1. Project Description
 
-State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.  
 Our team (DTC-09) is developing a web application that enhances the parking experiences for drivers who face frequent parking issues by providing a handy reserve parking spot feature, real-time data to users for available parking spots, and information on parking lot regulations and fees.
 
 ## 2. Names of Contributors
-
-List team members and/or short bio's here...
 
 - Hi, my name is Jason someone please help me. I am a CST student trapped in the BCIT building.
 - Hi, my name is Francesca. I am excited to build my first web application with my group in COMP 1800!!!
@@ -17,17 +14,12 @@ List team members and/or short bio's here...
 
 ## 3. Technologies and Resources Used
 
-List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
-
 - HTML, CSS, JavaScript
 - Bootstrap 5.0 (Frontend library)
 - Firebase 8.0 (BAAS - Backend as a Service)
 - Map Box API
 
 ## 4. Complete setup/installion/usage
-
-State what a user needs to do when they come to your project. How do others start using your code or application?
-Here are the steps ...
 
 - Users should sign up/login, so they can access all the features of the web app.
 - Users should take a look at the "How It Works" page for a small tutorial on what our web app does.
